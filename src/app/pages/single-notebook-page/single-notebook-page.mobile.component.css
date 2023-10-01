@@ -1,0 +1,7 @@
+@media screen and (width <= 768px) {
+
+    .info-container {
+        width: 350px;
+    }
+
+}

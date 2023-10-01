@@ -1,0 +1,26 @@
+.attendance-dialog-student-container {
+    width: 325px;
+    height: 35px;
+    display: grid;
+    grid-template-columns: 65% auto auto;
+    background-color: #bbbbbb;
+}
+
+.attendance-dialog-student-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+}
+
+.attendance-dialog-student-container div p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical; 
+}
+
+.attendance-dialog-student-container div input {
+    cursor: pointer;
+}

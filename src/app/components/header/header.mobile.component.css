@@ -1,0 +1,11 @@
+@media screen and (width <= 768px) {
+
+    .username-txt {
+        width: 175px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        -webkit-box-orient: vertical; 
+    }
+
+}

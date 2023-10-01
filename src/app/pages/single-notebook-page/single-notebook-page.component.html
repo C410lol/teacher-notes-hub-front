@@ -1,0 +1,59 @@
+<app-delete-dialog
+*ngIf="isDeleteMode"
+[id]="notebookId"
+(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goBack()"
+type="notebookDelete" title="Deletar Caderneta" 
+content="Deseja realmente deletar essa caderneta? Todas as aulas e trabalhos serão excluídos!">
+</app-delete-dialog>
+
+<app-delete-dialog
+*ngIf="isFinalizeMode"
+[id]="notebookId"
+(cancelButtonClick)="switchFinalizeMode()" (confirmButtonClick)="switchFinalizeMode()"
+type="notebookFinalize" title="Finalizar Caderneta"
+content="Deseja realmente finalizar essa caderneta? A confirmação iniciará um download 
+da tabela exel relacionada a ela.">
+</app-delete-dialog>
+
+<app-notebook-dialog 
+*ngIf="isEditMode"
+[notebookId]="notebookId"
+(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshNotebook(); switchEditMode()"
+type="edit" title="Editar Caderneta">
+</app-notebook-dialog>
+
+<div class="single-notebook-container">
+    <h1 class="title-txt">Informações</h1>
+    <div class="info-container">
+        <div class="single-info-container">
+            <h1>Classe:</h1>
+            <input disabled [value]="classe">
+        </div>
+        <div class="single-info-container">
+            <h1>Matéria:</h1>
+            <input disabled [value]="subject">
+        </div>
+        <div class="single-info-container">
+            <h1>Bimestre:</h1>
+            <input disabled [value]="bimester">
+        </div>
+        <div class="single-info-container">
+            <h1>Status:</h1>
+            <input disabled [value]="status">
+        </div>
+        <div class="single-info-container">
+            <h1>Criada Em:</h1>
+            <input disabled [value]="date">
+        </div>
+    </div>
+    <div class="txts-container">
+        <h1 (click)="navigateToLessons()">Ver Aulas</h1>
+        <h1 (click)="navigateToWorks()">Ver Trabalhos</h1>
+    </div>
+    <div class="btns-container">
+        <button (click)="switchDeleteMode()" class="red-btn">Excluir</button>
+        <button (click)="switchFinalizeMode()" class="yellow-btn">Finalizar</button>
+        <button (click)="switchEditMode()" class="blue-btn">Editar</button>
+
+    </div>
+</div>

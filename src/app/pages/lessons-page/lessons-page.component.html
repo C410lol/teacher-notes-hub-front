@@ -1,0 +1,31 @@
+<app-lesson-dialog 
+*ngIf="isCreateMode"
+[notebookId]="notebookId"
+(cancelButtonClick)="switchCreateMode()" (confirmButtonClick)="refreshLessons(); switchCreateMode()"
+type="create" title="Criar Aula">
+</app-lesson-dialog>
+
+<div class="lessons-page-container">
+    <h1 class="title-txt">Aulas</h1>
+    <h1 *ngIf="!isLessonsLoaded" class="loading-txt">Carregando...</h1>
+    <div *ngIf="isLessonsLoaded" class="content-container">
+        <button (click)="switchCreateMode()" class="create-btn">
+            <h1>Nova Aula</h1>
+        </button>
+        <div class="lessons-container">
+            <div class="lessons-header">
+                <div><h1>Data</h1></div>
+                <div><h1>Título</h1></div>
+                <div><h1>Chamada Realizada?</h1></div>
+            </div>
+            <div *ngFor="let lesson of lessonsList" class="lessons-list">
+                <app-lesson-list-element
+                [id]="lesson.id"
+                [date]="lesson.date"
+                [title]="lesson.title"
+                [attendance]="ifAttendanceExists(lesson.attendances?.length)">
+                </app-lesson-list-element>
+            </div>
+        </div>
+    </div>
+</div>

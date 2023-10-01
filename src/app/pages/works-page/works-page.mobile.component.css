@@ -1,0 +1,8 @@
+@media screen and (width <= 768px) {
+
+    .works-container {
+        width: 350px;
+        overflow-x: auto;
+    }
+
+}

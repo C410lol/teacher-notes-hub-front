@@ -1,0 +1,22 @@
+.grade-dialog-student-container {
+    width: 325px;
+    height: 35px;
+    display: grid;
+    grid-template-columns: 77.5% auto;
+    background-color: #bbbbbb;
+}
+
+.grade-dialog-student-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+}
+
+.grade-dialog-student-container div p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical; 
+}

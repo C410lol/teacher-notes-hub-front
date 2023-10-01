@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #3F3F3F;
+}
+
+body {
+    padding-bottom: 50px;
+}
+
+h1, button {
+    font-weight: normal;
+    font-family: 'Bebas Neue', sans-serif;
+    background-color: transparent;
+}
+
+p, input {
+    font-weight: normal;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: transparent;
+}
