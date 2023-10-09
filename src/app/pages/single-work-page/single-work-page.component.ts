@@ -23,6 +23,7 @@ export class SingleWorkPageComponent implements OnInit {
   title:string = '';
   details:string = '';
   observations:string = '';
+  workType: string = '';
   deliveryDate:string = '';
 
   constructor(
@@ -55,6 +56,7 @@ export class SingleWorkPageComponent implements OnInit {
     this.title = work.title;
     this.details = work.details;
     this.observations = work.observations;
+    this.workType = work.type;
     this.deliveryDate = work.deliveryDate;
   }
 

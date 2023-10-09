@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { NotebookType } from '../types/NotebookType';
+import { GradesWeightType } from '../types/Others/GradesWeightType';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +48,8 @@ export class NotebookService {
     });
   }
 
-  finalizeNotebook(notebookId?: string): Observable<Blob> {
-    return this.httpClient.get<Blob>(`${this.notebooksUrl}/finalize/${notebookId}`, {
+  finalizeNotebook(gradesWeight: GradesWeightType, notebookId?: string): Observable<Blob> {
+    return this.httpClient.put<Blob>(`${this.notebooksUrl}/finalize/${notebookId}`, gradesWeight, {
       headers: this.getHeaders,
       responseType: 'blob' as 'json'
     });

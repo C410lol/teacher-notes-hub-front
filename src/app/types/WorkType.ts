@@ -4,6 +4,7 @@ export type WorkType = {
     title: string,
     details: string,
     observations: string,
+    type: string,
     deliveryDate: string
     grades?: []
 

@@ -6,14 +6,11 @@ type="notebookDelete" title="Deletar Caderneta"
 content="Deseja realmente deletar essa caderneta? Todas as aulas e trabalhos serão excluídos!">
 </app-delete-dialog>
 
-<app-delete-dialog
+<app-finalize-dialog
 *ngIf="isFinalizeMode"
-[id]="notebookId"
-(cancelButtonClick)="switchFinalizeMode()" (confirmButtonClick)="switchFinalizeMode()"
-type="notebookFinalize" title="Finalizar Caderneta"
-content="Deseja realmente finalizar essa caderneta? A confirmação iniciará um download 
-da tabela exel relacionada a ela.">
-</app-delete-dialog>
+[notebookId]="notebookId"
+(cancelButtonClick)="switchFinalizeMode()" (confirmButtonClick)="switchFinalizeMode()">
+</app-finalize-dialog>
 
 <app-notebook-dialog 
 *ngIf="isEditMode"

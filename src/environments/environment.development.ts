@@ -1,6 +1,6 @@
 import { HttpHeaders } from "@angular/common/http";
 
-const prefix: string = "http://localhost:8080";
+const prefix: string = "http://177.71.161.160:8080";
 
 export const environment = {
     production: false,

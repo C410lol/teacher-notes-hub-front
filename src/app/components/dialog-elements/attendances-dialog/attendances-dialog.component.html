@@ -6,8 +6,9 @@
             <div><p>1º Aula Faltas</p></div>
             <div><p>2º Aula Faltas</p></div>
         </div>
-        <div *ngFor="let student of studentAttendanceList" class="students-list">  
+        <div class="students-list">  
             <app-attendance-dialog-list-element
+            *ngFor="let student of studentAttendanceList"
             #attendanceDialogListElements
             [isTwoLessons]="!isTwoLessons()"
             [studentId]="student.id" [studentName]="student.name"

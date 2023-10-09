@@ -17,6 +17,15 @@
             [(ngModel)]="observations">
         </div>
         <div>
+            <p>Tipo:</p>
+            <select [(ngModel)]="workType">
+                <option value="TRABALHO">TRABALHO/TAREFA</option>
+                <option>PROVA</option>
+                <option>PARTICIPAÇÃO</option>
+                <option>SIMULADO</option>
+            </select>
+        </div>
+        <div>
             <p>*Data:</p>
             <input id="date-input" type="date" 
             [(ngModel)]="date">

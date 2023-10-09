@@ -2,11 +2,10 @@
     background-color: transparent;
 }
 
-.attendances-dialog-container {
+.finalize-notebook-dialog-container {
     width: 350px;
-    height: auto;
-    min-height: 375px;
-    padding-bottom: 35px;
+    min-height: 215px;
+    padding-bottom: 30px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -18,47 +17,54 @@
 
 .title-txt {
     width: fit-content;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: large;
+    margin-top: 35px;
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: x-large;
     font-family: 'Bebas Neue', sans-serif;
 }
 
-.content-container {
-    width: 325px;
-    margin-top: 50px;
+hr {
+    width: 330px;
+    margin-top: 2.5px;
     margin-left: auto;
     margin-right: auto;
+    background-color: #3F3F3F;
 }
 
-.content-container p {
-    font-size: small;
-    font-family: 'Bebas Neue', sans-serif;
-}
-
-.attendance-header {
-    height: 45px;
-    display: grid;
-    grid-template-columns: 65% auto auto;
-    background-color: #E0E0E0;
-}
-
-.attendance-header div {
-    display: flex;
-    align-items: center;
+.content-txt {
+    margin-top: 10px;
     padding-left: 10px;
-    border: 0.125px solid #3F3F3F;
-    background-color: transparent;
+    padding-right: 10px;
+    font-family: 'Roboto', sans-serif;
 }
 
-.students-list {
-    max-height: 300px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+.grades-weight-container {
+    margin-top: 20px;
+    padding: 0 10px;
 }
 
-.btns-container {
+.grades-weight-container h1 {
+    font-size: large;
+}
+
+.grades-weight-container p {
+    font-size: small;
+}
+
+.grades-weight-selects {
+    margin-top: 7.5px;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 5px;
+}
+
+.grades-weight-selects div select, .grades-weight-selects div p {
+    width: 150px;
+    font-size: medium;
+}
+
+.btns-box {
     width: 325px;
     margin-top: 35px;
     margin-left: auto;
@@ -68,7 +74,7 @@
     column-gap: 10px;
 }
 
-.btns-container button {
+.btns-box button {
     height: 25px;
     border: 0;
     border-radius: 2.5px;

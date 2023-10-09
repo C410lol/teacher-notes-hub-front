@@ -1,0 +1,48 @@
+<div class="finalize-notebook-dialog-container">
+    <p class="title-txt">Finalizar Caderneta</p>
+    <hr>
+    <p class="content-txt">Deseja realmente finalizar essa caderneta? A confirmação iniciará um download
+        da tabela exel relacionada a ela.</p>
+    <div class="grades-weight-container">
+        <h1>Selecione O Peso Das Notas</h1>
+        <p>*Note que a soma dos pesos deve ser igual a 10!</p>
+        <div class="grades-weight-selects">
+            <div>
+                <p>Tarefas/Trabalhos:</p>
+                <select [(ngModel)]="tarefaSelect">
+                    <option *ngFor="let number of numbersArray">
+                        {{number}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Provas:</p>
+                <select [(ngModel)]="provaSelect">
+                    <option *ngFor="let number of numbersArray">
+                        {{number}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Participação:</p>
+                <select [(ngModel)]="participacaoSelect">
+                    <option *ngFor="let number of numbersArray">
+                        {{number}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Simulado:</p>
+                <select [(ngModel)]="simuladoSelect">
+                    <option *ngFor="let number of numbersArray">
+                        {{number}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="btns-box">
+        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
+        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+    </div>
+</div>

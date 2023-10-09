@@ -46,10 +46,6 @@ export class DeleteDialogComponent {
         this.deleteNotebook();
         break;
       }
-      case "notebookFinalize": {
-        this.finalizeNotebook();
-        break;
-      }
       case "lesson": {
         this.deleteLesson();
         break;
@@ -83,24 +79,6 @@ export class DeleteDialogComponent {
       next: () => this.confirmButtonClick.emit(),
       error: () => alert(environment.simpleErrorMessage)
     });
-  }
-
-  finalizeNotebook(): void {
-    this.notebookService.finalizeNotebook(this.id).subscribe({
-      next: (res) => {
-        const blobUrl: string = window.URL.createObjectURL(res);
-
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = `caderneta.xlsx`;
-        a.click();
-
-        window.URL.revokeObjectURL(blobUrl);
-
-        this.confirmButtonClick.emit();
-      },
-      error: (err) => {alert(environment.simpleErrorMessage); console.error(err);}
-    })
   }
 
   deleteLesson(): void {
