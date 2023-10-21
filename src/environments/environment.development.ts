@@ -1,6 +1,6 @@
 import { HttpHeaders } from "@angular/common/http";
 
-const prefix: string = "http://177.71.161.160:8080";
+const prefix: string = "https://server.teachernoteshub.online:8443";
 
 export const environment = {
     production: false,

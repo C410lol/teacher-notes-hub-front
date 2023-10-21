@@ -22,7 +22,6 @@ export class HomePageComponent implements OnInit {
 
   constructor(private notebookService: NotebookService) { 
     const userId: string | null = sessionStorage.getItem('userId');
-    console.log(userId);
     if(userId !== null) {
       this.teacherId = userId;
     }

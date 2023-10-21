@@ -13,50 +13,46 @@ import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
   {
-    path: '', component: PagesComponent, children: [
+    path: "user", component: UserPageComponent
+  },
+  {
+    path: "", children: [
       {
-        path: "user", component: UserPageComponent
+        path: "", component: HomePageComponent
       },
       {
-        path: "cadernetas", children: [
+        path: ":notebookId", children: [
           {
-            path: "", component: HomePageComponent
+            path: "", component: SingleNotebookPageComponent
           },
           {
-            path: ":notebookId", children: [
+            path: "aulas", children: [
               {
-                path: "", component: SingleNotebookPageComponent
+                path: '', component: LessonsPageComponent
               },
               {
-                path: "aulas", children: [
-                  {
-                    path: "", component: LessonsPageComponent
-                  },
-                  {
-                    path: ":lessonId", component: SingleLessonPageComponent
-                  }
-                ]
+                path: ':lessonId', component: SingleLessonPageComponent
+              }
+            ]
+          },
+          {
+            path: 'trabalhos', children: [
+              {
+                path: '', component: WorksPageComponent
               },
               {
-                path: "trabalhos", children: [
-                  {
-                    path: "", component: WorksPageComponent
-                  },
-                  {
-                    path: ":workId", component: SingleWorkPageComponent
-                  }
-                ]
+                path: ':workId', component: SingleWorkPageComponent
               }
             ]
           }
         ]
       }
     ]
-  },
+  }
 ]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class PagesRoutingModule { }

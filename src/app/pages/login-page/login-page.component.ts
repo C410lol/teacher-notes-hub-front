@@ -29,7 +29,7 @@ export class LoginPageComponent {
     }).subscribe({
       next: (res) => {
         localStorage.setItem('token', res);
-        this.router.navigate(['/cadernetas']);
+        this.router.navigate(['/']);
       },
       error: () => alert(environment.fieldErrorMessage)
     });
