@@ -17,8 +17,8 @@ export class UserPageComponent {
   isEditMode: boolean = false;
 
   userId: string = '';
-  userName:string = "";
-  userEmail:string =  "";
+  userName:string = 'Carregando...';
+  userEmail:string =  'Carregando...';
 
   constructor(
     private router: Router,

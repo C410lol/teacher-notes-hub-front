@@ -21,11 +21,11 @@ export class SingleNotebookPageComponent implements OnInit {
   isEditMode: boolean = false;
 
   notebookId?: string = '';
-  classe: string = '';
-  subject: string = '';
-  bimester: string = '';
-  status?: string = '';
-  date?: string = '';
+  classe: string = 'Carregando...';
+  subject: string = 'Carregando...';
+  bimester: string = 'Carregando...';
+  status?: string = 'Carregando...';
+  date?: string = 'Carregando...';
   studentsLength?: number = 0;
 
   constructor(

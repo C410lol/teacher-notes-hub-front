@@ -21,11 +21,11 @@ export class SingleLessonPageComponent implements OnInit {
   isEditMode: boolean = false;
 
   lessonId: string = '';
-  title: string = '';
-  details: string = '';
-  observations: string = '';
+  title: string = 'Carregando...';
+  details: string = 'Carregando...';
+  observations: string = 'Carregando...';
   quantity: number = 0;
-  date: string = '';
+  date: string = 'Carregando...';
   attendances?: AttendanceType[] = [];
 
   constructor(

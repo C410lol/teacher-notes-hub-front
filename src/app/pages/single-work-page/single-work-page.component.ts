@@ -20,11 +20,11 @@ export class SingleWorkPageComponent implements OnInit {
   isEditMode: boolean = false;
 
   workId:string = '';
-  title:string = '';
-  details:string = '';
-  observations:string = '';
-  workType: string = '';
-  deliveryDate:string = '';
+  title:string = 'Carregando...';
+  details:string = 'Carregando...';
+  observations:string = 'Carregando...';
+  workType: string = 'Carregando...';
+  deliveryDate:string = 'Carregando...';
 
   constructor(
     private activedRoute: ActivatedRoute,
