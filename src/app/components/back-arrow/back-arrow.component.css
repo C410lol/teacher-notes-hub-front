@@ -1,0 +1,10 @@
+.back-arrow-container {
+    position: absolute;
+    top: 115px;
+    left: 25px;
+}
+
+.back-arrow-container h1 {
+    cursor: pointer;
+    color: whitesmoke;
+}
