@@ -15,7 +15,8 @@ content="Deseja realmente deletar essa aula? Todas as anotações e chamadas ser
 <app-lesson-dialog 
 *ngIf="isEditMode" 
 [lessonId]="lessonId" [lessonTitle]="title" 
-[details]="details" [observations]="observations" [date]="date"
+[details]="details" [observations]="observations"
+[quantity]="quantity" [date]="date"
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshLesson(); switchEditMode()"
 type="edit" title="Editar Aula">
 </app-lesson-dialog>

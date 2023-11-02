@@ -12,6 +12,25 @@ type="create" title="Criar Caderneta">
         <button (click)="switchCreateMode()" class="create-btn">
             <h1>Nova Caderneta</h1>
         </button>
+        <div class="sort-container">
+            <div>
+                <h1>Ordernar Por:</h1>
+                <select (change)="selectChange()" [(ngModel)]="sortBy">
+                    <option value="classe">Classe</option>
+                    <option value="subject">Matéria</option>
+                    <option value="bimester">Bimestre</option>
+                    <option value="status">Status</option>
+                    <option value="createDate">Data</option>
+                </select>
+            </div>
+            <div>
+                <h1>Ordem:</h1>
+                <select (change)="selectChange()" [(ngModel)]="direction">
+                    <option value="asc">Crescente</option>
+                    <option value="desc">Decrescente</option>
+                </select>
+            </div>
+        </div>
         <div class="notebooks-container">
             <div class="notebooks-header">
                 <div><h1>Classe</h1></div>

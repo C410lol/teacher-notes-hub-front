@@ -21,6 +21,9 @@ export class LessonsPageComponent implements OnInit {
 
   lessonsList: LessonType[] = [];
 
+  sortBy: string = 'date';
+  direction: string = 'desc';
+
   constructor(
     private activedRoute: ActivatedRoute,
     private lessonService: LessonService
@@ -35,12 +38,16 @@ export class LessonsPageComponent implements OnInit {
     this.getAllLessons();
   }
 
+  selectChange(): void {
+    this.refreshLessons();
+  }
+
   refreshLessons(): void {
     this.getAllLessons();
   }
 
   getAllLessons(): void {
-    this.lessonService.getAllLessonsByNotebookId(this.notebookId).subscribe({
+    this.lessonService.getAllLessonsByNotebookId(this.notebookId, this.sortBy, this.direction).subscribe({
       next: (res) => {
         this.lessonsList = res;
         this.isLessonsLoaded = true;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { NotebookType } from 'src/app/types/NotebookType';
 import { NotebookService } from 'src/app/services/notebook.service';
 
@@ -20,6 +20,9 @@ export class HomePageComponent implements OnInit {
   
   notebookList: NotebookType[] = [];
 
+  sortBy: string = 'status';
+  direction: string = 'desc';
+
   constructor(private notebookService: NotebookService) { 
     const userId: string | null = sessionStorage.getItem('userId');
     if(userId !== null) {
@@ -31,12 +34,16 @@ export class HomePageComponent implements OnInit {
     this.getAllNotebooks();
   }
 
+  selectChange(): void {
+    this.refreshNotebooks();
+  }
+
   refreshNotebooks(): void {
     this.getAllNotebooks();
   }
 
   getAllNotebooks(): void {
-    this.notebookService.getAllNotebooks(this.teacherId).subscribe({
+    this.notebookService.getAllNotebooks(this.teacherId, this.sortBy, this.direction).subscribe({
       next: (res) => {
         this.notebookList = res;
         this.isNotebooksLoaded = true;

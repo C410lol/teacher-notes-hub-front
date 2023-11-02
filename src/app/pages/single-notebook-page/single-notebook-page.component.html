@@ -15,6 +15,7 @@ content="Deseja realmente deletar essa caderneta? Todas as aulas e trabalhos ser
 <app-notebook-dialog 
 *ngIf="isEditMode"
 [notebookId]="notebookId"
+[classe]="classe" [subject]="subject" [bimester]="bimester"
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshNotebook(); switchEditMode()"
 type="edit" title="Editar Caderneta">
 </app-notebook-dialog>

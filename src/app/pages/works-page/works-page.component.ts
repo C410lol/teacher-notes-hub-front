@@ -22,6 +22,9 @@ export class WorksPageComponent implements OnInit {
   studentsLength: number = 0;
   worksList: WorkType[] = [];
 
+  sortBy: string = 'deliveryDate';
+  direction: string = 'desc';
+
   constructor(private activedRoute: ActivatedRoute, 
     private workService: WorkService) {
       this.activedRoute.params.subscribe({
@@ -39,12 +42,16 @@ export class WorksPageComponent implements OnInit {
     this.getAllWorks();
   }
 
+  selectChange(): void {
+    this.refreshWorks();
+  }
+
   refreshWorks(): void {
     this.getAllWorks();
   }
 
   getAllWorks(): void {
-    this.workService.getAllWorks(this.notebookId).subscribe({
+    this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction).subscribe({
       next: (res) => {
         this.worksList = res;
         this.isWorksLoaded = true;

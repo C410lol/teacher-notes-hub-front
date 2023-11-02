@@ -14,7 +14,8 @@ content="Deseja realmente deletar esse trabalho/tarefa? Todas as anotações e n
 <app-work-dialog 
 *ngIf="isEditMode" 
 [workId]="workId" [workTitle]="title" 
-[details]="details" [observations]="observations" [date]="deliveryDate"
+[details]="details" [observations]="observations" 
+[workType]="workType" [date]="deliveryDate"
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshWork(); switchEditMode()"
 type="edit" title="Editar Trbalho/Tarefa">
 </app-work-dialog>
