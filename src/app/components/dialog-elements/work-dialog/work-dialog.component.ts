@@ -21,7 +21,7 @@ export class WorkDialogComponent {
   @Input() workTitle: string = '';
   @Input() details: string = '';
   @Input() observations: string = '';
-  workType: string = '';
+  @Input() workType: string = '';
   @Input() date: string = '';
 
   constructor(private workService: WorkService) { }

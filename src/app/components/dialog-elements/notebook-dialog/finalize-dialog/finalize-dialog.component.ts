@@ -20,10 +20,10 @@ export class FinalizeDialogComponent {
     5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10
   ];
 
-  tarefaSelect: string = '';
-  provaSelect: string = '';
-  participacaoSelect: string = '';
-  simuladoSelect: string = '';
+  tarefaSelect: string = '2.5';
+  provaSelect: string = '2.5';
+  participacaoSelect: string = '2.5';
+  simuladoSelect: string = '2.5';
 
   constructor(private notebookService: NotebookService) { }
 

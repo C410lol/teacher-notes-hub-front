@@ -19,9 +19,9 @@ export class NotebookDialogComponent {
   @Input() teacherId?: string = '';
   @Input() notebookId?: string = '';
 
-  classe: string = '';
-  subject: string = '';
-  bimester: string = '';
+  @Input() classe: string = 'Ensino_Fundamental_5_A';
+  @Input() subject: string = 'Português';
+  @Input() bimester: string = 'Primeiro';
 
   constructor(private notebookService: NotebookService) { }
 
