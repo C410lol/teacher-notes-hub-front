@@ -23,8 +23,9 @@ export class WorkService {
     });
   }
 
-  getAllWorks(notebookId: string): Observable<WorkType[]> {
-    return this.httpClient.get<WorkType[]>(`${this.worksUrl}/all?notebookId=${notebookId}`, {
+  getAllWorks(notebookId: string, sortBy: string, direction: string): Observable<WorkType[]> {
+    return this.httpClient.get<WorkType[]>(
+      `${this.worksUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}`, {
       headers: this.getHeaders
     });
   }

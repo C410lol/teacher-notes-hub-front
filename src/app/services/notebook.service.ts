@@ -24,8 +24,9 @@ export class NotebookService {
     });
   }
 
-  getAllNotebooks(teacherId: string): Observable<NotebookType[]> {
-    return this.httpClient.get<NotebookType[]>(`${this.notebooksUrl}/all?teacherId=${teacherId}`, {
+  getAllNotebooks(teacherId: string, sortby: string, direction: string): Observable<NotebookType[]> {
+    return this.httpClient.get<NotebookType[]>(
+      `${this.notebooksUrl}/all?teacherId=${teacherId}&sortBy=${sortby}&direction=${direction}`, {
       headers: this.getHeaders
     });
   }

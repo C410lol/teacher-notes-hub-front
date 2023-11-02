@@ -23,8 +23,9 @@ export class LessonService {
     });
   }
 
-  getAllLessonsByNotebookId(notebookId: string): Observable<LessonType[]> {
-    return this.httpClient.get<LessonType[]>(`${this.lessonsUrl}/all?notebookId=${notebookId}`, {
+  getAllLessonsByNotebookId(notebookId: string, sortBy: string, direction: string): Observable<LessonType[]> {
+    return this.httpClient.get<LessonType[]>(
+      `${this.lessonsUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}`, {
       headers: this.getHeaders
     });
   }
