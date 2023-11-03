@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { LessonType } from '../types/LessonType';
+import { PageType } from '../types/Others/PageType';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class LessonService {
     });
   }
 
-  getAllLessonsByNotebookId(notebookId: string, sortBy: string, direction: string): Observable<LessonType[]> {
-    return this.httpClient.get<LessonType[]>(
-      `${this.lessonsUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}`, {
+  getAllLessonsByNotebookId(notebookId: string, sortBy: string, direction: string, pageNum: number): Observable<PageType<LessonType>> {
+    return this.httpClient.get<PageType<LessonType>>(
+      `${this.lessonsUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}&pageNum=${pageNum}`, {
       headers: this.getHeaders
     });
   }

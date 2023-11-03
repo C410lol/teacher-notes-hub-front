@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { WorkType } from '../types/WorkType';
 import { Observable } from 'rxjs';
+import { PageType } from '../types/Others/PageType';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class WorkService {
     });
   }
 
-  getAllWorks(notebookId: string, sortBy: string, direction: string): Observable<WorkType[]> {
-    return this.httpClient.get<WorkType[]>(
-      `${this.worksUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}`, {
+  getAllWorks(notebookId: string, sortBy: string, direction: string, pageNum: number): Observable<PageType<WorkType>> {
+    return this.httpClient.get<PageType<WorkType>>(
+      `${this.worksUrl}/all?notebookId=${notebookId}&sortBy=${sortBy}&direction=${direction}&pageNum=${pageNum}`, {
       headers: this.getHeaders
     });
   }

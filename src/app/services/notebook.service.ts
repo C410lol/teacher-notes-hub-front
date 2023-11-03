@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { NotebookType } from '../types/NotebookType';
 import { GradesWeightType } from '../types/Others/GradesWeightType';
+import { PageType } from '../types/Others/PageType';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class NotebookService {
     });
   }
 
-  getAllNotebooks(teacherId: string, sortby: string, direction: string): Observable<NotebookType[]> {
-    return this.httpClient.get<NotebookType[]>(
-      `${this.notebooksUrl}/all?teacherId=${teacherId}&sortBy=${sortby}&direction=${direction}`, {
+  getAllNotebooks(teacherId: string, sortby: string, direction: string, pageNum: number): Observable<PageType<NotebookType>> {
+    return this.httpClient.get<PageType<NotebookType>>(
+      `${this.notebooksUrl}/all?teacherId=${teacherId}&sortBy=${sortby}&direction=${direction}&pageNum=${pageNum}`, {
       headers: this.getHeaders
     });
   }
