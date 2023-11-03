@@ -1,0 +1,38 @@
+<div class="work-container">
+    <p class="title-txt">{{title}}</p>
+    <div class="form">
+        <div>
+            <p>*Título:</p>
+            <input type="text" placeholder="Insira o título do trabalho (obrigatório)"
+            [(ngModel)]="workTitle">
+        </div>
+        <div>
+            <p>*Detalhes:</p>
+            <input type="text" placeholder="Insira os detalhes do trabalho (obrigatório)" 
+            [(ngModel)]="details">
+        </div>
+        <div>
+            <p>Observações:</p>
+            <input type="text" placeholder="Insira as observações do trabalho" 
+            [(ngModel)]="observations">
+        </div>
+        <div>
+            <p>*Tipo:</p>
+            <select [(ngModel)]="workType">
+                <option value="TRABALHO">TRABALHO/TAREFA</option>
+                <option>PROVA</option>
+                <option>PARTICIPAÇÃO</option>
+                <option>SIMULADO</option>
+            </select>
+        </div>
+        <div>
+            <p>*Data:</p>
+            <input id="date-input" type="date" 
+            [(ngModel)]="date">
+        </div>
+    </div>
+    <div class="btns-box">
+        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
+        <button (click)="confirmOnClick()" class="green-btn">Criar</button>
+    </div>
+</div>
