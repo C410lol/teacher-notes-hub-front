@@ -1,0 +1,31 @@
+<div class="create-page-container">
+    <div class="create-container">
+        <p class="title-txt">Criar</p>
+        <div class="form">
+            <div>
+                <h1>Nome:</h1>
+                <input type="text" placeholder="Insira seu nome"
+                [(ngModel)]="name">
+            </div>
+            <div>
+                <h1>Email:</h1>
+                <input type="text" placeholder="Insira seu email"
+                [(ngModel)]="email">
+            </div>
+            <div>
+                <h1>Senha:</h1>
+                <input type="password" placeholder="Insira sua senha"
+                [(ngModel)]="password">
+            </div>
+            <div>
+                <h1 class="smaller-txt">Confirmar Senha:</h1>
+                <input type="password" placeholder="Confirme sua senha"
+                [(ngModel)]="confPassword">
+            </div>
+        </div>
+        <div class="btns-container">
+            <button (click)="createOnClick()" class="red-btn">Criar</button>
+            <p>Já possui uma conta?<a class="link-txt" [routerLink]="['/login']">Faça login agora</a></p>
+        </div>
+    </div>
+</div>

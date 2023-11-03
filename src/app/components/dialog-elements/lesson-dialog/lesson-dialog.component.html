@@ -1,0 +1,36 @@
+<div class="lesson-container">
+    <p class="title-txt">{{title}}</p>
+    <div class="form">
+        <div>
+            <p>*Título:</p>
+            <input type="text" placeholder="Insira o título da aula (obrigatório)" 
+            [(ngModel)]="lessonTitle">
+        </div>
+        <div>
+            <p>*Detalhes:</p>
+            <input type="text" placeholder="Insira os detalhes da aula (obrigatório)" 
+            [(ngModel)]="details">
+        </div>
+        <div>
+            <p>Observações:</p>
+            <input type="text" placeholder="Insira as observações da aula" 
+            [(ngModel)]="observations">
+        </div>
+        <div>
+            <p>Quantidade:</p>
+            <select [(ngModel)]="quantity">
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <div>
+            <p>Data:</p>
+            <input type="date" 
+            [(ngModel)]="date">
+        </div>
+    </div>
+    <div class="btns-box">
+        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
+        <button (click)="confirmOnClick()" class="green-btn">Criar</button>
+    </div>
+</div>

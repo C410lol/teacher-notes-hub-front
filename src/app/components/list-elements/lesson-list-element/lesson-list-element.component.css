@@ -1,0 +1,30 @@
+.lesson-container {
+    width: 1000px;
+    height: 45px;
+    display: grid;
+    grid-template-columns: 15% auto 10%;
+    cursor: pointer;
+    background-color: #bbbbbb;
+}
+
+.lesson-container:hover {
+    background-color: #bbbbbba9;
+}
+
+.lesson-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+}
+
+.SIM {
+    font-weight: bold;
+    color: #73a541;
+}
+
+.NÃO {
+    font-weight: bold;
+    color: #aa383a;
+}

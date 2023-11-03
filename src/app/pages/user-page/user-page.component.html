@@ -1,0 +1,40 @@
+<app-delete-dialog
+*ngIf="isDeleteMode"
+[id]="userId"
+(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goToLoginPage(); switchDeleteMode()"
+type="userDelete" title="Deletar Conta"
+content="Deseja realmente excluir sua conta? Todas as cadernetas e dados serão perdidos!">
+</app-delete-dialog>
+
+<app-delete-dialog
+*ngIf="isLogoutMode"
+[id]="userId"
+(cancelButtonClick)="switchLogoutMode()" (confirmButtonClick)="goToLoginPage(); switchLogoutMode()"
+type="userLogout" title="Sair Da Conta"
+content="Deseja realmente sair da conta? Você terá que fazer o login novamente!">
+</app-delete-dialog>
+
+<app-user-dialog
+*ngIf="isEditMode"
+[userId]="userId" [userName]="userName" [userEmail]="userEmail"
+(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshPage(); switchEditMode()">
+</app-user-dialog>
+
+<div class="user-container">
+    <h1>Sobre Mim</h1>
+    <div class="info-container">
+        <div class="single-info-container">
+            <h1>Nome:</h1>
+            <input value="{{userName}}">
+        </div>
+        <div class="single-info-container">
+            <h1>Email:</h1>
+            <input value="{{userEmail}}">
+        </div>
+    </div>
+    <div class="btns-container">
+        <button (click)="switchDeleteMode()" class="red-btn">Excluir Conta</button>
+        <button (click)="switchLogoutMode()" class="yellow-btn">Sair</button>
+        <button (click)="switchEditMode()" class="blue-btn">Editar Conta</button>
+    </div>
+</div>

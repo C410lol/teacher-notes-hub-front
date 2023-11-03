@@ -1,0 +1,30 @@
+.notebook-container {
+    width: 1000px;
+    height: 45px;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 7.5% 10% 8.5% auto;
+    cursor: pointer;
+    background-color: #bbbbbb;
+}
+
+.notebook-container:hover {
+    background-color: #bbbbbba9;
+}
+
+.notebook-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+}
+
+.ON {
+    font-weight: bold;
+    color: #73a541;
+}
+
+.OFF {
+    font-weight: bold;
+    color: #aa383a;
+}

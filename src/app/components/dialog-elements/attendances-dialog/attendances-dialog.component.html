@@ -1,0 +1,24 @@
+<div class="attendances-dialog-container">
+    <p class="title-txt">Criar/Editar Chamada</p>
+    <div class="content-container">
+        <div class="attendance-header">
+            <div><p>Aluno</p></div>
+            <div><p>1º Aula Faltas</p></div>
+            <div><p>2º Aula Faltas</p></div>
+        </div>
+        <div class="students-list">  
+            <app-attendance-dialog-list-element
+            *ngFor="let student of studentAttendanceList"
+            #attendanceDialogListElements
+            [isTwoLessons]="!isTwoLessons()"
+            [studentId]="student.id" [studentName]="student.name"
+            [firstCheckboxStatus]="student.firstAttendancePresent"
+            [secondCheckboxStatus]="student.secondAttendancePresent">
+            </app-attendance-dialog-list-element>
+        </div>
+        <div class="btns-container">
+            <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
+            <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+        </div>
+    </div>
+</div>

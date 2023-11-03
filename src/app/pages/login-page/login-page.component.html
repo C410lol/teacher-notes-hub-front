@@ -1,0 +1,21 @@
+<div class="login-page-container">
+    <div class="login-container">
+        <p class="title-txt">Login</p>
+        <div class="form">
+            <div>
+                <h1>Email:</h1>
+                <input type="text" placeholder="Insira seu email"
+                [(ngModel)]="email">
+            </div>
+            <div>
+                <h1>Senha:</h1>
+                <input type="password" placeholder="Insira sua senha"
+                [(ngModel)]="password">
+            </div>
+        </div>
+        <div class="btns-container">
+            <button (click)="loginOnClick()" class="red-btn">Login</button>
+            <p>Não possui uma conta?<a [routerLink]="['/create']" class="link-txt">Crie uma agora</a></p>
+        </div>
+    </div>
+</div>

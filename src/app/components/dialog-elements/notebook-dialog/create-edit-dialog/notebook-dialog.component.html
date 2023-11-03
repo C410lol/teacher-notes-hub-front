@@ -1,0 +1,57 @@
+<div class="notebook-dialog-container">
+    <p class="title-txt">{{title}}</p>
+    <div class="form">
+        <div>
+            <p>Classe:</p>
+            <select [(ngModel)]="classe">
+                <option value="Ensino_Fundamental_5_A">Ensino Fundamental 5-A</option>
+                <option value="Ensino_Fundamental_5_B">Ensino Fundamental 5-B</option>
+                <option value="Ensino_Fundamental_6_A">Ensino Fundamental 6-A</option>
+                <option value="Ensino_Fundamental_6_B">Ensino Fundamental 6-B</option>
+                <option value="Ensino_Fundamental_7_A">Ensino Fundamental 7-A</option>
+                <option value="Ensino_Fundamental_7_B">Ensino Fundamental 7-B</option>
+                <option value="Ensino_Fundamental_8_A">Ensino Fundamental 8-A</option>
+                <option value="Ensino_Fundamental_8_B">Ensino Fundamental 8-B</option>
+                <option value="Ensino_Fundamental_9_A">Ensino Fundamental 9-A</option>
+                <option value="Ensino_Fundamental_9_B">Ensino Fundamental 9-B</option>
+                <option value="Ensino_Médio_1_A">Ensino Médio 1-A</option>
+                <option value="Ensino_Médio_1_B">Ensino Médio 1-B</option>
+                <option value="Ensino_Médio_2_A">Ensino Médio 2-A</option>
+                <option value="Ensino_Médio_2_B">Ensino Médio 2-B</option>
+                <option value="Ensino_Médio_3_A">Ensino Médio 3-A</option>
+                <option value="Ensino_Médio_3_B">Ensino Médio 3-B</option>
+            </select>
+        </div>
+        <div>
+            <p>Matéria:</p>
+            <select [(ngModel)]="subject">
+                <option>Português</option>
+                <option>Literatura</option>
+                <option>Geografia</option>
+                <option>História</option>
+                <option>Filosofia</option>
+                <option>Matemática</option>
+                <option>Física</option>
+                <option>Química</option>
+                <option>Biologia</option>
+                <option>Inglês</option>
+                <option>Arte</option>
+                <option value="Educação_Física">Educação Física</option>
+                <option value="Projeto_De_Vida">Projeto de Vida</option>
+            </select>
+        </div>
+        <div>
+            <p>Bimestre:</p>
+            <select [(ngModel)]="bimester">
+                <option>Primeiro</option>
+                <option>Segundo</option>
+                <option>Terceiro</option>
+                <option>Quarto</option>
+            </select>
+        </div>
+    </div>
+    <div class="btns-box">
+        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
+        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+    </div>
+</div>
