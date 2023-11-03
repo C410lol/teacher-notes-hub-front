@@ -1,0 +1,136 @@
+* {
+    background-color: transparent;
+}
+
+.grades-dialog-container {
+    width: 350px;
+    height: auto;
+    min-height: 375px;
+    max-height: 500px;
+    padding-bottom: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    border: 2.5px solid #3F3F3F;
+    border-radius: 2.5px;
+    background-color: #bbbbbb;
+}
+
+.title-txt {
+    width: fit-content;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.creation-container {
+    width: 325px;
+    height: 100px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.creation-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.creation-form-container select {
+    width: 150px;
+    height: 25px;
+    margin: 0px 10px;
+    padding-left: 2.5px;
+    border: 0;
+    border-radius: 2.5px;
+    background-color: #a3a3a3;
+}
+
+.creation-btns-container {
+    width: fit-content;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.creation-btns-container button {
+    width: 150px;
+    height: 25px;
+    border: 0;
+    border-radius: 2.5px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.content-container {
+    width: 325px;
+    height: auto;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.5px solid #3F3F3F;
+}
+
+.content-container p {
+    font-size: small;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.grade-header {
+    height: 35px;
+    display: grid;
+    grid-template-columns: 77.5% auto;
+    background-color: #E0E0E0;
+}
+
+.grade-header div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 0.125px solid #3F3F3F;
+    background-color: transparent;
+}
+
+.student-grades-list {
+    max-height: 245px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.btns-container {
+    width: 325px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.btns-container button {
+    width: 250px;
+    height: 25px;
+    border: 0;
+    border-radius: 2.5px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.red-btn {
+    background-color: #e03437;
+}
+
+.red-btn:hover {
+    background-color: #e03437b9;
+}
+
+.green-btn {
+    background-color: #73a541;
+}
+
+.green-btn:hover {
+    background-color: #73a541ce;
+}

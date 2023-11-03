@@ -1,0 +1,87 @@
+* {
+    background-color: transparent;
+}
+
+.work-container {
+    width: 350px;
+    min-height: 375px;
+    padding-bottom: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    border: 2.5px solid #3F3F3F;
+    border-radius: 2.5px;
+    background-color: #bbbbbb;
+}
+
+.title-txt {
+    width: fit-content;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: large;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.form {
+    width: 325px;
+    margin-top: 55px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form div {
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 25% auto;
+}
+
+.form p {
+    font-size: small;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.form select, .form input {
+    height: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 10px;
+    border: 0;
+    border-radius: 2.5px;
+    background-color: #a3a3a3;
+}
+
+.btns-box {
+    width: 325px;
+    margin-top: 55px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+}
+
+.btns-box button {
+    height: 25px;
+    border: 0;
+    border-radius: 2.5px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.red-btn {
+    background-color: #e03437;
+}
+
+.red-btn:hover {
+    background-color: #e03437b9;
+}
+
+.green-btn {
+    background-color: #73a541;
+}
+
+.green-btn:hover {
+    background-color: #73a541ce;
+}
