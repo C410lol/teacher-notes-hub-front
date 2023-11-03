@@ -1,0 +1,58 @@
+<app-notebook-dialog 
+*ngIf="isCreateMode" 
+[teacherId]="teacherId"
+(cancelButtonClick)="switchCreateMode()" (confirmButtonClick)="refreshNotebooks(); switchCreateMode()"
+type="create" title="Criar Caderneta">
+</app-notebook-dialog>
+
+<div [ngClass]="isCreateMode.toString()" class="home-container">
+    <h1 class="title-txt">Cadernetas</h1>
+    <h1 *ngIf="!isNotebooksLoaded" class="loading-txt">Carregando...</h1>
+    <div *ngIf="isNotebooksLoaded" class="content-container">
+        <button (click)="switchCreateMode()" class="create-btn">
+            <h1>Nova Caderneta</h1>
+        </button>
+        <div class="sort-container">
+            <div>
+                <h1>Ordernar Por:</h1>
+                <select (change)="selectChange()" [(ngModel)]="sortBy">
+                    <option value="classe">Classe</option>
+                    <option value="subject">Matéria</option>
+                    <option value="bimester">Bimestre</option>
+                    <option value="status">Status</option>
+                    <option value="createDate">Data</option>
+                </select>
+            </div>
+            <div>
+                <h1>Ordem:</h1>
+                <select (change)="selectChange()" [(ngModel)]="direction">
+                    <option value="asc">Crescente</option>
+                    <option value="desc">Decrescente</option>
+                </select>
+            </div>
+        </div>
+        <div class="notebooks-container">
+            <div class="notebooks-header">
+                <div><h1>Classe</h1></div>
+                <div><h1>Matéria</h1></div>
+                <div><h1>Bimestre</h1></div>
+                <div><h1>Aulas</h1></div>
+                <div><h1>Trabalhos</h1></div>
+                <div><h1>Status</h1></div>
+                <div><h1>Criada Em</h1></div>
+            </div>
+            <div *ngFor="let notebook of notebookList">
+                <app-notebook-list-element
+                [id]="notebook.id"
+                [classe]="notebook.classe"
+                [subject]="notebook.subject"
+                [bimester]="notebook.bimester"
+                [lessons]="notebook.lessons"
+                [works]="notebook.works"
+                [status]="notebook.status"
+                [date]="notebook.createDate">
+                </app-notebook-list-element>
+            </div>
+        </div>
+    </div>
+</div>
