@@ -1,0 +1,88 @@
+.works-page-container {
+    width: 100%;
+    height: 100%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content-container {
+    width: 100%;
+    height: 100%;
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-btn {
+    width: 350px;
+    height: auto;
+    padding: 5px 0px;
+    border: 0;
+    border-radius: 2.5px;
+    cursor: pointer;
+    background-color: #73a541;
+    font-size: medium;
+}
+
+.create-btn:hover {
+    background-color: #73a541ce;
+}
+
+.works-container {
+    width: 1000px;
+    height: auto;
+    margin-top: 5px;
+}
+
+.sort-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sort-container div {
+    margin-bottom: 2.5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sort-container div h1, select {
+    margin-left: 7.5px;
+}
+
+.sort-container div h1 {
+    color: #E0E0E0;
+}
+
+.sort-container div select {
+    width: 125px;
+    height: 25px;
+    border: 0;
+    border-radius: 2.5px;
+    background-color: #a3a3a3;
+}
+
+.works-header {
+    width: 1000px;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 15% auto 12%;
+    background-color: #E0E0E0;
+}
+
+.works-header div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border: 1px solid #3F3F3F;
+    background-color: transparent;
+}
+
+h1 {
+    font-size: larger;
+}
