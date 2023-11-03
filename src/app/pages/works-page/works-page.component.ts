@@ -21,9 +21,11 @@ export class WorksPageComponent implements OnInit {
 
   studentsLength: number = 0;
   worksList: WorkType[] = [];
+  pageNumbers: number[] = [];
 
   sortBy: string = 'deliveryDate';
   direction: string = 'desc';
+  pageNum: number = 1;
 
   constructor(private activedRoute: ActivatedRoute, 
     private workService: WorkService) {
@@ -51,13 +53,22 @@ export class WorksPageComponent implements OnInit {
   }
 
   getAllWorks(): void {
-    this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction).subscribe({
+    this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.worksList = res;
+        this.worksList = res.content;
+        this.createPageNumbersOptions(res.totalPages);
         this.isWorksLoaded = true;
       },
       error: (err) => console.error(err)
     });
+  }
+
+  createPageNumbersOptions(totalPages: number): void {
+    if(this.pageNumbers.length == 0) {
+      for(let index: number = 1; index <= totalPages; index++) {
+        this.pageNumbers.push(index);
+      }
+    }
   }
 
   switchCreateMode(): void {

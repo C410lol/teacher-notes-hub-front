@@ -31,6 +31,14 @@ type="create" title="Criar Aula">
                     <option value="desc">Decrescente</option>
                 </select>
             </div>
+            <div>
+                <h1>Página:</h1>
+                <select (change)="selectChange()" [(ngModel)]="pageNum">
+                    <option *ngFor="let pageNum of pageNumbers">
+                        {{pageNum}}
+                    </option>
+                </select>
+            </div>
         </div>
         <div class="lessons-container">
             <div class="lessons-header">

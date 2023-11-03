@@ -19,9 +19,11 @@ export class HomePageComponent implements OnInit {
   teacherId: string = '';
   
   notebookList: NotebookType[] = [];
+  pageNumbers: number[] = [];
 
   sortBy: string = 'status';
   direction: string = 'desc';
+  pageNum: number = 1;
 
   constructor(private notebookService: NotebookService) { 
     const userId: string | null = sessionStorage.getItem('userId');
@@ -43,13 +45,22 @@ export class HomePageComponent implements OnInit {
   }
 
   getAllNotebooks(): void {
-    this.notebookService.getAllNotebooks(this.teacherId, this.sortBy, this.direction).subscribe({
+    this.notebookService.getAllNotebooks(this.teacherId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.notebookList = res;
+        this.notebookList = res.content;
+        this.createPageNumbersOptions(res.totalPages);
         this.isNotebooksLoaded = true;
       },
       error: (err) => console.error(err)
     });
+  }
+
+  createPageNumbersOptions(totalPages: number): void {
+    if(this.pageNumbers.length == 0) {
+      for(let index: number = 1; index <= totalPages; index++) {
+        this.pageNumbers.push(index);
+      }
+    }
   }
 
   switchCreateMode(): void {

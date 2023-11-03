@@ -20,9 +20,11 @@ export class LessonsPageComponent implements OnInit {
   notebookId: string = '';
 
   lessonsList: LessonType[] = [];
+  pageNumbers: number[] = [];
 
   sortBy: string = 'date';
   direction: string = 'desc';
+  pageNum: number = 1;
 
   constructor(
     private activedRoute: ActivatedRoute,
@@ -47,13 +49,22 @@ export class LessonsPageComponent implements OnInit {
   }
 
   getAllLessons(): void {
-    this.lessonService.getAllLessonsByNotebookId(this.notebookId, this.sortBy, this.direction).subscribe({
+    this.lessonService.getAllLessonsByNotebookId(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.lessonsList = res;
+        this.lessonsList = res.content;
+        this.createPageNumbersOptions(res.totalPages);
         this.isLessonsLoaded = true;
       },
       error: (err) => console.error(err)
     });
+  }
+
+  createPageNumbersOptions(totalPages: number): void {
+    if(this.pageNumbers.length == 0) {
+      for(let index: number = 1; index <= totalPages; index++) {
+        this.pageNumbers.push(index);
+      }
+    }
   }
 
   switchCreateMode(): void {
