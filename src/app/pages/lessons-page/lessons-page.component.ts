@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
 import { LessonType } from 'src/app/types/LessonType';
-import { SortInterface } from '../SortInterface';
+import { SortInterface } from '../../types/interfaces/SortInterface';
 
 @Component({
   selector: 'app-lessons-page',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NotebookType } from 'src/app/types/NotebookType';
 import { NotebookService } from 'src/app/services/notebook.service';
-import { SortInterface } from '../SortInterface';
+import { SortInterface } from '../../types/interfaces/SortInterface';
 
 @Component({
   selector: 'app-home-page',

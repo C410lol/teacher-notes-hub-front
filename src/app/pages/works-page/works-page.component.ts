@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
-import { SortInterface } from '../SortInterface';
+import { SortInterface } from '../../types/interfaces/SortInterface';
 
 @Component({
   selector: 'app-works-page',
