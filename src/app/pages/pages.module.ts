@@ -14,6 +14,7 @@ import { SingleWorkPageComponent } from '../pages/single-work-page/single-work-p
 import { UserPageComponent } from '../pages/user-page/user-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CreatePageComponent } from './create-page/create-page.component';
     UserPageComponent,
     LoginPageComponent,
     CreatePageComponent,
+    NotFoundPageComponent,
   ],
   exports: [
     PagesComponent,

@@ -18,6 +18,7 @@ import { AttendanceDialogListElementComponent } from './list-elements/attendance
 import { GradesDialogListElementComponent } from './list-elements/grades-dialog-list-element/grades-dialog-list-element.component';
 import { FinalizeDialogComponent } from './dialog-elements/notebook-dialog/finalize-dialog/finalize-dialog.component';
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
+import { SortingComponent } from './sorting/sorting.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { BackArrowComponent } from './back-arrow/back-arrow.component';
     GradesDialogListElementComponent,
     FinalizeDialogComponent,
     BackArrowComponent,
+    SortingComponent,
   ],
   exports: [
     HeaderComponent,
@@ -51,7 +53,8 @@ import { BackArrowComponent } from './back-arrow/back-arrow.component';
     AttendancesDialogComponent,
     GradesDialogComponent,
     FinalizeDialogComponent,
-    BackArrowComponent
+    BackArrowComponent,
+    SortingComponent
   ],
   imports: [
     CommonModule,

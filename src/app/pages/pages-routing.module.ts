@@ -9,9 +9,13 @@ import { SingleNotebookPageComponent } from './single-notebook-page/single-noteb
 import { SingleWorkPageComponent } from './single-work-page/single-work-page.component';
 import { WorksPageComponent } from './works-page/works-page.component';
 import { PagesComponent } from './pages.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 
 const routes: Routes = [
+  {
+    path: "not-found", component: NotFoundPageComponent
+  },
   {
     path: "user", component: UserPageComponent
   },
@@ -48,6 +52,9 @@ const routes: Routes = [
         ]
       }
     ]
+  },
+  {
+    path: "**", redirectTo: "not-found"
   }
 ]
 
