@@ -1,0 +1,33 @@
+h1 {
+    font-size: larger;
+}
+
+.sorting-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sorting-container div {
+    margin-bottom: 2.5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sorting-container div h1, select {
+    margin-left: 7.5px;
+}
+
+.sorting-container div h1 {
+    color: #E0E0E0;
+}
+
+.sorting-container div select {
+    width: 125px;
+    height: 25px;
+    border: 0;
+    border-radius: 2.5px;
+    background-color: #a3a3a3;
+}

@@ -1,0 +1,15 @@
+@media screen and (width <= 768px) {
+
+    .sorting-container {
+        flex-direction: column;
+    }
+
+    .sorting-container div {
+        margin-bottom: 10px;
+    }
+
+    .sorting-container div select {
+        width: 75px;
+    }
+
+}

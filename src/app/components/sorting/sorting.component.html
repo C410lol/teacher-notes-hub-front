@@ -1,0 +1,25 @@
+<div class="sorting-container">
+    <div>
+        <h1>Ordernar Por:</h1>
+        <select [(ngModel)]="orderBy" (change)="orderByOnChange()">
+            <option *ngFor="let orderByElement of orderByElementsList" [value]="orderByElement.value">
+                {{orderByElement.name}}
+            </option>
+        </select>
+    </div>
+    <div>
+        <h1>Ordem:</h1>
+        <select [(ngModel)]="direction" (change)="directionOnChange()">
+            <option value="asc">Crescente</option>
+            <option value="desc">Decrescente</option>
+        </select>
+    </div>
+    <div>
+        <h1>Página:</h1>
+        <select [(ngModel)]="pageNum" (change)="pageNumOnChange()">
+            <option *ngFor="let pageNum of pageNumbersList">
+                {{pageNum}}
+            </option>
+        </select>
+    </div>
+</div>
