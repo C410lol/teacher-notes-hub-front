@@ -14,32 +14,20 @@ type="create" title="Criar Aula">
         <button (click)="switchCreateMode()" class="create-btn">
             <h1>Nova Aula</h1>
         </button>
-        <div class="sort-container">
-            <div>
-                <h1>Ordernar Por:</h1>
-                <select (change)="selectChange()" [(ngModel)]="sortBy">
-                    <option value="date">Data</option>
-                    <option value="title">Título</option>
-                    <option value="attendances">Chamada</option>
-                    <option value="quantity">Quantidade</option>
-                </select>
-            </div>
-            <div>
-                <h1>Ordem:</h1>
-                <select (change)="selectChange()" [(ngModel)]="direction">
-                    <option value="asc">Crescente</option>
-                    <option value="desc">Decrescente</option>
-                </select>
-            </div>
-            <div>
-                <h1>Página:</h1>
-                <select (change)="selectChange()" [(ngModel)]="pageNum">
-                    <option *ngFor="let pageNum of pageNumbers">
-                        {{pageNum}}
-                    </option>
-                </select>
-            </div>
-        </div>
+        
+        <app-sorting [orderByElementsList]="[
+            {value: 'date', name: 'Data'},
+            {value: 'title', name: 'Título'},
+            {value: 'quantity', name: 'Quantidade'},
+            {value: 'attendances', name: 'Chamada'}
+        ]"
+        [totalPages]="totalPages"
+        (orderByOptionEvent)="orderByOnChange($event)"
+        (directionOptionEvent)="directionOnChange($event)"
+        (pageNumOptionEvent)="pageNumOnChange($event)">
+
+        </app-sorting>
+
         <div class="lessons-container">
             <div class="lessons-header">
                 <div><h1>Data</h1></div>

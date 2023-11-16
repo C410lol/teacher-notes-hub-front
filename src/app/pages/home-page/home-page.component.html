@@ -12,33 +12,19 @@ type="create" title="Criar Caderneta">
         <button (click)="switchCreateMode()" class="create-btn">
             <h1>Nova Caderneta</h1>
         </button>
-        <div class="sort-container">
-            <div>
-                <h1>Ordernar Por:</h1>
-                <select (change)="selectChange()" [(ngModel)]="sortBy">
-                    <option value="classe">Classe</option>
-                    <option value="subject">Matéria</option>
-                    <option value="bimester">Bimestre</option>
-                    <option value="status">Status</option>
-                    <option value="createDate">Data</option>
-                </select>
-            </div>
-            <div>
-                <h1>Ordem:</h1>
-                <select (change)="selectChange()" [(ngModel)]="direction">
-                    <option value="asc">Crescente</option>
-                    <option value="desc">Decrescente</option>
-                </select>
-            </div>
-            <div>
-                <h1>Página:</h1>
-                <select (change)="selectChange()" [(ngModel)]="pageNum">
-                    <option *ngFor="let pageNum of pageNumbers">
-                        {{pageNum}}
-                    </option>
-                </select>
-            </div>
-        </div>
+
+        <app-sorting [orderByElementsList]="[
+            {value: 'classe', name: 'Classe'},
+            {value: 'subject', name: 'Matéria'},
+            {value: 'bimester', name: 'Bimestre'},
+            {value: 'status', name: 'Status'},
+            {value: 'createDate', name: 'Data'}
+            ]" 
+            [totalPages]="totalPages"
+            (orderByOptionEvent)="orderByOnChange($event)"
+            (directionOptionEvent)="directionOnChange($event)"
+            (pageNumOptionEvent)="pageNumOnChange($event)"></app-sorting>
+
         <div class="notebooks-container">
             <div class="notebooks-header">
                 <div><h1>Classe</h1></div>

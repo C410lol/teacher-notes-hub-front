@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
 import { LessonType } from 'src/app/types/LessonType';
+import { SortInterface } from '../SortInterface';
 
 @Component({
   selector: 'app-lessons-page',
@@ -12,7 +13,7 @@ import { LessonType } from 'src/app/types/LessonType';
     '../pages-shared-styles/title-txt.css',
   ]
 })
-export class LessonsPageComponent implements OnInit {
+export class LessonsPageComponent implements OnInit, SortInterface {
 
   isCreateMode: boolean = false;
   isLessonsLoaded: boolean = false;
@@ -20,7 +21,7 @@ export class LessonsPageComponent implements OnInit {
   notebookId: string = '';
 
   lessonsList: LessonType[] = [];
-  pageNumbers: number[] = [];
+  totalPages: number = 1;
 
   sortBy: string = 'date';
   direction: string = 'desc';
@@ -40,7 +41,18 @@ export class LessonsPageComponent implements OnInit {
     this.getAllLessons();
   }
 
-  selectChange(): void {
+  orderByOnChange(orderBy: string): void {
+    this.sortBy = orderBy;
+    this.refreshLessons();
+  }
+
+  directionOnChange(direction: string): void {
+    this.direction = direction;
+    this.refreshLessons();
+  }
+
+  pageNumOnChange(pageNum: number): void {
+    this.pageNum = pageNum;
     this.refreshLessons();
   }
 
@@ -52,19 +64,11 @@ export class LessonsPageComponent implements OnInit {
     this.lessonService.getAllLessonsByNotebookId(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
         this.lessonsList = res.content;
-        this.createPageNumbersOptions(res.totalPages);
+        this.totalPages = res.totalPages;
         this.isLessonsLoaded = true;
       },
       error: (err) => console.error(err)
     });
-  }
-
-  createPageNumbersOptions(totalPages: number): void {
-    if(this.pageNumbers.length == 0) {
-      for(let index: number = 1; index <= totalPages; index++) {
-        this.pageNumbers.push(index);
-      }
-    }
   }
 
   switchCreateMode(): void {

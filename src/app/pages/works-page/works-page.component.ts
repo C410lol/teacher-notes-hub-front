@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
+import { SortInterface } from '../SortInterface';
 
 @Component({
   selector: 'app-works-page',
@@ -12,7 +13,7 @@ import { WorkType } from 'src/app/types/WorkType';
     '../pages-shared-styles/title-txt.css',
   ]
 })
-export class WorksPageComponent implements OnInit {
+export class WorksPageComponent implements OnInit, SortInterface {
 
   isCreateMode: boolean = false;
   isWorksLoaded: boolean = false;
@@ -21,7 +22,7 @@ export class WorksPageComponent implements OnInit {
 
   studentsLength: number = 0;
   worksList: WorkType[] = [];
-  pageNumbers: number[] = [];
+  totalPages: number = 1;
 
   sortBy: string = 'deliveryDate';
   direction: string = 'desc';
@@ -44,7 +45,18 @@ export class WorksPageComponent implements OnInit {
     this.getAllWorks();
   }
 
-  selectChange(): void {
+  orderByOnChange(orderBy: string): void {
+    this.sortBy = orderBy;
+    this.refreshWorks();
+  }
+
+  directionOnChange(direction: string): void {
+    this.direction = direction;
+    this.refreshWorks();
+  }
+
+  pageNumOnChange(pageNum: number): void {
+    this.pageNum = pageNum;
     this.refreshWorks();
   }
 
@@ -56,19 +68,11 @@ export class WorksPageComponent implements OnInit {
     this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
         this.worksList = res.content;
-        this.createPageNumbersOptions(res.totalPages);
+        this.totalPages = res.totalPages;
         this.isWorksLoaded = true;
       },
       error: (err) => console.error(err)
     });
-  }
-
-  createPageNumbersOptions(totalPages: number): void {
-    if(this.pageNumbers.length == 0) {
-      for(let index: number = 1; index <= totalPages; index++) {
-        this.pageNumbers.push(index);
-      }
-    }
   }
 
   switchCreateMode(): void {

@@ -1,6 +1,7 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NotebookType } from 'src/app/types/NotebookType';
 import { NotebookService } from 'src/app/services/notebook.service';
+import { SortInterface } from '../SortInterface';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +12,9 @@ import { NotebookService } from 'src/app/services/notebook.service';
     '../pages-shared-styles/title-txt.css',
   ]
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, SortInterface {
+
+  @Output() totalPagesEvent: EventEmitter<number> = new EventEmitter<number>();
 
   isCreateMode:boolean = false;
   isNotebooksLoaded: boolean = false;
@@ -19,7 +22,7 @@ export class HomePageComponent implements OnInit {
   teacherId: string = '';
   
   notebookList: NotebookType[] = [];
-  pageNumbers: number[] = [];
+  totalPages: number = 1;
 
   sortBy: string = 'status';
   direction: string = 'desc';
@@ -36,7 +39,18 @@ export class HomePageComponent implements OnInit {
     this.getAllNotebooks();
   }
 
-  selectChange(): void {
+  orderByOnChange(orderBy: string): void {
+    this.sortBy = orderBy;
+    this.refreshNotebooks();
+  }
+
+  directionOnChange(direction: string): void {
+    this.direction = direction;
+    this.refreshNotebooks();
+  }
+
+  pageNumOnChange(pageNum: number): void {
+    this.pageNum = pageNum;
     this.refreshNotebooks();
   }
 
@@ -48,19 +62,11 @@ export class HomePageComponent implements OnInit {
     this.notebookService.getAllNotebooks(this.teacherId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
         this.notebookList = res.content;
-        this.createPageNumbersOptions(res.totalPages);
+        this.totalPages = res.totalPages;
         this.isNotebooksLoaded = true;
       },
       error: (err) => console.error(err)
     });
-  }
-
-  createPageNumbersOptions(totalPages: number): void {
-    if(this.pageNumbers.length == 0) {
-      for(let index: number = 1; index <= totalPages; index++) {
-        this.pageNumbers.push(index);
-      }
-    }
   }
 
   switchCreateMode(): void {
