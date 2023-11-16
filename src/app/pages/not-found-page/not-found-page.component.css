@@ -1,0 +1,36 @@
+h1, p {
+    color: #EFEFEF;
+}
+
+.note-found-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.biggest-txt {
+    margin-top: 150px;
+    font-size: 75px;
+}
+
+.medium-txt {
+    font-size: 35px;
+}
+
+.smaller-txt {
+    text-align: center;
+    font-size: 15px;
+}
+
+.back-home-btn {
+    width: 335px;
+    height: 40px;
+    margin-top: 15px;
+    border: 0;
+    background-color: #e03437;
+}
+
+.back-home-btn:hover {
+    background-color: #e03437b9;
+}
