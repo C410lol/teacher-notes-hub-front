@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
 import { AttendanceType } from 'src/app/types/AttendanceType';
 import { LessonType } from 'src/app/types/LessonType';
@@ -29,6 +29,7 @@ export class SingleLessonPageComponent implements OnInit {
   attendances?: number = 0;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute, 
     private location: Location,
     private lessonService: LessonService
@@ -50,7 +51,10 @@ export class SingleLessonPageComponent implements OnInit {
   getLesson(): void {
     this.lessonService.getLessonById(this.lessonId).subscribe({
       next: (res) => this.setLessonValues(res),
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err),
+        this.router.navigate(['/not-found']);
+      }
     });
   }
 

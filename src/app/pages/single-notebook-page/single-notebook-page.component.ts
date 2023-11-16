@@ -50,7 +50,10 @@ export class SingleNotebookPageComponent implements OnInit {
   getNotebook(): void {
     this.notebookService.getNotebookById(this.notebookId).subscribe({
       next: (res) => this.setNotebookValues(res),
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err),
+        this.router.navigate(['/not-found']);
+      }
     });
   }
 

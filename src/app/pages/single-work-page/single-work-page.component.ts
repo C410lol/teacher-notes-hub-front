@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
 
@@ -27,6 +27,7 @@ export class SingleWorkPageComponent implements OnInit {
   deliveryDate:string = 'Carregando...';
 
   constructor(
+    private router: Router,
     private activedRoute: ActivatedRoute,
     private location: Location, 
     private workService: WorkService,
@@ -48,7 +49,10 @@ export class SingleWorkPageComponent implements OnInit {
   getWork(): void {
     this.workService.getWorkById(this.workId).subscribe({
       next: (res) => this.setWorkValues(res),
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err),
+        this.router.navigate(['/not-found']);
+      }
     });
   }
 
