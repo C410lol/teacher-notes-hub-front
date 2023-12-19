@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 import { LessonService } from 'src/app/services/lesson.service';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { UserService } from 'src/app/services/user.service';
@@ -22,6 +23,7 @@ export class DeleteDialogComponent {
   @Input() id?: string = '';
 
   constructor(
+    private eventService: EventService,
     private userService: UserService,
     private notebookService: NotebookService,
     private lessonService: LessonService,
@@ -63,6 +65,7 @@ export class DeleteDialogComponent {
         localStorage.clear();
         sessionStorage.clear();
         this.confirmButtonClick.emit();
+        this.eventService.triggerRefreshHeader();
       },
       error: () => alert(environment.simpleErrorMessage)
     });
@@ -72,6 +75,7 @@ export class DeleteDialogComponent {
     localStorage.clear();
     sessionStorage.clear();
     this.confirmButtonClick.emit();
+    this.eventService.triggerRefreshHeader();
   }
 
   deleteNotebook(): void {

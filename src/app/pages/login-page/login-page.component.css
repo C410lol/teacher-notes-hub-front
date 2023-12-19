@@ -1,9 +1,7 @@
 .login-container {
     width: 350px;
     height: auto;
-    margin: 100px auto;
-    padding-bottom: 47.2px;
-    border: 1px solid #e03437;
+    margin: 90px auto;
     background-color: #3F3F3F;
 }
 
@@ -57,9 +55,21 @@
     color: #efefefb0;
 }
 
+.change-password-txt {
+    cursor: pointer;
+    font-size: small;
+    font-style: italic;
+    text-decoration: underline;
+    color: #EFEFEF;
+}
+
+.change-password-txt:hover {
+    color: #f15c5c;
+}
+
 .btns-container {
     width: fit-content;
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 35px;
@@ -97,6 +107,7 @@
 .link-txt {
     margin-left: 5px;
     cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
     font-style: italic;
     text-decoration: underline;
     color: #EFEFEF;

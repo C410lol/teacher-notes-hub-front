@@ -5,5 +5,5 @@
         Parece que a página que você estava procurando 
         não existe ou você não possui autorização para acessa-lá!
     </p>
-    <button [routerLink]="['/']" class="back-home-btn">Voltar Para HOME</button>
+    <button (click)="goBack()" class="back-home-btn">Voltar</button>
 </div>

@@ -7,7 +7,7 @@ type="create" title="Criar Trabalho/Tarefa">
 
 <app-back-arrow></app-back-arrow>
 
-<div class="works-page-container">
+<div [ngClass]="{ 'blur-filter': isCreateMode }" class="works-page-container">
     <h1 class="title-txt">Trabalhos/Tarefas</h1>
     <h1 *ngIf="!isWorksLoaded" class="loading-txt">Carregando...</h1>
     <div *ngIf="isWorksLoaded" class="content-container">

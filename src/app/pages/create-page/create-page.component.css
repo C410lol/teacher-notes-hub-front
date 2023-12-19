@@ -1,9 +1,8 @@
 .create-container {
     width: 350px;
     height: auto;
-    margin: 100px auto;
-    padding-bottom: 47.2px;
-    border: 1px solid #e03437;
+    margin: 90px auto;
+    margin-bottom: 30px;
     background-color: #3F3F3F;
 }
 
@@ -97,6 +96,7 @@
 .link-txt {
     margin-left: 5px;
     cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
     font-style: italic;
     text-decoration: underline;
     color: #EFEFEF;

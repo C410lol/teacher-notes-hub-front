@@ -23,7 +23,7 @@ type="edit" title="Editar Aula">
 
 <app-back-arrow></app-back-arrow>
 
-<div class="single-lesson-container">
+<div [ngClass]="{ 'blur-filter': isAttendanceMode || isDeleteMode || isEditMode }" class="single-lesson-container">
     <h1 class="title-txt">Informações</h1>
     <div class="info-container">
         <div class="single-info-container">

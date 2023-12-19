@@ -7,6 +7,7 @@
                 <input type="text" placeholder="Insira seu email"
                 [(ngModel)]="email">
             </div>
+            <a [routerLink]="['/mudar-senha-request']" class="change-password-txt">Não Lembra de sua senha?</a>
             <div>
                 <h1>Senha:</h1>
                 <input type="password" placeholder="Insira sua senha"
@@ -15,7 +16,7 @@
         </div>
         <div class="btns-container">
             <button (click)="loginOnClick()" class="red-btn">Login</button>
-            <p>Não possui uma conta?<a [routerLink]="['/create']" class="link-txt">Crie uma agora</a></p>
+            <p>Não possui uma conta?<a [routerLink]="['/criar']" class="link-txt">Crie uma agora</a></p>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
 import { SortInterface } from '../../types/interfaces/SortInterface';
@@ -11,6 +11,7 @@ import { SortInterface } from '../../types/interfaces/SortInterface';
     './works-page.component.css',
     './works-page.mobile.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class WorksPageComponent implements OnInit, SortInterface {
@@ -28,8 +29,11 @@ export class WorksPageComponent implements OnInit, SortInterface {
   direction: string = 'desc';
   pageNum: number = 1;
 
-  constructor(private activedRoute: ActivatedRoute, 
-    private workService: WorkService) {
+  constructor(
+    private router: Router,
+    private activedRoute: ActivatedRoute, 
+    private workService: WorkService
+    ) {
       this.activedRoute.params.subscribe({
         next: (res) => this.notebookId = res["notebookId"],
         error: (err) => console.error(err)
@@ -37,11 +41,15 @@ export class WorksPageComponent implements OnInit, SortInterface {
 
       this.activedRoute.queryParams.subscribe({
         next: (res) => this.studentsLength = res["studentsLength"],
-        error: (err) => console.error(err)
+        error: (err) => {
+          console.error(err),
+          this.router.navigate(['/not-found']);
+        }
       });
   }
 
   ngOnInit(): void {
+    console.log(this.notebookId);
     this.getAllWorks();
   }
 
@@ -67,8 +75,12 @@ export class WorksPageComponent implements OnInit, SortInterface {
   getAllWorks(): void {
     this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.worksList = res.content;
-        this.totalPages = res.totalPages;
+        if (res.status == 200) {
+          if (res.body != null) {
+            this.worksList = res.body.content;
+            this.totalPages = res.body.totalPages;
+          }
+        }
         this.isWorksLoaded = true;
       },
       error: (err) => console.error(err)

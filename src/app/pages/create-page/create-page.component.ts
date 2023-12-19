@@ -36,7 +36,10 @@ export class CreatePageComponent {
       email: this.email,
       password: this.password
     }).subscribe({
-      next: () => this.router.navigate(['/login']),
+      next: () => {
+        alert('Conta criada com sucesso! Uma mensagem foi enviada ao seu email para verificar sua conta.');
+        this.router.navigate(['/login']);
+      },
       error: () => alert(environment.fieldErrorMessage)
     });
   }

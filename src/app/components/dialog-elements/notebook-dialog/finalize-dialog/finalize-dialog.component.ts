@@ -25,6 +25,9 @@ export class FinalizeDialogComponent {
   participacaoSelect: string = '2.5';
   simuladoSelect: string = '2.5';
 
+  weightSum: number = 10;
+  weigthSumStyle: string = 'GREEN';
+
   constructor(private notebookService: NotebookService) { }
 
   cancelOnClick(): void {
@@ -62,6 +65,18 @@ export class FinalizeDialogComponent {
       participacaoWeight: Number.parseFloat(this.participacaoSelect),
       simuladoWeight: Number.parseFloat(this.simuladoSelect)
     }
+  }
+
+  changeWeightSum(): void {
+    this.weightSum = 
+    Number.parseFloat(this.tarefaSelect) + 
+    Number.parseFloat(this.provaSelect) + 
+    Number.parseFloat(this.participacaoSelect) + 
+    Number.parseFloat(this.simuladoSelect);
+
+    if (this.weightSum == 10) {
+      this.weigthSumStyle = 'GREEN';
+    } else this.weigthSumStyle = 'RED';
   }
 
   ifEqualTen(): boolean {

@@ -12,6 +12,7 @@ import { LessonType } from 'src/app/types/LessonType';
     './single-lesson-page.component.css',
     './single-lesson-page.mobile.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class SingleLessonPageComponent implements OnInit {
@@ -50,7 +51,13 @@ export class SingleLessonPageComponent implements OnInit {
 
   getLesson(): void {
     this.lessonService.getLessonById(this.lessonId).subscribe({
-      next: (res) => this.setLessonValues(res),
+      next: (res) => {
+        if (res.status == 200) {
+          if (res.body != null) {
+            this.setLessonValues(res.body);
+          }
+        }
+      },
       error: (err) => {
         console.error(err),
         this.router.navigate(['/not-found']);

@@ -20,7 +20,7 @@ content="Deseja realmente sair da conta? Você terá que fazer o login novamente
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshPage(); switchEditMode()">
 </app-user-dialog>
 
-<div class="user-container">
+<div [ngClass]="{ 'blur-filter': isDeleteMode || isLogoutMode || isEditMode }" class="user-container">
     <h1>Sobre Mim</h1>
     <div class="info-container">
         <div class="single-info-container">

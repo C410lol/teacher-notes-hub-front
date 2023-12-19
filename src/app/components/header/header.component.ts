@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,16 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 export class HeaderComponent {
 
   @Input() username:string = '';
+  @Input() type: string = '';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
+
+  usernameOnClick(): void {
+    if (this.type == 'logged') {
+      this.router.navigate(['/user']);
+    } else this.router.navigate(['/login']);
+  }
 
 }

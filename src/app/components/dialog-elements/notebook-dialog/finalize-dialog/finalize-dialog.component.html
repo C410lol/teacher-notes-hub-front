@@ -6,7 +6,7 @@
     <div class="grades-weight-container">
         <h1>Selecione O Peso Das Notas</h1>
         <p>*Note que a soma dos pesos deve ser igual a 10!</p>
-        <div class="grades-weight-selects">
+        <div (change)="changeWeightSum()" class="grades-weight-selects">
             <div>
                 <p>Tarefas/Trabalhos:</p>
                 <select [(ngModel)]="tarefaSelect">
@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div>
-                <p>Simulado:</p>
+                <p>Outros:</p>
                 <select [(ngModel)]="simuladoSelect">
                     <option *ngFor="let number of numbersArray">
                         {{number}}
@@ -40,6 +40,10 @@
                 </select>
             </div>
         </div>
+    </div>
+    <div class="weight-sum-container">
+        <h1>Soma Atual --></h1>
+        <p [ngClass]="weigthSumStyle">{{weightSum}}</p>
     </div>
     <div class="btns-box">
         <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>

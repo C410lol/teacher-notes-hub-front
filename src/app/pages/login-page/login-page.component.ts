@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -15,6 +16,7 @@ export class LoginPageComponent {
 
   constructor(
     private router: Router,
+    private eventService: EventService,
     private userService: UserService
   ) { }
 
@@ -28,8 +30,13 @@ export class LoginPageComponent {
       password: this.password
     }).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res);
-        this.router.navigate(['/']);
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('userId', res.userId);
+        
+        this.router.navigate(['/cadernetas']);
+
+        this.eventService.triggerRefreshServices();
+        this.eventService.triggerRefreshHeader();
       },
       error: () => alert(environment.fieldErrorMessage)
     });

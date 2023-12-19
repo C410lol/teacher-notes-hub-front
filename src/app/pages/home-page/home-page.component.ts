@@ -1,7 +1,9 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NotebookType } from 'src/app/types/NotebookType';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { SortInterface } from '../../types/interfaces/SortInterface';
+import { HttpResponse } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +11,9 @@ import { SortInterface } from '../../types/interfaces/SortInterface';
   styleUrls: [
     './home-page.component.css', 
     './home-page.mobile.component.css',
+    './home-page-error-container.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class HomePageComponent implements OnInit, SortInterface {
@@ -17,7 +21,7 @@ export class HomePageComponent implements OnInit, SortInterface {
   @Output() totalPagesEvent: EventEmitter<number> = new EventEmitter<number>();
 
   isCreateMode:boolean = false;
-  isNotebooksLoaded: boolean = false;
+  currentState: string = 'loading';
 
   teacherId: string = '';
   
@@ -28,15 +32,37 @@ export class HomePageComponent implements OnInit, SortInterface {
   direction: string = 'desc';
   pageNum: number = 1;
 
-  constructor(private notebookService: NotebookService) { 
-    const userId: string | null = sessionStorage.getItem('userId');
-    if(userId !== null) {
-      this.teacherId = userId;
-    }
-  }
+  constructor(
+    private notebookService: NotebookService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
-    this.getAllNotebooks();
+    this.verifyUserStatus();
+  }
+
+  verifyUserStatus(): void {
+    const token: string | null = localStorage.getItem('token');
+    if (token == null) {
+      this.currentState = 'unlogged';
+      return;
+    }
+    const userId: string | null = localStorage.getItem('userId');
+    if (userId != null) {
+      this.userService.isUserVerified(userId).subscribe({
+        next: () => {
+          this.teacherId = userId;
+          this.getAllNotebooks();
+        },
+        error: (err: HttpResponse<boolean>) => {
+          if (err.status == 400) {
+            this.currentState = 'unverified';
+          } else this.currentState = 'error';
+        }
+      });
+    } else {
+      this.currentState = 'error'; 
+    }
   }
 
   orderByOnChange(orderBy: string): void {
@@ -61,11 +87,17 @@ export class HomePageComponent implements OnInit, SortInterface {
   getAllNotebooks(): void {
     this.notebookService.getAllNotebooks(this.teacherId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.notebookList = res.content;
-        this.totalPages = res.totalPages;
-        this.isNotebooksLoaded = true;
+        if (res.status == 200) {
+          if (res.body != null) {
+            this.notebookList = res.body.content;
+            this.totalPages = res.body.totalPages;
+          }
+        }
+        this.currentState = 'loaded';
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        this.currentState = 'error';
+      }
     });
   }
 
@@ -73,6 +105,20 @@ export class HomePageComponent implements OnInit, SortInterface {
     if(this.isCreateMode === false) {
       this.isCreateMode = true;
     } else this.isCreateMode = false;
+  }
+
+  resendVerificationEmail(): void {
+    const userId: string | null = sessionStorage.getItem('userId');
+    if (userId != null) {
+      this.userService.resendVerificationEmailBtUserId(userId).subscribe({
+        next: () => alert('Email enviado com sucesso!'),
+        error: () => alert('Ops, algo deu errado ao enviar seu email, tente novamente mais tarde.')
+      });
+    }
+  }
+
+  refreshPage(): void {
+    location.reload();
   }
 
 }

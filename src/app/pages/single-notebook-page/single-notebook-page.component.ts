@@ -11,6 +11,7 @@ import { NotebookType } from 'src/app/types/NotebookType';
     './single-notebook-page.component.css',
     './single-notebook-page.mobile.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class SingleNotebookPageComponent implements OnInit {

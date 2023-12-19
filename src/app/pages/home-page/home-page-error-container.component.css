@@ -1,0 +1,29 @@
+.generic-error-container {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generic-error-container h1, p {
+    text-align: center;
+    color: #eb9898;
+}
+
+.generic-error-container h1 {
+    margin-bottom: 10px;
+    font-size: x-large;
+}
+
+.generic-error-container button {
+    width: 225px;
+    height: 30px;
+    margin-top: 15px;
+    border: 0;
+    background-color: #e03437;
+    cursor: pointer;
+}
+
+.generic-error-container button:hover {
+    background-color: #e03437b9;
+}

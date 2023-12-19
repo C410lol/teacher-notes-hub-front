@@ -12,6 +12,7 @@
     border: 2.5px solid #3F3F3F;
     border-radius: 2.5px;
     background-color: #bbbbbb;
+    z-index: 1;
 }
 
 .title-txt {

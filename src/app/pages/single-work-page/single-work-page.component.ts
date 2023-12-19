@@ -11,6 +11,7 @@ import { WorkType } from 'src/app/types/WorkType';
     './single-work-page.component.css',
     './single-work-page.mobile.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class SingleWorkPageComponent implements OnInit {
@@ -48,7 +49,13 @@ export class SingleWorkPageComponent implements OnInit {
 
   getWork(): void {
     this.workService.getWorkById(this.workId).subscribe({
-      next: (res) => this.setWorkValues(res),
+      next: (res) => {
+        if (res.status == 200) {
+          if (res.body != null) {
+            this.setWorkValues(res.body);
+          }
+        }
+      },
       error: (err) => {
         console.error(err),
         this.router.navigate(['/not-found']);

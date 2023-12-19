@@ -13,6 +13,7 @@
     border: 2.5px solid #3F3F3F;
     border-radius: 2.5px;
     background-color: #bbbbbb;
+    z-index: 1;
 }
 
 .title-txt {
@@ -64,9 +65,35 @@ hr {
     font-size: medium;
 }
 
+.weight-sum-container {
+    width: fit-content;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 0 10px;
+    border: 1px solid #3F3F3F;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.weight-sum-container h1 {
+    font-size: medium;
+    margin-right: 5px;
+}
+
+.GREEN {
+    font-weight: bold;
+    color: rgba(66, 133, 0, 0.827)
+}
+
+.RED {
+    font-weight: bold;
+    color: #aa383a;
+}
+
 .btns-box {
     width: 325px;
-    margin-top: 35px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
     display: grid;

@@ -37,9 +37,10 @@ export class UserDialogComponent {
     this.userService.editUser(this.userId, {
       name: this.userName,
       email: this.userEmail,
-      password: this.password
     }).subscribe({
-      next: () => this.confirmButtonClick.emit(),
+      next: () => {
+        this.confirmButtonClick.emit();
+      },
       error: () => alert('Ops, algo deu errado, verifique os campos ou tente novamente mais tarde.')
     });
   }

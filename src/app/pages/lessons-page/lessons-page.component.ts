@@ -11,6 +11,7 @@ import { SortInterface } from '../../types/interfaces/SortInterface';
     './lessons-page.component.css', 
     './lessons-page.mobile.component.css',
     '../pages-shared-styles/title-txt.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class LessonsPageComponent implements OnInit, SortInterface {
@@ -28,6 +29,7 @@ export class LessonsPageComponent implements OnInit, SortInterface {
   pageNum: number = 1;
 
   constructor(
+    private router: Router,
     private activedRoute: ActivatedRoute,
     private lessonService: LessonService
     ) {
@@ -63,11 +65,18 @@ export class LessonsPageComponent implements OnInit, SortInterface {
   getAllLessons(): void {
     this.lessonService.getAllLessonsByNotebookId(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({
       next: (res) => {
-        this.lessonsList = res.content;
-        this.totalPages = res.totalPages;
+        if (res.status == 200) {
+          if (res.body != null) {
+            this.lessonsList = res.body.content;
+            this.totalPages = res.body.totalPages;
+          }
+        }
         this.isLessonsLoaded = true;
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err),
+        this.router.navigate(['/not-found']);
+      }
     });
   }
 

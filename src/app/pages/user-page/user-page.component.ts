@@ -7,7 +7,8 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user-page.component.html',
   styleUrls: [
     './user-page.component.css',
-    './user-page.mobile.component.css'
+    './user-page.mobile.component.css',
+    '../pages-shared-styles/blur-filter.css',
   ]
 })
 export class UserPageComponent {
@@ -28,13 +29,15 @@ export class UserPageComponent {
   }
 
   getUser(): void {
-    const token: string | null = localStorage.getItem('token');
-    if(token !== null) {
-      this.userService.getUserByToken(token).subscribe({
+    const userId: string | null = localStorage.getItem('userId');
+    if(userId !== null) {
+      this.userService.getUserById(userId).subscribe({
         next: (res) => {
-          this.userId = res.id;
-          this.userName = res.name;
-          this.userEmail = res.email;
+          if (res.body != null) {
+            this.userId = res.body.id;
+            this.userName = res.body.name;
+            this.userEmail = res.body.email;
+          }
         },
         error: (err) => console.error(err)
       });
