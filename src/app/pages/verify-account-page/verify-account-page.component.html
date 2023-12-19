@@ -1,0 +1,17 @@
+<div [ngSwitch]="currentState" class="verify-account-container">
+    <div *ngSwitchCase="'successState'">
+        <h1>Conta Verificada Com Sucesso!</h1>
+        <p>Tudo pronto para acessar seus conteúdos, aproveite!</p>
+        <button [routerLink]="['/cadernetas']">Voltar Para Home</button>
+    </div>
+    <div *ngSwitchCase="'loadingState'">
+        <h1>Verificando Conta...</h1>
+        <p>Aguarde um pouquinho para verificar sua confirmação.</p>
+    </div>
+    <div *ngSwitchCase="'errorState'">
+        <h1>Ops, Houve Algum Erro Ao Verificar Sua Conta</h1>
+        <p>ALgo deu errado ao verificar sua conta :(. Talvez a conta não exista mais ou o código está errado.</p>
+        <p>Clique aqui para reenviar o email de verificação</p>
+        <button>Reenviar Email</button>
+    </div>
+</div>
