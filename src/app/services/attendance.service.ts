@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { AttendanceType } from '../types/AttendanceType';
 import { CreationAttendanceType } from '../types/Others/CreationAttendanceType';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,13 @@ export class AttendanceService {
   private getHeaders: HttpHeaders = new HttpHeaders();
   private attendanceUrl: string = '';
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(
+    private httpClient: HttpClient,
+    eventService: EventService
+    ) {
+    eventService.refreshServices.subscribe({
+      next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+    });
     this.getHeaders = environment.getHeaders(localStorage.getItem("token"));
     this.attendanceUrl = environment.attendanceUrl;
   }
@@ -25,7 +32,7 @@ export class AttendanceService {
   }
 
   getAllAttendancesByLessonId(lessonId: string): Observable<AttendanceType[]> {
-    return this.httpClient.get<AttendanceType[]>(`${this.attendanceUrl}/all?lessonId=${lessonId}`, {
+    return this.httpClient.get<AttendanceType[]>(`${this.attendanceUrl}/all/${lessonId}`, {
       headers: this.getHeaders
     });
   }
