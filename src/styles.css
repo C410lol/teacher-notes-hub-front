@@ -16,7 +16,7 @@ h1, button {
     background-color: transparent;
 }
 
-p, input {
+p, a, input {
     font-weight: normal;
     font-family: 'Roboto Condensed', sans-serif;
     background-color: transparent;
