@@ -15,6 +15,9 @@ import { UserPageComponent } from '../pages/user-page/user-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+import { VerifyAccountPageComponent } from './verify-account-page/verify-account-page.component';
+import { ChangePasswordRequestPageComponent } from './change-password-request-page/change-password-request-page.component';
+import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     LoginPageComponent,
     CreatePageComponent,
     NotFoundPageComponent,
+    VerifyAccountPageComponent,
+    ChangePasswordRequestPageComponent,
+    ChangePasswordPageComponent,
   ],
   exports: [
     PagesComponent,
@@ -39,6 +45,9 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
     SingleLessonPageComponent,
     SingleWorkPageComponent,
     UserPageComponent,
+    VerifyAccountPageComponent,
+    ChangePasswordRequestPageComponent,
+    ChangePasswordPageComponent,
   ],
   imports: [
     CommonModule,
