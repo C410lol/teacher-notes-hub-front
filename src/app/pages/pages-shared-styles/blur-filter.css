@@ -1,0 +1,4 @@
+.blur-filter {
+    filter: blur(2.5px);
+    pointer-events: none;
+}
