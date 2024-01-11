@@ -40,7 +40,13 @@ export class CreatePageComponent {
         alert('Conta criada com sucesso! Uma mensagem foi enviada ao seu email para verificar sua conta.');
         this.router.navigate(['/login']);
       },
-      error: () => alert(environment.fieldErrorMessage)
+      error: (err) => {
+        if (typeof err.error == 'string') {
+          alert(err.error);
+          return;
+        }
+        alert(environment.simpleErrorMessage);
+      }
     });
   }
 

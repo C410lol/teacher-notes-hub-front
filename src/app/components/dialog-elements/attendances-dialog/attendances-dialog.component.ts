@@ -119,7 +119,10 @@ export class AttendancesDialogComponent implements OnInit {
 
   createAttendance(attendances: any[]): void {
     this.attendanceService.createAttendance(this.lessonId, attendances).subscribe({
-        next: () => this.confirmButtonClick.emit(),
+        next: () => {
+          alert('Chamada Salva Com Sucesso!');
+          this.confirmButtonClick.emit();
+        },
         error: () => alert(environment.simpleErrorMessage)
     });
   }

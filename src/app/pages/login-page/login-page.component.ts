@@ -1,7 +1,9 @@
+import { HttpResponse, HttpStatusCode } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
+import { AuthReturnType } from 'src/app/types/Others/AuthReturnType';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -30,15 +32,23 @@ export class LoginPageComponent {
       password: this.password
     }).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('userId', res.userId);
-        
-        this.router.navigate(['/cadernetas']);
-
-        this.eventService.triggerRefreshServices();
-        this.eventService.triggerRefreshHeader();
+        if (res.body != null) {
+          localStorage.setItem('token', res.body.token);
+          localStorage.setItem('userId', res.body.userId);
+          
+          this.router.navigate(['/cadernetas']);
+  
+          this.eventService.triggerRefreshServices();
+          this.eventService.triggerRefreshHeader();
+        }
       },
-      error: () => alert(environment.fieldErrorMessage)
+      error: (err) => {
+        if(typeof err.error == 'string') {
+          alert(err.error);
+          return;
+        }
+        alert(environment.simpleErrorMessage);
+      }
     });
   }
 

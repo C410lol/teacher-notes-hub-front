@@ -14,8 +14,6 @@ export class UserDialogComponent {
   @Input() userId: string = '';
   @Input() userName: string = '';
   @Input() userEmail: string = '';
-  password: string = '';
-  confPassword: string = '';
 
   constructor(private userService: UserService) { }
 
@@ -24,13 +22,7 @@ export class UserDialogComponent {
   }
 
   confirmOnClick(): void {
-    if(this.isTheSamePassword()) {
-      this.editUser();
-    } else alert('A senha deve ser a mesma!');
-  }
-
-  isTheSamePassword(): boolean {
-    return this.password === this.confPassword;
+    this.editUser();
   }
 
   editUser(): void {

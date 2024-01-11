@@ -44,6 +44,9 @@ export class DeleteDialogComponent {
         this.logoutUser();
         break;
       }
+      case 'userPasswordChange':
+        this.passwordChange();
+        break;
       case "notebookDelete": {
         this.deleteNotebook();
         break;
@@ -76,6 +79,17 @@ export class DeleteDialogComponent {
     sessionStorage.clear();
     this.confirmButtonClick.emit();
     this.eventService.triggerRefreshHeader();
+  }
+
+  passwordChange(): void {
+    if(this.id != null) {
+      this.userService.sendChangePasswordRequestById(this.id).subscribe({
+        next: () => this.confirmButtonClick.emit(),
+        error: () => alert(environment.simpleErrorMessage)
+      });
+      return;
+    }
+    alert(environment.simpleErrorMessage);
   }
 
   deleteNotebook(): void {

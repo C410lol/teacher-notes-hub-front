@@ -20,6 +20,15 @@ content="Deseja realmente sair da conta? Você terá que fazer o login novamente
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshPage(); switchEditMode()">
 </app-user-dialog>
 
+<app-delete-dialog
+*ngIf="isPasswordMode"
+[id]="userId"
+(cancelButtonClick)="switchPasswordMode()" (confirmButtonClick)="passwordConfirmClick(); switchPasswordMode()"
+type="userPasswordChange" title="Trocar Senha"
+content="Deseja realmente trocar sua senha? Um email será enviado até você para confirmar esta ação."
+>
+</app-delete-dialog>
+
 <div [ngClass]="{ 'blur-filter': isDeleteMode || isLogoutMode || isEditMode }" class="user-container">
     <h1>Sobre Mim</h1>
     <div class="info-container">
@@ -36,5 +45,6 @@ content="Deseja realmente sair da conta? Você terá que fazer o login novamente
         <button (click)="switchDeleteMode()" class="red-btn">Excluir Conta</button>
         <button (click)="switchLogoutMode()" class="yellow-btn">Sair</button>
         <button (click)="switchEditMode()" class="blue-btn">Editar Conta</button>
+        <button (click)="switchPasswordMode()" class="blue-btn">Mudar Senha</button>
     </div>
 </div>

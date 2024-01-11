@@ -19,9 +19,12 @@ export class ChangePasswordRequestPageComponent {
   ) { }
 
   sendChangePasswordRequest(): void {
-    this.userService.sendChangePasswordRequest(this.email).subscribe({
+    this.userService.sendChangePasswordRequestByEmail(this.email).subscribe({
       next: () => this.currentStatus = 'success',
-      error: () => this.currentStatus = 'error'
+      error: (err) => {
+        console.log(err);
+        this.currentStatus = 'error'
+      }
     });
   }
 

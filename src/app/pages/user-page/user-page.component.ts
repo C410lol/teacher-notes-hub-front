@@ -16,6 +16,7 @@ export class UserPageComponent {
   isDeleteMode: boolean = false;
   isLogoutMode: boolean = false;
   isEditMode: boolean = false;
+  isPasswordMode: boolean = false;
 
   userId: string = '';
   userName:string = 'Carregando...';
@@ -52,22 +53,24 @@ export class UserPageComponent {
     this.router.navigate(['/login']);
   }
 
+  passwordConfirmClick(): void {
+    alert('Uma mensagem foi enviada para seu email, vá até ela para trocar sua senha!');
+  }
+
+  switchPasswordMode(): void {
+    this.isPasswordMode = !this.isPasswordMode;
+  }
+
   switchEditMode(): void {
-    if(this.isEditMode === false) {
-      this.isEditMode = true;
-    } else this.isEditMode = false;
+    this.isEditMode = !this.isEditMode;
   }
 
   switchLogoutMode(): void {
-    if(this.isLogoutMode === false) {
-      this.isLogoutMode = true;
-    } else this.isLogoutMode = false;
+    this.isLogoutMode = !this.isLogoutMode;
   }
 
   switchDeleteMode(): void {
-    if(this.isDeleteMode === false) {
-      this.isDeleteMode = true;
-    } else this.isDeleteMode = false;
+    this.isDeleteMode = !this.isDeleteMode;
   }
 
 }
