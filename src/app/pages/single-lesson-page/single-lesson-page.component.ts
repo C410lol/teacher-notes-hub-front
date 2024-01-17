@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
@@ -26,14 +26,15 @@ export class SingleLessonPageComponent implements OnInit {
   details: string = 'Carregando...';
   observations: string = 'Carregando...';
   quantity: number = 0;
-  date: string = 'Carregando...';
+  date: string = '';
   attendances?: number = 0;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute, 
     private location: Location,
-    private lessonService: LessonService
+    private lessonService: LessonService,
+    private dateFormatter: DatePipe
     ) {
       this.activatedRoute.params.subscribe({
         next: (res) => this.lessonId = res["lessonId"],
@@ -88,6 +89,14 @@ export class SingleLessonPageComponent implements OnInit {
 
   switchEditMode(): void {
     this.isEditMode = !this.isEditMode;
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }

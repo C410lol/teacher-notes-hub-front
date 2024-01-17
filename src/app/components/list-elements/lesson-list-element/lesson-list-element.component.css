@@ -2,7 +2,7 @@
     width: 1000px;
     height: 45px;
     display: grid;
-    grid-template-columns: 15% auto 10%;
+    grid-template-columns: 12.5% auto 10% 10%;
     cursor: pointer;
     background-color: #bbbbbb;
 }

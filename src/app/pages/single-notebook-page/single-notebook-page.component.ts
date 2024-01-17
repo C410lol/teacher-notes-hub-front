@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotebookService } from 'src/app/services/notebook.service';
@@ -25,14 +25,15 @@ export class SingleNotebookPageComponent implements OnInit {
   subject: string = 'Carregando...';
   bimester: string = 'Carregando...';
   status?: string = 'Carregando...';
-  date?: string = 'Carregando...';
+  date?: string = '';
   studentsLength?: number = 0;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute, 
     private location: Location,
-    private notebookService: NotebookService
+    private notebookService: NotebookService,
+    private dateFormatter: DatePipe
     ) {
     this.activatedRoute.params.subscribe({
       next: (res) => this.notebookId = res["notebookId"],
@@ -89,6 +90,14 @@ export class SingleNotebookPageComponent implements OnInit {
 
   switchDeleteMode(): void {
     this.isDeleteMode = !this.isDeleteMode;
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }

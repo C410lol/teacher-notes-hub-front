@@ -2,23 +2,23 @@
 *ngIf="isCreateMode"
 [notebookId]="notebookId"
 (cancelButtonClick)="switchCreateMode()" (confirmButtonClick)="refreshWorks(); switchCreateMode()"
-type="create" title="Criar Trabalho/Tarefa">
+type="create" title="Criar Ferramenta de Avaliação">
 </app-work-dialog>
 
 <app-back-arrow></app-back-arrow>
 
 <div [ngClass]="{ 'blur-filter': isCreateMode }" class="works-page-container">
-    <h1 class="title-txt">Trabalhos/Tarefas</h1>
+    <h1 class="title-txt">Ferramentas de Avaliação</h1>
     <h1 *ngIf="!isWorksLoaded" class="loading-txt">Carregando...</h1>
     <div *ngIf="isWorksLoaded" class="content-container">
         <button (click)="switchCreateMode()" class="create-btn">
-            <h1>Novo Trabalho/Tarefa</h1>
+            <h1>Nova Ferramenta de Avaliação</h1>
         </button>
         
         <app-sorting [orderByElementsList]="[
             {value: 'deliveryDate', name: 'Data'},
             {value: 'title', name: 'Título'},
-            {value: 'type', name: 'tipo'},
+            {value: 'type', name: 'Tipo'},
             {value: 'grades', name: 'Notas'}
         ]"
         [totalPages]="totalPages"
@@ -37,7 +37,7 @@ type="create" title="Criar Trabalho/Tarefa">
             <div *ngFor="let work of worksList" class="works-list">
                 <app-work-list-element
                 [id]="work.id"
-                [date]="work.deliveryDate"
+                [date]="formatDate(work.deliveryDate)"
                 [title]="work.title"
                 [grades]="work.grades"
                 [students]="studentsLength">

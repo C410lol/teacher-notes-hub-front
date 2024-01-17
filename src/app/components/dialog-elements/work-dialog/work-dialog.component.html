@@ -19,14 +19,17 @@
         <div>
             <p>*Tipo:</p>
             <select [(ngModel)]="workType">
-                <option value="TRABALHO">TRABALHO/TAREFA</option>
-                <option>PROVA</option>
-                <option>PARTICIPAÇÃO</option>
+                <option>TRABALHO</option>
+                <option>TAREFA</option>
+                <option>AVALIAÇÃO</option>
+                <option>ENGAJAMENTO</option>
+                <option>SIMULADO</option>
+                <option>TRILHA</option>
                 <option>OUTROS</option>
             </select>
         </div>
         <div>
-            <p>*Data:</p>
+            <p>Data:</p>
             <input id="date-input" type="date" 
             [(ngModel)]="date">
         </div>

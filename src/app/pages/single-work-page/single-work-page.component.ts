@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
@@ -25,13 +25,14 @@ export class SingleWorkPageComponent implements OnInit {
   details:string = 'Carregando...';
   observations:string = 'Carregando...';
   workType: string = 'Carregando...';
-  deliveryDate:string = 'Carregando...';
+  deliveryDate:string = '';
 
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute,
     private location: Location, 
     private workService: WorkService,
+    private dateFormatter: DatePipe
   ) { 
       this.activedRoute.params.subscribe({
         next: (res) => this.workId = res["workId"],
@@ -85,6 +86,14 @@ export class SingleWorkPageComponent implements OnInit {
 
   switchEditMode(): void {
     this.isEditMode = !this.isEditMode;
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }

@@ -53,9 +53,12 @@
                     </div>
                 </div>
                 <div *ngFor="let notebook of notebookList">
-                    <app-notebook-list-element [id]="notebook.id" [classe]="notebook.classe"
-                        [subject]="notebook.subject" [bimester]="notebook.bimester" [lessons]="notebook.lessons"
-                        [works]="notebook.works" [status]="notebook.status" [date]="notebook.createDate">
+                    <app-notebook-list-element [id]="notebook.id" 
+                    [classe]="notebook.classe.replaceAll('_', ' ')"
+                    [subject]="notebook.subject.replaceAll('_', ' ')" 
+                    [bimester]="notebook.bimester" [lessons]="notebook.lessons"
+                    [works]="notebook.works" [status]="notebook.status" 
+                    [date]="formatDate(notebook.createDate)">
                     </app-notebook-list-element>
                 </div>
             </div>

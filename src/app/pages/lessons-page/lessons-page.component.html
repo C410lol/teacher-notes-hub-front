@@ -32,13 +32,15 @@ type="create" title="Criar Aula">
             <div class="lessons-header">
                 <div><h1>Data</h1></div>
                 <div><h1>Título</h1></div>
+                <div><h1>Quantidade</h1></div>
                 <div><h1>Chamada Realizada?</h1></div>
             </div>
             <div *ngFor="let lesson of lessonsList" class="lessons-list">
                 <app-lesson-list-element
                 [id]="lesson.id"
-                [date]="lesson.date"
+                [date]="formatDate(lesson.date)"
                 [title]="lesson.title"
+                [quantity]="lesson.quantity"
                 [attendance]="ifAttendanceExists(lesson.attendances)">
                 </app-lesson-list-element>
             </div>

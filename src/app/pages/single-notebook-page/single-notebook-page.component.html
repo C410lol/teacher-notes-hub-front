@@ -27,11 +27,11 @@ type="edit" title="Editar Caderneta">
     <div class="info-container">
         <div class="single-info-container">
             <h1>Classe:</h1>
-            <input disabled [value]="classe">
+            <input disabled [value]="classe.replaceAll('_', ' ')">
         </div>
         <div class="single-info-container">
             <h1>Matéria:</h1>
-            <input disabled [value]="subject">
+            <input disabled [value]="subject.replaceAll('_', ' ')">
         </div>
         <div class="single-info-container">
             <h1>Bimestre:</h1>
@@ -43,12 +43,12 @@ type="edit" title="Editar Caderneta">
         </div>
         <div class="single-info-container">
             <h1>Criada Em:</h1>
-            <input disabled [value]="date">
+            <input disabled [value]="formatDate(date)">
         </div>
     </div>
     <div class="txts-container">
         <h1 (click)="navigateToLessons()">Ver Aulas</h1>
-        <h1 (click)="navigateToWorks()">Ver Trabalhos</h1>
+        <h1 (click)="navigateToWorks()">Ver Ferramentas de Avaliação</h1>
     </div>
     <div class="btns-container">
         <button (click)="switchDeleteMode()" class="red-btn">Excluir</button>

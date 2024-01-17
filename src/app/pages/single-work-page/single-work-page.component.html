@@ -17,7 +17,7 @@ content="Deseja realmente deletar esse trabalho/tarefa? Todas as anotações e n
 [details]="details" [observations]="observations" 
 [workType]="workType" [date]="deliveryDate"
 (cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshWork(); switchEditMode()"
-type="edit" title="Editar Trbalho/Tarefa">
+type="edit" title="Editar Ferramenta de Avaliação">
 </app-work-dialog>
 
 <app-back-arrow></app-back-arrow>
@@ -47,7 +47,7 @@ type="edit" title="Editar Trbalho/Tarefa">
         </div>
         <div class="single-info-container">
             <h1>Data De Entrega:</h1>
-            <input [value]="deliveryDate">
+            <input [value]="formatDate(deliveryDate)">
         </div>
     </div>
     <div class="txts-container">

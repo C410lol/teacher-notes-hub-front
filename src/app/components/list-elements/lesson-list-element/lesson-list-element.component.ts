@@ -11,6 +11,7 @@ export class LessonListElementComponent {
   @Input() id?: number = 0;
   @Input() date: string = '';
   @Input() title: string = '';
+  @Input() quantity: number = 0;
   @Input() attendance: string = '';
 
   constructor(

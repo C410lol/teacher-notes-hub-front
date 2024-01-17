@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
 import { SortInterface } from '../../types/interfaces/SortInterface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-works-page',
@@ -32,7 +33,8 @@ export class WorksPageComponent implements OnInit, SortInterface {
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute, 
-    private workService: WorkService
+    private workService: WorkService,
+    private dateFormatter: DatePipe
     ) {
       this.activedRoute.params.subscribe({
         next: (res) => this.notebookId = res["notebookId"],
@@ -91,6 +93,14 @@ export class WorksPageComponent implements OnInit, SortInterface {
     if(this.isCreateMode === false) {
       this.isCreateMode = true;
     } else this.isCreateMode = false;
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }

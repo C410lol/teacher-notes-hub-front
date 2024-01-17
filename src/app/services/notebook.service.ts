@@ -6,6 +6,7 @@ import { NotebookType } from '../types/NotebookType';
 import { GradesWeightType } from '../types/Others/GradesWeightType';
 import { PageType } from '../types/Others/PageType';
 import { EventService } from './event.service';
+import { MissingTasksType } from '../types/Others/MissingTasksType';
 
 @Injectable({
   providedIn: 'root'
@@ -53,13 +54,20 @@ export class NotebookService {
     });
   }
 
+  verifyMissingTasks(notebookId?: string): Observable<HttpResponse<MissingTasksType>> {
+    return this.httpClient.get<MissingTasksType>(`${this.notebooksUrl}/${notebookId}/missing-tasks`, {
+      headers: this.getHeaders,
+      observe: 'response'
+    });
+  }
+
   deleteNotebook(notebookId?: string): Observable<void> {
     return this.httpClient.delete<void>(`${this.notebooksUrl}/delete/${notebookId}`, {
       headers: this.getHeaders
     });
   }
 
-  finalizeNotebook(gradesWeight: GradesWeightType, notebookId?: string): Observable<Blob> {
+  finalizeNotebook(gradesWeight: any, notebookId?: string): Observable<Blob> {
     return this.httpClient.put<Blob>(`${this.notebooksUrl}/finalize/${notebookId}`, gradesWeight, {
       headers: this.getHeaders,
       responseType: 'blob' as 'json'

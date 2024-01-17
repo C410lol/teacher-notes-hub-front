@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
 import { LessonType } from 'src/app/types/LessonType';
 import { SortInterface } from '../../types/interfaces/SortInterface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-lessons-page',
@@ -31,7 +32,8 @@ export class LessonsPageComponent implements OnInit, SortInterface {
   constructor(
     private router: Router,
     private activedRoute: ActivatedRoute,
-    private lessonService: LessonService
+    private lessonService: LessonService,
+    private dateFormatter: DatePipe
     ) {
       this.activedRoute.params.subscribe({
         next: (res) => this.notebookId = res["notebookId"],
@@ -91,6 +93,14 @@ export class LessonsPageComponent implements OnInit, SortInterface {
       if(attendanceLength > 0) return 'SIM';
     }
     return 'NÃO';
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }

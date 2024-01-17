@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-work-dialog',
@@ -38,14 +39,14 @@ export class WorkDialogComponent {
   createWork(): void {
     this.workService.createWork(this.notebookId, this.createWorkObject()).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: (err) => console.error(err)
+      error: (err) => alert(environment.fieldErrorMessage)
     });
   }
 
   editWork(): void {
     this.workService.editWork(this.workId, this.createWorkObject()).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: (err) => console.error(err)
+      error: () => alert(environment.fieldErrorMessage)
     });
   }
 

@@ -4,6 +4,7 @@ import { NotebookService } from 'src/app/services/notebook.service';
 import { SortInterface } from '../../types/interfaces/SortInterface';
 import { HttpResponse } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
@@ -35,6 +36,7 @@ export class HomePageComponent implements OnInit, SortInterface {
   constructor(
     private notebookService: NotebookService,
     private userService: UserService,
+    private dateFormatter: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -119,6 +121,14 @@ export class HomePageComponent implements OnInit, SortInterface {
 
   refreshPage(): void {
     location.reload();
+  }
+
+  formatDate(date: string | undefined): string {
+    const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
+    if (dateFormatted != null) {
+      return dateFormatted;
+    }
+    return "??/??/????";
   }
 
 }
