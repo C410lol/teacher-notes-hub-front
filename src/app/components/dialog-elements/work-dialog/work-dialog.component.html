@@ -11,7 +11,7 @@
             <input type="text" placeholder="Insira os detalhes do trabalho (obrigatório)" 
             [(ngModel)]="details">
         </div>
-        <div>
+        <div *ngIf="isEditMode()">
             <p>Observações:</p>
             <input type="text" placeholder="Insira as observações do trabalho" 
             [(ngModel)]="observations">

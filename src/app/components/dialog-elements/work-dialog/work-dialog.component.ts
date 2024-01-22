@@ -60,4 +60,8 @@ export class WorkDialogComponent {
     }
   }
 
+  isEditMode(): boolean {
+    return this.type == 'edit';
+  }
+
 }
