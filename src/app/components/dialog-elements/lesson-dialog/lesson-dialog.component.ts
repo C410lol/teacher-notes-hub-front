@@ -60,4 +60,8 @@ export class LessonDialogComponent {
     }
   }
 
+  isEditMode(): boolean {
+    return this.type == 'edit';
+  }
+
 }
