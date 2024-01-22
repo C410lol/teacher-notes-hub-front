@@ -41,7 +41,7 @@
     width: 1000px;
     height: 60px;
     display: grid;
-    grid-template-columns: 15% auto 12%;
+    grid-template-columns: 15% auto 12.5% 12%;
     background-color: #E0E0E0;
 }
 

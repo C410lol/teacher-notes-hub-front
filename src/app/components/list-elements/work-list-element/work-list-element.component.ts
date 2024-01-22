@@ -11,6 +11,7 @@ export class WorkListElementComponent {
   @Input() id?: number = 0;
   @Input() date: string = '';
   @Input() title: string = '';
+  @Input() type: string = '';
   @Input() grades?: number = 0;
   @Input() students: number = 0;
 

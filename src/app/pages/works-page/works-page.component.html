@@ -32,6 +32,7 @@ type="create" title="Criar Ferramenta de Avaliação">
             <div class="works-header">
                 <div><h1>Data</h1></div>
                 <div><h1>Título</h1></div>
+                <div><h1>Tipo</h1></div>
                 <div><h1>Notas/Alunos</h1></div>
             </div>
             <div *ngFor="let work of worksList" class="works-list">
@@ -39,6 +40,7 @@ type="create" title="Criar Ferramenta de Avaliação">
                 [id]="work.id"
                 [date]="formatDate(work.deliveryDate)"
                 [title]="work.title"
+                [type]="work.type"
                 [grades]="work.grades"
                 [students]="studentsLength">
                 </app-work-list-element>
