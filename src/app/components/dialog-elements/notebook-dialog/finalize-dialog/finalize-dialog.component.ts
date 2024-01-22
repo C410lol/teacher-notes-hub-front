@@ -22,9 +22,9 @@ export class FinalizeDialogComponent {
     5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10
   ];
 
-  trabalhoSelect: string = '4';
-  tarefaSelect: string = '3';
-  avaliacaoSelect: string = '3';
+  trabalhoSelect: string = '0';
+  tarefaSelect: string = '0';
+  avaliacaoSelect: string = '0';
   engajamentoSelect: string = '0';
   simuladoSelect: string = '0';
   trilhasSelect: string = '0';
