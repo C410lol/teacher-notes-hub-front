@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GradeService } from 'src/app/services/grade.service';
 import { StudentService } from 'src/app/services/student.service';
