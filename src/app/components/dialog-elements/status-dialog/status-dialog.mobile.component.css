@@ -1,0 +1,8 @@
+@media screen and (width <= 768px) {
+
+    .status-dialog-dialog {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+}

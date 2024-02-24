@@ -1,0 +1,48 @@
+* {
+    background-color: transparent;
+}
+
+.status-dialog-container {
+    width: 350px;
+    min-height: 65px;
+    bottom: 25px;
+    right: 25px;
+    padding-bottom: 5px;
+    z-index: 1;
+    position: fixed;
+    background-color: #E0E0E0;
+    border-radius: 25px;
+}
+
+.close-dialog-txt {
+    position: absolute;
+    top: 2.5px;
+    right: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.title-txt {
+    width: fit-content;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 0;
+    font-size: large;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.content-txt {
+    margin-top: 2.5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: small;
+    font-family: 'Roboto', sans-serif;
+}
+
+.success {
+    border: 3.5px solid #73a541;
+}
+
+.error {
+    border: 3.5px solid #e03437;
+}
