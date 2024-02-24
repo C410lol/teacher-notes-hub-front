@@ -2,6 +2,7 @@
     position: absolute;
     top: 115px;
     left: 25px;
+    background-color: transparent;
 }
 
 .back-arrow-container h1 {

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.development';
 import { LessonType } from '../types/LessonType';
 import { PageType } from '../types/Others/PageType';
 import { EventService } from './event.service';
+import { LessonCreationType } from '../types/Others/LessonCreationType';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,10 @@ export class LessonService {
     this.lessonsUrl = environment.lessonsUrl;
   }
 
-  createLesson(notebookId: string, lesson: LessonType): Observable<HttpResponse<void>> {
-    return this.httpClient.post<void>(`${this.lessonsUrl}/create?notebookId=${notebookId}`, lesson, {
+  createLesson(notebookId: string, lesson: LessonCreationType): Observable<HttpResponse<void>> {
+    return this.httpClient.post<void>(`${this.lessonsUrl}/create?notebookId=${notebookId}`, 
+    lesson, 
+    {
       headers: this.getHeaders,
       observe: 'response'
     });
@@ -47,8 +50,10 @@ export class LessonService {
     });
   }
 
-  editLesson(lessonId: string, lesson: LessonType): Observable<HttpResponse<void>> {
-    return this.httpClient.put<void>(`${this.lessonsUrl}/edit/${lessonId}`, lesson, {
+  editLesson(lessonId: string, lesson: LessonCreationType): Observable<HttpResponse<void>> {
+    return this.httpClient.put<void>(`${this.lessonsUrl}/edit/${lessonId}`, 
+    lesson, 
+    {
       headers: this.getHeaders,
       observe: 'response'
     });

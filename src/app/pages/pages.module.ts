@@ -18,6 +18,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { VerifyAccountPageComponent } from './verify-account-page/verify-account-page.component';
 import { ChangePasswordRequestPageComponent } from './change-password-request-page/change-password-request-page.component';
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
+import { TeachersPageComponent } from './teachers-page/teachers-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ChangePasswordPageComponent } from './change-password-page/change-passw
     VerifyAccountPageComponent,
     ChangePasswordRequestPageComponent,
     ChangePasswordPageComponent,
+    TeachersPageComponent,
   ],
   exports: [
     PagesComponent,

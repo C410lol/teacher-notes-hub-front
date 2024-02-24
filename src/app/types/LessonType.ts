@@ -1,4 +1,4 @@
-import { AttendanceType } from "./AttendanceType"
+import { BNCCCodeType } from "./BNCCCodeType"
 
 export type LessonType = {
 
@@ -6,6 +6,7 @@ export type LessonType = {
     title: string,
     details: string,
     observations: string,
+    bnccCodes?: BNCCCodeType[],
     quantity: number,
     date: string,
     attendances?: number

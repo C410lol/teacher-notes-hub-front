@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -25,9 +25,10 @@ export class GradeService {
     this.gradesUrl = environment.gradesUrl;
   }
 
-  getAllGradesByWorkId(workId: string): Observable<GradeType[]> {
+  getAllGradesByWorkId(workId: string): Observable<HttpResponse<GradeType[]>> {
     return this.httpClient.get<GradeType[]>(`${this.gradesUrl}/all/${workId}`, {
-      headers: this.getHeaders
+      headers: this.getHeaders,
+      observe: 'response'
     });
   }
 

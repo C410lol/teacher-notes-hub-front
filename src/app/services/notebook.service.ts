@@ -61,9 +61,22 @@ export class NotebookService {
     });
   }
 
-  deleteNotebook(notebookId?: string): Observable<void> {
-    return this.httpClient.delete<void>(`${this.notebooksUrl}/delete/${notebookId}`, {
-      headers: this.getHeaders
+  sendDeleteNotebookRequest(notebookId?: string, userId?: string): Observable<HttpResponse<string>> {
+    return this.httpClient.post<string>(`${this.notebooksUrl}/${notebookId}/delete-request?userId=${userId}`, 
+    {}, 
+    { 
+      headers: this.getHeaders,
+      responseType: 'text' as 'json',
+      observe: 'response' 
+    });
+  }
+
+  deleteNotebook(notebookId?: string, vCode?: string): Observable<HttpResponse<string>> {
+    return this.httpClient.delete<string>(`${this.notebooksUrl}/${notebookId}/delete?vCode=${vCode}`, 
+    {
+      headers: this.getHeaders,
+      responseType: 'text' as 'json',
+      observe: 'response'
     });
   }
 

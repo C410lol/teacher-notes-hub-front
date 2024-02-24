@@ -22,16 +22,8 @@ const routes: Routes = [
   { path: 'criar', component: CreatePageComponent },
   { path: "user", component: UserPageComponent },
   { path: 'mudar-senha-request', component: ChangePasswordRequestPageComponent },
-  { 
-    path: 'change-password', children: [
-      { path: ':userId', component: ChangePasswordPageComponent }
-    ]
-  },
-  {
-    path: 'verify-account', children: [
-      { path: ':teacherId', component: VerifyAccountPageComponent }
-    ]
-  },
+  { path: 'change-password', children: [ { path: ':userId', component: ChangePasswordPageComponent } ] },
+  { path: 'verify-account', children: [ { path: ':teacherId', component: VerifyAccountPageComponent } ] },
   {
     path: "cadernetas", children: [
       { path: "", component: HomePageComponent },
