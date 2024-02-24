@@ -1,3 +1,10 @@
+<app-status-dialog
+*ngIf="isStatusMode" [type]="'error'"
+[title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <div class="user-container">
     <p class="title-txt">Editar Usuário</p>
     <div class="form">

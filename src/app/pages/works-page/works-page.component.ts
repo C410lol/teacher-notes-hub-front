@@ -4,6 +4,7 @@ import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
 import { SortInterface } from '../../types/interfaces/SortInterface';
 import { DatePipe } from '@angular/common';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-works-page',
@@ -15,9 +16,9 @@ import { DatePipe } from '@angular/common';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class WorksPageComponent implements OnInit, SortInterface {
+export class WorksPageComponent extends DialogParent implements OnInit, SortInterface {
 
-  isCreateMode: boolean = false;
+  
   isWorksLoaded: boolean = false;
 
   notebookId: string = '';
@@ -36,6 +37,7 @@ export class WorksPageComponent implements OnInit, SortInterface {
     private workService: WorkService,
     private dateFormatter: DatePipe
     ) {
+      super();
       this.activedRoute.params.subscribe({
         next: (res) => this.notebookId = res["notebookId"],
         error: (err) => console.error(err)
@@ -43,10 +45,7 @@ export class WorksPageComponent implements OnInit, SortInterface {
 
       this.activedRoute.queryParams.subscribe({
         next: (res) => this.studentsLength = res["studentsLength"],
-        error: (err) => {
-          console.error(err),
-          this.router.navigate(['/not-found']);
-        }
+        error: (err) => console.error(err)
       });
   }
 
@@ -85,14 +84,11 @@ export class WorksPageComponent implements OnInit, SortInterface {
         }
         this.isWorksLoaded = true;
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err)
+        this.router.navigate(['/not-found']);
+      }
     });
-  }
-
-  switchCreateMode(): void {
-    if(this.isCreateMode === false) {
-      this.isCreateMode = true;
-    } else this.isCreateMode = false;
   }
 
   formatDate(date: string | undefined): string {

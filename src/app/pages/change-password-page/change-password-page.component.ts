@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { Validations } from '../pages-shared-styles/Validations';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-change-password-page',
@@ -10,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
     '../pages-shared-styles/title-txt.css',
   ]
 })
-export class ChangePasswordPageComponent {
+export class ChangePasswordPageComponent extends DialogParent {
 
   userId: string = '';
   vCode: string = '';
@@ -24,6 +26,7 @@ export class ChangePasswordPageComponent {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
   ) { 
+    super();
     this.activatedRoute.params.subscribe({
       next: (res) => this.userId = res['userId'],
       error: () => this.currentStatus = 'error'
@@ -35,18 +38,30 @@ export class ChangePasswordPageComponent {
   }
 
   changePassword(): void {
-    if (!this.isTheSamePassword()) {
-      alert('A senha deve ser a mesma!');
+    if (!Validations.isNotBlank([this.password])) { 
+      this.setStatus('Erro Ao Mudar Senha!', 'Algum campo está vazio');
+      this.switchStatusMode();
+      return; 
+    }
+    if (this.password.trim().length < 8) {
+      this.setStatus('Erro Ao Mudar Senha!', 'A senha deve ter no mínimo 8 caracteres');
+      this.switchStatusMode();
+      return; 
+    }
+    if (!this.isTheSamePassword()) { 
+      this.setStatus('Erro Ao Mudar Senha!', 'A senha deve ser a mesma');
+      this.switchStatusMode();
       return;
     }
-    this.userService.changePassword(this.userId, this.vCode, this.password).subscribe({
+    this.userService.changePassword(this.userId, this.vCode, this.password.trim().replaceAll(' ', ''))
+    .subscribe({
       next: () => this.currentStatus = 'success',
       error: () => this.currentStatus = 'error'
     });
   }
 
   isTheSamePassword(): boolean {
-    return this.password === this.confPassword;
+    return this.password.trim() === this.confPassword.trim();
   }
 
 }

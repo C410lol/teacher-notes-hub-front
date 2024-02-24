@@ -1,3 +1,10 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'error'" [title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <div class="attendances-dialog-container">
     <p class="title-txt">Criar/Editar Chamada</p>
     <div class="content-container">

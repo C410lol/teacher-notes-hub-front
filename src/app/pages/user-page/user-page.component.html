@@ -1,35 +1,43 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="statusType" [title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="setStatusModeFalse()">
+</app-status-dialog>
+
 <app-delete-dialog
-*ngIf="isDeleteMode"
+*ngIf="isMode01"
 [id]="userId"
-(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goToLoginPage(); switchDeleteMode()"
+(cancelButtonClick)="switchMode01()" (confirmButtonClick)="goToLoginPage(); switchMode01()"
 type="userDelete" title="Deletar Conta"
 content="Deseja realmente excluir sua conta? Todas as cadernetas e dados serão perdidos!">
 </app-delete-dialog>
 
 <app-delete-dialog
-*ngIf="isLogoutMode"
+*ngIf="isMode02"
 [id]="userId"
-(cancelButtonClick)="switchLogoutMode()" (confirmButtonClick)="goToLoginPage(); switchLogoutMode()"
+(cancelButtonClick)="switchMode02()" (confirmButtonClick)="goToLoginPage(); switchMode02()"
 type="userLogout" title="Sair Da Conta"
 content="Deseja realmente sair da conta? Você terá que fazer o login novamente!">
 </app-delete-dialog>
 
 <app-user-dialog
-*ngIf="isEditMode"
+*ngIf="isMode03"
 [userId]="userId" [userName]="userName" [userEmail]="userEmail"
-(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshPage(); switchEditMode()">
+(cancelButtonClick)="switchMode03()" 
+(confirmButtonClick)="refreshPage(); switchMode03(); setEditStatus(); switchStatusMode()">
 </app-user-dialog>
 
 <app-delete-dialog
-*ngIf="isPasswordMode"
+*ngIf="isMode04"
 [id]="userId"
-(cancelButtonClick)="switchPasswordMode()" (confirmButtonClick)="passwordConfirmClick(); switchPasswordMode()"
+(cancelButtonClick)="switchMode04()" 
+(confirmButtonClick)="switchMode04(); setPasswordChangeStatus(); switchStatusMode()"
 type="userPasswordChange" title="Trocar Senha"
 content="Deseja realmente trocar sua senha? Um email será enviado até você para confirmar esta ação."
 >
 </app-delete-dialog>
 
-<div [ngClass]="{ 'blur-filter': isDeleteMode || isLogoutMode || isEditMode }" class="user-container">
+<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 || isMode04 }" class="user-container">
     <h1>Sobre Mim</h1>
     <div class="info-container">
         <div class="single-info-container">
@@ -42,9 +50,9 @@ content="Deseja realmente trocar sua senha? Um email será enviado até você pa
         </div>
     </div>
     <div class="btns-container">
-        <button (click)="switchDeleteMode()" class="red-btn">Excluir Conta</button>
-        <button (click)="switchLogoutMode()" class="yellow-btn">Sair</button>
-        <button (click)="switchEditMode()" class="blue-btn">Editar Conta</button>
-        <button (click)="switchPasswordMode()" class="blue-btn">Mudar Senha</button>
+        <button (click)="switchMode01()" class="red-btn">Excluir Conta</button>
+        <button (click)="switchMode02()" class="yellow-btn">Sair</button>
+        <button (click)="switchMode03()" class="blue-btn">Editar Conta</button>
+        <button (click)="switchMode04()" class="blue-btn">Mudar Senha</button>
     </div>
 </div>

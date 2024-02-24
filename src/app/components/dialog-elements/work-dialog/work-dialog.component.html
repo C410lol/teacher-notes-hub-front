@@ -1,23 +1,30 @@
+<app-status-dialog
+*ngIf="isStatusMode" [type]="'error'"
+[title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <div class="work-container">
     <p class="title-txt">{{title}}</p>
     <div class="form">
         <div>
-            <p>*Título:</p>
-            <input type="text" placeholder="Insira o título do trabalho (obrigatório)"
+            <p>*Conteúdo:</p>
+            <input type="text" placeholder="Insira o conteúdo (obrigatório)"
             [(ngModel)]="workTitle">
         </div>
         <div>
-            <p>*Detalhes:</p>
-            <input type="text" placeholder="Insira os detalhes do trabalho (obrigatório)" 
+            <p>*Desenvolvimento:</p>
+            <input type="text" placeholder="Insira o desenvolvimento (obrigatório)" 
             [(ngModel)]="details">
         </div>
         <div *ngIf="isEditMode()">
             <p>Observações:</p>
-            <input type="text" placeholder="Insira as observações do trabalho" 
+            <input type="text" placeholder="Insira as observações" 
             [(ngModel)]="observations">
         </div>
         <div>
-            <p>*Tipo:</p>
+            <p>*Categoria:</p>
             <select [(ngModel)]="workType">
                 <option>TRABALHO</option>
                 <option>TAREFA</option>
@@ -29,13 +36,13 @@
             </select>
         </div>
         <div>
-            <p>Data:</p>
+            <p>Data de Entrega:</p>
             <input id="date-input" type="date" 
             [(ngModel)]="date">
         </div>
     </div>
     <div class="btns-box">
         <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Criar</button>
+        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
     </div>
 </div>

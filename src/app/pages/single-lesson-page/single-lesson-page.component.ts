@@ -2,8 +2,9 @@ import { DatePipe, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LessonService } from 'src/app/services/lesson.service';
-import { AttendanceType } from 'src/app/types/AttendanceType';
+import { BNCCCodeType } from 'src/app/types/BNCCCodeType';
 import { LessonType } from 'src/app/types/LessonType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-single-lesson-page',
@@ -15,16 +16,15 @@ import { LessonType } from 'src/app/types/LessonType';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class SingleLessonPageComponent implements OnInit {
+export class SingleLessonPageComponent extends DialogParent implements OnInit {
 
-  isAttendanceMode: boolean = false;
-  isDeleteMode: boolean = false;
-  isEditMode: boolean = false;
+  notebookId: string = '';
 
   lessonId: string = '';
   title: string = 'Carregando...';
   details: string = 'Carregando...';
   observations: string = 'Carregando...';
+  bnccCodes?: BNCCCodeType[] = [];
   quantity: number = 0;
   date: string = '';
   attendances?: number = 0;
@@ -36,10 +36,14 @@ export class SingleLessonPageComponent implements OnInit {
     private lessonService: LessonService,
     private dateFormatter: DatePipe
     ) {
-      this.activatedRoute.params.subscribe({
-        next: (res) => this.lessonId = res["lessonId"],
-        error: (err) => console.error(err)
-      });
+    super();
+    this.activatedRoute.params.subscribe({
+      next: (res) => {
+        this.notebookId = res['notebookId'];
+        this.lessonId = res["lessonId"];
+      },
+      error: (err) => console.error(err)
+    });
   }
 
   ngOnInit(): void {
@@ -70,6 +74,7 @@ export class SingleLessonPageComponent implements OnInit {
     this.title = lesson.title;
     this.details = lesson.details;
     this.observations = lesson.observations;
+    this.bnccCodes = lesson.bnccCodes;
     this.quantity = lesson.quantity;
     this.date = lesson.date;
     this.attendances = lesson.attendances;
@@ -79,24 +84,24 @@ export class SingleLessonPageComponent implements OnInit {
     this.location.back();
   }
 
-  switchAttendanceMode(): void {
-    this.isAttendanceMode = !this.isAttendanceMode;
-  }
-
-  switchDeleteMode(): void {
-    this.isDeleteMode = !this.isDeleteMode;
-  }
-
-  switchEditMode(): void {
-    this.isEditMode = !this.isEditMode;
-  }
-
   formatDate(date: string | undefined): string {
     const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
     if (dateFormatted != null) {
       return dateFormatted;
     }
     return "??/??/????";
+  }
+
+  getJustCode(): string[] | undefined {
+    return this.bnccCodes?.map(element => element.code);
+  }
+
+  setAttendanceStatus(): void {
+    this.setStatus('Chamada Salva Com Sucesso!', 'Chamada salva com sucesso');
+  }
+
+  setEditStatus(): void {
+    this.setStatus('Aula Editada Com Sucesso!', 'Aula editada com sucesso');
   }
 
 }

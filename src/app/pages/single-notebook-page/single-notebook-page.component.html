@@ -1,49 +1,57 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'success'" [title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="setStatusModeFalse()">
+</app-status-dialog>
+
 <app-delete-dialog
-*ngIf="isDeleteMode"
+*ngIf="isMode01"
 [id]="notebookId"
-(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goBack()"
+(cancelButtonClick)="switchMode01()" (confirmButtonClick)="deleteNotebookMessageAlert(); switchMode01()"
 type="notebookDelete" title="Deletar Caderneta" 
-content="Deseja realmente deletar essa caderneta? Todas as aulas e trabalhos serão excluídos!">
+content="Deseja realmente deletar essa caderneta? Uma mensagem será enviada até seu email para confirmar esta ação.">
 </app-delete-dialog>
 
 <app-finalize-dialog
-*ngIf="isFinalizeMode"
+*ngIf="isMode02"
 [notebookId]="notebookId"
-(cancelButtonClick)="switchFinalizeMode()" (confirmButtonClick)="switchFinalizeMode()">
+(cancelButtonClick)="switchMode02()" 
+(confirmButtonClick)="switchMode02(); setFinalizeStatus(); switchStatusMode()">
 </app-finalize-dialog>
 
 <app-notebook-dialog 
-*ngIf="isEditMode"
+*ngIf="isMode03"
 [notebookId]="notebookId"
 [classe]="classe" [subject]="subject" [bimester]="bimester"
-(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshNotebook(); switchEditMode()"
+(cancelButtonClick)="switchMode03()" 
+(confirmButtonClick)="refreshNotebook(); switchMode03(); setEditStatus(); switchStatusMode()"
 type="edit" title="Editar Caderneta">
 </app-notebook-dialog>
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isDeleteMode || isFinalizeMode || isEditMode }" class="single-notebook-container">
+<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-notebook-container">
     <h1 class="title-txt">Informações</h1>
     <div class="info-container">
         <div class="single-info-container">
-            <h1>Classe:</h1>
-            <input disabled [value]="classe.replaceAll('_', ' ')">
+            <h1>Turma:</h1>
+            <input [value]="classe.replaceAll('_', ' ')">
         </div>
         <div class="single-info-container">
-            <h1>Matéria:</h1>
-            <input disabled [value]="subject.replaceAll('_', ' ')">
+            <h1>Disciplina:</h1>
+            <input [value]="subject.replaceAll('_', ' ')">
         </div>
         <div class="single-info-container">
             <h1>Bimestre:</h1>
-            <input disabled [value]="bimester">
+            <input [value]="bimester">
         </div>
         <div class="single-info-container">
             <h1>Status:</h1>
-            <input disabled [value]="status">
+            <input [value]="status">
         </div>
         <div class="single-info-container">
             <h1>Criada Em:</h1>
-            <input disabled [value]="formatDate(date)">
+            <input [value]="formatDate(date)">
         </div>
     </div>
     <div class="txts-container">
@@ -51,9 +59,8 @@ type="edit" title="Editar Caderneta">
         <h1 (click)="navigateToWorks()">Ver Ferramentas de Avaliação</h1>
     </div>
     <div class="btns-container">
-        <button (click)="switchDeleteMode()" class="red-btn">Excluir</button>
-        <button (click)="switchFinalizeMode()" class="yellow-btn">Finalizar</button>
-        <button (click)="switchEditMode()" class="blue-btn">Editar</button>
-
+        <button (click)="switchMode01()" class="red-btn">Excluir</button>
+        <button (click)="switchMode02()" class="yellow-btn">Finalizar</button>
+        <button (click)="switchMode03()" class="blue-btn">Editar</button>
     </div>
 </div>

@@ -1,9 +1,11 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { LessonService } from 'src/app/services/lesson.service';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { UserService } from 'src/app/services/user.service';
 import { WorkService } from 'src/app/services/work.service';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -11,7 +13,7 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.css']
 })
-export class DeleteDialogComponent {
+export class DeleteDialogComponent extends DialogParent {
 
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirmButtonClick: EventEmitter<void> = new EventEmitter<void>();
@@ -28,7 +30,9 @@ export class DeleteDialogComponent {
     private notebookService: NotebookService,
     private lessonService: LessonService,
     private workService: WorkService,
-  ) { }
+  ) { 
+    super();
+  }
 
   cancelOnClick(): void {
     this.cancelButtonClick.emit();
@@ -70,7 +74,7 @@ export class DeleteDialogComponent {
         this.confirmButtonClick.emit();
         this.eventService.triggerRefreshHeader();
       },
-      error: () => alert(environment.simpleErrorMessage)
+      error: () => this.switchStatusMode()
     });
   }
 
@@ -85,32 +89,41 @@ export class DeleteDialogComponent {
     if(this.id != null) {
       this.userService.sendChangePasswordRequestById(this.id).subscribe({
         next: () => this.confirmButtonClick.emit(),
-        error: () => alert(environment.simpleErrorMessage)
+        error: () => this.switchStatusMode()
       });
       return;
     }
-    alert(environment.simpleErrorMessage);
+    this.switchStatusMode();
   }
 
   deleteNotebook(): void {
-    this.notebookService.deleteNotebook(this.id).subscribe({
-      next: () => this.confirmButtonClick.emit(),
-      error: () => alert(environment.simpleErrorMessage)
-    });
+    const userId = localStorage.getItem('userId');
+    if (userId != null) {
+      this.notebookService.sendDeleteNotebookRequest(this.id, userId).subscribe({
+        next: () => this.confirmButtonClick.emit(),
+        error: () => this.switchStatusMode()
+      });
+      return;
+    }
+    this.switchStatusMode();
   }
 
   deleteLesson(): void {
     this.lessonService.deleteLesson(this.id).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: () => alert(environment.simpleErrorMessage)
+      error: () => this.switchStatusMode()
     });
   }
 
   deleteWork(): void {
     this.workService.deleteWork(this.id).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: () => alert(environment.simpleErrorMessage)
+      error: () => this.switchStatusMode()
     });
+  }
+
+  getEnviromentErrorMessage(): string {
+    return environment.simpleErrorMessage;
   }
 
 }

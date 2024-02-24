@@ -1,28 +1,35 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'success'" [title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <app-grades-dialog
-*ngIf="isGradeMode"
-(cancelButtonClick)="switchGradeMode()">
+*ngIf="isMode01"
+(cancelButtonClick)="switchMode01()">
 </app-grades-dialog>
 
 <app-delete-dialog 
-*ngIf="isDeleteMode" 
+*ngIf="isMode02" 
 [id]="workId"
-(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goBack()"
+(cancelButtonClick)="switchMode02()" (confirmButtonClick)="goBack()"
 type="work" title="Deletar Trabalho/Tarefa"
 content="Deseja realmente deletar esse trabalho/tarefa? Todas as anotações e notas serão excluídas!">
 </app-delete-dialog>
 
 <app-work-dialog 
-*ngIf="isEditMode" 
+*ngIf="isMode03" 
 [workId]="workId" [workTitle]="title" 
 [details]="details" [observations]="observations" 
 [workType]="workType" [date]="deliveryDate"
-(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshWork(); switchEditMode()"
+(cancelButtonClick)="switchMode03()" 
+(confirmButtonClick)="refreshWork(); switchMode03(); setEditStatus(); switchStatusMode()"
 type="edit" title="Editar Ferramenta de Avaliação">
 </app-work-dialog>
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isGradeMode || isDeleteMode || isEditMode }" class="single-work-container">
+<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-work-container">
     <h1 class="title-txt">Informações</h1>
     <div class="info-container">
         <div class="single-info-container">
@@ -51,10 +58,10 @@ type="edit" title="Editar Ferramenta de Avaliação">
         </div>
     </div>
     <div class="txts-container">
-        <h1 (click)="switchGradeMode()">Criar/Editar Notas</h1>
+        <h1 (click)="switchMode01()">Criar/Editar Notas</h1>
     </div>
     <div class="btns-container">
-        <button (click)="switchDeleteMode()" class="red-btn">Excluir</button>
-        <button (click)="switchEditMode()" class="blue-btn">Editar</button>
+        <button (click)="switchMode02()" class="red-btn">Excluir</button>
+        <button (click)="switchMode03()" class="blue-btn">Editar</button>
     </div>
 </div>

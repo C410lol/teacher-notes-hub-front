@@ -1,6 +1,12 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'error'" [title]="'Ops, Algo Deu Errado'"
+[content]="getEnviromentErrorMessage()"
+(destroyButtonClick)="isStatusMode = false">    
+</app-status-dialog>
+
 <div class="delete-dialog-container">
     <p class="title-txt">{{title}}</p>
-    <hr>
     <p class="content-txt">{{content}}</p>
     <div class="btns-box">
         <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>

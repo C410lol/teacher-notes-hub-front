@@ -1,6 +1,12 @@
+<app-status-dialog
+*ngIf="isStatusMode" [type]="'error'"
+[title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <div class="finalize-notebook-dialog-container">
     <p class="title-txt">Finalizar Caderneta</p>
-    <hr>
     <p class="content-txt">Deseja realmente finalizar essa caderneta? A confirmação iniciará um download
         da tabela exel relacionada a ela.</p>
     <div class="grades-weight-container">

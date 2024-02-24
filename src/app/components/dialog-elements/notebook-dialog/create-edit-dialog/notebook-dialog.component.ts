@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { NotebookType } from 'src/app/types/NotebookType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -8,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './notebook-dialog.component.html',
   styleUrls: ['./notebook-dialog.component.css']
 })
-export class NotebookDialogComponent {
+export class NotebookDialogComponent extends DialogParent {
 
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirmButtonClick: EventEmitter<void> = new EventEmitter<void>();
@@ -19,11 +20,15 @@ export class NotebookDialogComponent {
   @Input() teacherId?: string = '';
   @Input() notebookId?: string = '';
 
-  @Input() classe: string = 'Ensino_Fundamental_5_A';
-  @Input() subject: string = 'Português';
+  @Input() classe: string = 'Ensino_Fundamental_6_A';
+  @Input() subject: string = 'Arte';
   @Input() bimester: string = 'Primeiro';
 
-  constructor(private notebookService: NotebookService) { }
+  constructor(
+    private notebookService: NotebookService
+  ) { 
+    super();
+  }
 
   cancelOnClick(): void {
     this.cancelButtonClick.emit();
@@ -37,14 +42,14 @@ export class NotebookDialogComponent {
   createNotebook(): void {
     this.notebookService.createNotebook(this.teacherId, this.createNotebookObject()).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: () => alert(environment.fieldErrorMessage)
+      error: () => this.switchStatusMode()
     });
   }
 
   editNotebook(): void {
     this.notebookService.editNotebook(this.notebookId, this.createNotebookObject()).subscribe({
       next: () => this.confirmButtonClick.emit(),
-      error: () => alert(environment.fieldErrorMessage)
+      error: () => this.switchStatusMode()
     });
   }
 
@@ -54,6 +59,10 @@ export class NotebookDialogComponent {
       subject: this.subject,
       bimester: this.bimester
     }
+  }
+
+  getEnvironmentErrorMessage(): string {
+    return environment.simpleErrorMessage;
   }
 
 }

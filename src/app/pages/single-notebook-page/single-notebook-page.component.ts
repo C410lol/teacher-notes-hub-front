@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { NotebookType } from 'src/app/types/NotebookType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-single-notebook-page',
@@ -14,11 +15,7 @@ import { NotebookType } from 'src/app/types/NotebookType';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class SingleNotebookPageComponent implements OnInit {
-
-  isDeleteMode: boolean = false;
-  isFinalizeMode: boolean = false;
-  isEditMode: boolean = false;
+export class SingleNotebookPageComponent extends DialogParent implements OnInit {
 
   notebookId?: string = '';
   classe: string = 'Carregando...';
@@ -30,11 +27,11 @@ export class SingleNotebookPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute, 
-    private location: Location,
+    private activatedRoute: ActivatedRoute,
     private notebookService: NotebookService,
     private dateFormatter: DatePipe
     ) {
+    super();
     this.activatedRoute.params.subscribe({
       next: (res) => this.notebookId = res["notebookId"],
       error: (err) => console.error(err)
@@ -68,8 +65,9 @@ export class SingleNotebookPageComponent implements OnInit {
     this.studentsLength = notebook.students;
   }
 
-  goBack(): void {
-    this.location.back();
+  deleteNotebookMessageAlert(): void {
+    this.setStatus('Requisição Para Deletar Caderneta Enviada!', 'Vá até seu email para confirmar essa ação');
+    this.switchStatusMode();
   }
 
   navigateToLessons(): void {
@@ -80,24 +78,20 @@ export class SingleNotebookPageComponent implements OnInit {
     this.router.navigateByUrl(`${this.router.url}/trabalhos?studentsLength=${this.studentsLength}`);
   }
 
-  switchEditMode(): void {
-    this.isEditMode = !this.isEditMode;
-  }
-
-  switchFinalizeMode(): void {
-    this.isFinalizeMode = !this.isFinalizeMode;
-  }
-
-  switchDeleteMode(): void {
-    this.isDeleteMode = !this.isDeleteMode;
-  }
-
   formatDate(date: string | undefined): string {
     const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
     if (dateFormatted != null) {
       return dateFormatted;
     }
     return "??/??/????";
+  }
+
+  setFinalizeStatus(): void {
+    this.setStatus('Caderneta Finalizada Com Sucesso!', 'O download do arquivo EXCEL iniciará a qualquer momento');
+  }
+
+  setEditStatus(): void {
+    this.setStatus('Caderneta Editada Com Sucesso!', 'Caderneta editada com sucesso');
   }
 
 }

@@ -1,37 +1,47 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'success'" [title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <app-attendances-dialog 
-*ngIf="isAttendanceMode"
+*ngIf="isMode01"
 [lessonQuantity]="quantity" [hasAttendances]="attendances !== 0"
-(cancelButtonClick)="switchAttendanceMode()" (confirmButtonClick)="switchAttendanceMode(); refreshLesson()">
+(cancelButtonClick)="switchMode01()" 
+(confirmButtonClick)="switchMode01(); refreshLesson(); setAttendanceStatus(); switchStatusMode();">
 </app-attendances-dialog>
 
 <app-delete-dialog 
-*ngIf="isDeleteMode"
+*ngIf="isMode02"
 [id]="lessonId"
-(cancelButtonClick)="switchDeleteMode()" (confirmButtonClick)="goBack()"
+(cancelButtonClick)="switchMode02()" (confirmButtonClick)="goBack()"
 type="lesson" title="Deletar Aula"
 content="Deseja realmente deletar essa aula? Todas as anotações e chamadas serão excluídas!">
 </app-delete-dialog>
 
 <app-lesson-dialog 
-*ngIf="isEditMode" 
+*ngIf="isMode03" 
+[notebookId]="notebookId"
 [lessonId]="lessonId" [lessonTitle]="title" 
 [details]="details" [observations]="observations"
+[bnccCodes]="getJustCode()"
 [quantity]="quantity" [date]="date"
-(cancelButtonClick)="switchEditMode()" (confirmButtonClick)="refreshLesson(); switchEditMode()"
+(cancelButtonClick)="switchMode03()" 
+(confirmButtonClick)="refreshLesson(); switchMode03(); setEditStatus(); switchStatusMode();"
 type="edit" title="Editar Aula">
 </app-lesson-dialog>
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isAttendanceMode || isDeleteMode || isEditMode }" class="single-lesson-container">
+<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-lesson-container">
     <h1 class="title-txt">Informações</h1>
     <div class="info-container">
         <div class="single-info-container">
-            <h1>Título:</h1>
+            <h1>Conteúdo:</h1>
             <input [value]="title">
         </div>
         <div class="single-info-container">
-            <h1>Detalhes:</h1>
+            <h1>Desenvolvimento:</h1>
             <div class="single-info-container-txt-box">
                 <p>{{details}}</p>
             </div>
@@ -43,19 +53,27 @@ type="edit" title="Editar Aula">
             </div>
         </div>
         <div class="single-info-container">
+            <h1>Habilidades:</h1>
+            <div class="single-info-container-txt-box">
+                <p *ngFor="let bnccCode of bnccCodes">
+                    {{bnccCode.description}}
+                </p>
+            </div>
+        </div>
+        <div class="single-info-container">
             <h1>Quantidade:</h1>
-            <input disabled [value]="quantity">
+            <input [value]="quantity">
         </div>
         <div class="single-info-container">
             <h1>Data:</h1>
-            <input disabled [value]="formatDate(date)">
+            <input [value]="formatDate(date)">
         </div>
     </div>
     <div class="txts-container">
-        <h1 (click)="switchAttendanceMode()">Fazer/Editar Chamada</h1>
+        <h1 (click)="switchMode01()">Fazer/Editar Chamada</h1>
     </div>
     <div class="btns-container">
-        <button (click)="switchDeleteMode()" class="red-btn">Excluir</button>
-        <button (click)="switchEditMode()" class="blue-btn">Editar</button>
+        <button (click)="switchMode02()" class="red-btn">Excluir</button>
+        <button (click)="switchMode03()" class="blue-btn">Editar</button>
     </div>
 </div>

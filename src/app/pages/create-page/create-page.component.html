@@ -1,3 +1,9 @@
+<app-status-dialog
+*ngIf="isStatusMode" [type]="statusType"
+[title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="setStatusModeFalse()">
+</app-status-dialog>
+
 <div class="create-page-container">
     <div class="create-container">
         <p class="title-txt">Criar</p>

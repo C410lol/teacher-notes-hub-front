@@ -31,6 +31,10 @@ h1 {
     font-size: medium;
 }
 
+.create-btn h1 {
+    color: black;
+}
+
 .create-btn:hover {
     background-color: #73a541ce;
 }
@@ -46,6 +50,8 @@ h1 {
     height: 60px;
     display: grid;
     grid-template-columns: 12.5% auto 10% 10%;
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
     background-color: #E0E0E0;
 }
 
@@ -55,4 +61,12 @@ h1 {
     padding-left: 10px;
     border: 1px solid #3F3F3F;
     background-color: transparent;
+}
+
+.lessons-header:first-child {
+    border-top-left-radius: 7.5px;
+}
+
+.lessons-header:last-child {
+    border-top-right-radius: 7.5px;
 }

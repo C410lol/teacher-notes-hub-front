@@ -1,3 +1,9 @@
+<app-status-dialog
+*ngIf="isStatusMode" [type]="statusType"
+[title]="statusTitle" [content]="statusContent"
+(destroyButtonClick)="setStatusModeFalse()">
+</app-status-dialog>
+
 <div class="login-page-container">
     <div class="login-container">
         <p class="title-txt">Login</p>

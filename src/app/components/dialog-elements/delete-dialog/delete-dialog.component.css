@@ -9,8 +9,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     position: fixed;
-    border: 2.5px solid #3F3F3F;
-    border-radius: 2.5px;
+    border: 2.5px solid #000000;
+    border-radius: 5px;
     background-color: #bbbbbb;
     z-index: 1;
 }
@@ -55,6 +55,7 @@ hr {
     border-radius: 2.5px;
     cursor: pointer;
     font-family: 'Bebas Neue', sans-serif;
+    color: black;
 }
 
 .red-btn {

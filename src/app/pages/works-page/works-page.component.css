@@ -27,6 +27,10 @@
     font-size: medium;
 }
 
+.create-btn h1 {
+    color: black;
+}
+
 .create-btn:hover {
     background-color: #73a541ce;
 }
@@ -42,6 +46,8 @@
     height: 60px;
     display: grid;
     grid-template-columns: 15% auto 12.5% 12%;
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
     background-color: #E0E0E0;
 }
 
@@ -51,6 +57,14 @@
     padding-left: 10px;
     border: 1px solid #3F3F3F;
     background-color: transparent;
+}
+
+.works-header:first-child {
+    border-top-left-radius: 7.5px;
+}
+
+.works-header:last-child {
+    border-top-right-radius: 7.5px;
 }
 
 h1 {

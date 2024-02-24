@@ -1,8 +1,9 @@
 import { HttpResponse, HttpStatusCode } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NotebookService } from 'src/app/services/notebook.service';
 import { GradesWeightType } from 'src/app/types/Others/GradesWeightType';
 import { MissingTasksType } from 'src/app/types/Others/MissingTasksType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
@@ -10,7 +11,7 @@ import { environment } from 'src/environments/environment.development';
   templateUrl: './finalize-dialog.component.html',
   styleUrls: ['./finalize-dialog.component.css']
 })
-export class FinalizeDialogComponent {
+export class FinalizeDialogComponent extends DialogParent implements OnInit {
 
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirmButtonClick: EventEmitter<void> = new EventEmitter<void>();
@@ -30,10 +31,18 @@ export class FinalizeDialogComponent {
   trilhasSelect: string = '0';
   outrosSelect: string = '0';
 
-  weightSum: number = 10;
+  weightSum: number = 0;
   weigthSumStyle: string = 'GREEN';
 
-  constructor(private notebookService: NotebookService) { }
+  constructor(
+    private notebookService: NotebookService
+  ) { 
+    super();
+  }
+
+  ngOnInit(): void {
+    this.changeWeightSum();
+  }
 
   cancelOnClick(): void {
     this.cancelButtonClick.emit();
@@ -41,7 +50,8 @@ export class FinalizeDialogComponent {
 
   confirmOnClick(): void {
     if(!this.ifEqualTen()) {
-      alert('A soma dos pesos deve ser igual a 10!');
+      this.setStatusContent('A soma dos pesos deve ser igual à 10');
+      this.switchStatusMode();
       return;
     }
     this.ifThereIsMissingTasks();
@@ -51,10 +61,12 @@ export class FinalizeDialogComponent {
     this.notebookService.verifyMissingTasks(this.notebookId).subscribe({
       next: (res) => {
         if(res.status == HttpStatusCode.NoContent) { this.finalizeNotebook(); return; } 
-        alert('Você possue aula(s)/ferramenta(s) sem chamada/notas');
+        this.setStatusContent('Você possue aula(s)/ferramenta(s) sem chamada/notas');
+        this.switchStatusMode();
       },
       error: () => {
-        alert(environment.simpleErrorMessage);
+        this.setStatusContent(environment.simpleErrorMessage);
+        this.switchStatusMode();
       }
     });
   }
@@ -73,7 +85,10 @@ export class FinalizeDialogComponent {
 
         this.confirmButtonClick.emit();
       },
-      error: (err) => {alert(environment.simpleErrorMessage); console.error(err);}
+      error: (err) => {
+        this.setStatusContent(environment.simpleErrorMessage); 
+        this.switchStatusMode();
+      }
     })
   }
 
@@ -112,6 +127,10 @@ export class FinalizeDialogComponent {
            Number.parseFloat(this.simuladoSelect) + 
            Number.parseFloat(this.trilhasSelect) + 
            Number.parseFloat(this.outrosSelect) == 10;
+  }
+
+  setStatusContent( content: string): void {
+    this.setStatus('Erro Ao Finalizar Caderneta!', content);
   }
 
 }

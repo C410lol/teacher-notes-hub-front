@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-user-page',
@@ -11,12 +13,7 @@ import { UserService } from 'src/app/services/user.service';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class UserPageComponent {
-
-  isDeleteMode: boolean = false;
-  isLogoutMode: boolean = false;
-  isEditMode: boolean = false;
-  isPasswordMode: boolean = false;
+export class UserPageComponent extends DialogParent {
 
   userId: string = '';
   userName:string = 'Carregando...';
@@ -26,6 +23,7 @@ export class UserPageComponent {
     private router: Router,
     private userService: UserService
   ) { 
+    super();
     this.getUser();
   }
 
@@ -40,7 +38,10 @@ export class UserPageComponent {
             this.userEmail = res.body.email;
           }
         },
-        error: (err) => console.error(err)
+        error: () => {
+          this.setStatus('Erro Ao Carregar Usuário!', environment.simpleErrorMessage, 'error');
+          this.switchStatusMode();
+        }
       });
     }
   }
@@ -53,24 +54,12 @@ export class UserPageComponent {
     this.router.navigate(['/login']);
   }
 
-  passwordConfirmClick(): void {
-    alert('Uma mensagem foi enviada para seu email, vá até ela para trocar sua senha!');
+  setEditStatus(): void {
+    this.setStatus('Conta Editada Com Sucesso!', 'Conta editada com sucesso!', 'success');
   }
 
-  switchPasswordMode(): void {
-    this.isPasswordMode = !this.isPasswordMode;
-  }
-
-  switchEditMode(): void {
-    this.isEditMode = !this.isEditMode;
-  }
-
-  switchLogoutMode(): void {
-    this.isLogoutMode = !this.isLogoutMode;
-  }
-
-  switchDeleteMode(): void {
-    this.isDeleteMode = !this.isDeleteMode;
+  setPasswordChangeStatus(): void {
+    this.setStatus('Email Enviado Com Sucesso!', 'Vá até seu email para trocar de senha', 'success');
   }
 
 }

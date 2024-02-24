@@ -1,3 +1,10 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="statusType" [title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <div class="grades-dialog-container">
     <p class="title-txt">Criar/Editar Nota</p>
     <div class="creation-container">
@@ -34,7 +41,7 @@
             <button (click)="confirmOnClick()" class="green-btn">Criar/Editar</button>
         </div>
     </div>
-    <div class="content-container">
+    <div *ngIf="!isGradesEmpty()" class="content-container">
         <div class="grade-header">
             <div><p>Aluno</p></div>
             <div><p>Nota</p></div>

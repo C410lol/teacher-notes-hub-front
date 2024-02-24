@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-single-work-page',
@@ -14,11 +15,7 @@ import { WorkType } from 'src/app/types/WorkType';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class SingleWorkPageComponent implements OnInit {
-
-  isGradeMode: boolean = false;
-  isDeleteMode: boolean = false;
-  isEditMode: boolean = false;
+export class SingleWorkPageComponent extends DialogParent implements OnInit {
 
   workId:string = '';
   title:string = 'Carregando...';
@@ -34,10 +31,11 @@ export class SingleWorkPageComponent implements OnInit {
     private workService: WorkService,
     private dateFormatter: DatePipe
   ) { 
-      this.activedRoute.params.subscribe({
-        next: (res) => this.workId = res["workId"],
-        error: (err) => console.error(err)
-      });
+    super();
+    this.activedRoute.params.subscribe({
+      next: (res) => this.workId = res["workId"],
+      error: (err) => console.error(err)
+    });
   }
 
   ngOnInit(): void {
@@ -76,24 +74,16 @@ export class SingleWorkPageComponent implements OnInit {
     this.location.back();
   }
 
-  switchGradeMode(): void {
-    this.isGradeMode = !this.isGradeMode;
-  }
-
-  switchDeleteMode(): void {
-    this.isDeleteMode = !this.isDeleteMode;
-  }
-
-  switchEditMode(): void {
-    this.isEditMode = !this.isEditMode;
-  }
-
   formatDate(date: string | undefined): string {
     const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');
     if (dateFormatted != null) {
       return dateFormatted;
     }
     return "??/??/????";
+  }
+
+  setEditStatus(): void {
+    this.setStatus('Ferramenta Editada Com Sucesso!', 'Ferramenta editada com sucesso!');
   }
 
 }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { Validations } from '../pages-shared-styles/Validations';
+import { HttpResponse } from '@angular/common/http';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-change-password-request-page',
@@ -9,20 +12,30 @@ import { UserService } from 'src/app/services/user.service';
     '../pages-shared-styles/title-txt.css'
   ]
 })
-export class ChangePasswordRequestPageComponent {
+export class ChangePasswordRequestPageComponent extends DialogParent {
 
   currentStatus: string = 'normal';
   email: string = '';
 
   constructor(
     private userService: UserService,
-  ) { }
+  ) { 
+    super();
+  }
 
   sendChangePasswordRequest(): void {
-    this.userService.sendChangePasswordRequestByEmail(this.email).subscribe({
+    if (!Validations.isNotBlank([this.email])) { 
+      alert('O campo está vazio!'); 
+      return; 
+    }
+    this.userService.sendChangePasswordRequestByEmail(this.email.trim()).subscribe({
       next: () => this.currentStatus = 'success',
       error: (err) => {
-        console.log(err);
+        if (typeof err.error == 'string') {
+          this.setStatus('Erro Ao Enviar Requisição!', err.error);
+          this.switchStatusMode();
+          return;
+        }
         this.currentStatus = 'error'
       }
     });

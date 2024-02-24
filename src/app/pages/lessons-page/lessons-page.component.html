@@ -1,17 +1,25 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="'success'" [title]="'Aula Criada Com Sucesso!'"
+[content]="'Aula Criada Com Sucesso!'"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
 <app-lesson-dialog 
-*ngIf="isCreateMode"
+*ngIf="isMode01"
 [notebookId]="notebookId"
-(cancelButtonClick)="switchCreateMode()" (confirmButtonClick)="refreshLessons(); switchCreateMode()"
+(cancelButtonClick)="switchMode01()" 
+(confirmButtonClick)="refreshLessons(); switchMode01(); switchStatusMode();"
 type="create" title="Criar Aula">
 </app-lesson-dialog>
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isCreateMode }" class="lessons-page-container">
+<div [ngClass]="{ 'blur-filter': isMode01 }" class="lessons-page-container">
     <h1 class="title-txt">Aulas</h1>
     <h1 *ngIf="!isLessonsLoaded" class="loading-txt">Carregando...</h1>
     <div *ngIf="isLessonsLoaded" class="content-container">
-        <button (click)="switchCreateMode()" class="create-btn">
+        <button (click)="switchMode01()" class="create-btn">
             <h1>Nova Aula</h1>
         </button>
         
@@ -31,7 +39,7 @@ type="create" title="Criar Aula">
         <div class="lessons-container">
             <div class="lessons-header">
                 <div><h1>Data</h1></div>
-                <div><h1>Título</h1></div>
+                <div><h1>Conteúdo</h1></div>
                 <div><h1>Quantidade</h1></div>
                 <div><h1>Chamada Realizada?</h1></div>
             </div>

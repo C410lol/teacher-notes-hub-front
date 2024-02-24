@@ -8,13 +8,14 @@ import { StudentType } from 'src/app/types/StudentType';
 import { AttendanceDialogListElementComponent } from '../../list-elements/attendance-dialog-list-element/attendance-dialog-list-element.component';
 import { CreationAttendanceType } from 'src/app/types/Others/CreationAttendanceType';
 import { environment } from 'src/environments/environment.development';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-attendances-dialog',
   templateUrl: './attendances-dialog.component.html',
   styleUrls: ['./attendances-dialog.component.css']
 })
-export class AttendancesDialogComponent implements OnInit {
+export class AttendancesDialogComponent extends DialogParent implements OnInit {
 
   @ViewChildren('attendanceDialogListElements') attendanceDialogsListElements: 
   QueryList<AttendanceDialogListElementComponent> = 
@@ -38,6 +39,7 @@ export class AttendancesDialogComponent implements OnInit {
     private studentService: StudentService,
     private attendanceService: AttendanceService,
   ) { 
+    super();
     this.getParamIds();
   }
 
@@ -63,7 +65,10 @@ export class AttendancesDialogComponent implements OnInit {
           this.loadAttendances();
         } else this.loadEmptyAttendances();
       },
-      error: (err) => console.error(err)
+      error: () => {
+        this.setStatus('Erro Ao Carregar Os Alunos', environment.simpleErrorMessage);
+        this.switchStatusMode();
+      }
     });
   }
 
@@ -73,7 +78,10 @@ export class AttendancesDialogComponent implements OnInit {
         this.attendancesList = res;
         this.loadStudentsAttendances(res);
       },
-      error: (err) => console.error(err)
+      error: () => {
+        this.setStatus('Erro Ao Carregar As Chamadas!', environment.simpleErrorMessage);
+        this.switchStatusMode();
+      }
     });
   }
 
@@ -120,10 +128,12 @@ export class AttendancesDialogComponent implements OnInit {
   createAttendance(attendances: any[]): void {
     this.attendanceService.createAttendance(this.lessonId, attendances).subscribe({
         next: () => {
-          alert('Chamada Salva Com Sucesso!');
           this.confirmButtonClick.emit();
         },
-        error: () => alert(environment.simpleErrorMessage)
+        error: () => {
+          this.setStatus('Erro Ao Salvar Chamada!', environment.simpleErrorMessage);
+          this.switchStatusMode()
+        }
     });
   }
 
@@ -166,7 +176,5 @@ export class AttendancesDialogComponent implements OnInit {
 
     return attendances;
   }
-
-  
 
 }

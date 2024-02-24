@@ -4,6 +4,7 @@ import { LessonService } from 'src/app/services/lesson.service';
 import { LessonType } from 'src/app/types/LessonType';
 import { SortInterface } from '../../types/interfaces/SortInterface';
 import { DatePipe } from '@angular/common';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-lessons-page',
@@ -15,9 +16,8 @@ import { DatePipe } from '@angular/common';
     '../pages-shared-styles/blur-filter.css',
   ]
 })
-export class LessonsPageComponent implements OnInit, SortInterface {
+export class LessonsPageComponent extends DialogParent implements OnInit, SortInterface {
 
-  isCreateMode: boolean = false;
   isLessonsLoaded: boolean = false;
 
   notebookId: string = '';
@@ -35,10 +35,11 @@ export class LessonsPageComponent implements OnInit, SortInterface {
     private lessonService: LessonService,
     private dateFormatter: DatePipe
     ) {
-      this.activedRoute.params.subscribe({
-        next: (res) => this.notebookId = res["notebookId"],
-        error: (err) => console.error(err)
-      });
+    super();
+    this.activedRoute.params.subscribe({
+      next: (res) => this.notebookId = res["notebookId"],
+      error: (err) => console.error(err)
+    });
   }
 
   ngOnInit(): void {
@@ -80,12 +81,6 @@ export class LessonsPageComponent implements OnInit, SortInterface {
         this.router.navigate(['/not-found']);
       }
     });
-  }
-
-  switchCreateMode(): void {
-    if(this.isCreateMode === false) {
-      this.isCreateMode = true;
-    } else this.isCreateMode = false;
   }
 
   ifAttendanceExists(attendanceLength?: number): string {
