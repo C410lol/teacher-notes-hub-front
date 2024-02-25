@@ -10,8 +10,9 @@
     <div class="creation-container">
         <div class="creation-form-container">
             <select [(ngModel)]="studentSelect">
-                <option *ngFor="let student of studentsList" 
-                [value]="student.id">{{student.name}}</option>
+                <option *ngFor="let student of studentsList" [value]="student.id" [ngClass]="isStudentInGradesList(student)">
+                    {{student.name}}
+                </option>
             </select>
             <select [(ngModel)]="gradeSelect">
                 <option>0.0</option>

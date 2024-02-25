@@ -138,3 +138,12 @@
 .green-btn:hover {
     background-color: #73a541ce;
 }
+
+
+.grade-exist {
+    background-color: #73a541a5;
+}
+
+.grade-unexist {
+    background-color: #e03437b5;
+}
