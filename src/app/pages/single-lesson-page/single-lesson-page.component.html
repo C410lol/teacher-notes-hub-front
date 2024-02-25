@@ -6,6 +6,7 @@
 
 <app-attendances-dialog 
 *ngIf="isMode01"
+[notebookId]="notebookId" [lessonId]="lessonId"
 [lessonQuantity]="quantity" [hasAttendances]="attendances !== 0"
 (cancelButtonClick)="switchMode01()" 
 (confirmButtonClick)="switchMode01(); refreshLesson(); setAttendanceStatus(); switchStatusMode();">

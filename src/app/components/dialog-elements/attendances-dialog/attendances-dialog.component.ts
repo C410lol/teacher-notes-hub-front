@@ -27,8 +27,8 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
   @Input() lessonQuantity: number = 1;
   @Input() hasAttendances?: boolean = false;
 
-  notebookId: string = '';
-  lessonId: string = '';
+  @Input() notebookId: string = '';
+  @Input() lessonId: string = '';
 
   studentsList: StudentType[] = [];
   attendancesList: AttendanceType[] = [];
@@ -40,17 +40,6 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
     private attendanceService: AttendanceService,
   ) { 
     super();
-    this.getParamIds();
-  }
-
-  getParamIds(): void {
-    this.activatedRoute.params.subscribe({
-      next: (res) => {
-        this.notebookId = res['notebookId'];
-        this.lessonId = res['lessonId'];
-      },
-      error: (err) => console.error(err)
-    });
   }
 
   ngOnInit(): void {

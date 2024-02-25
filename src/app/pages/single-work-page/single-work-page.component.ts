@@ -17,7 +17,9 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 })
 export class SingleWorkPageComponent extends DialogParent implements OnInit {
 
+  notebookId: string = '';
   workId:string = '';
+
   title:string = 'Carregando...';
   details:string = 'Carregando...';
   observations:string = 'Carregando...';
@@ -33,7 +35,10 @@ export class SingleWorkPageComponent extends DialogParent implements OnInit {
   ) { 
     super();
     this.activedRoute.params.subscribe({
-      next: (res) => this.workId = res["workId"],
+      next: (res) => {
+        this.notebookId = res["notebookId"];
+        this.workId = res["workId"];
+      },
       error: (err) => console.error(err)
     });
   }

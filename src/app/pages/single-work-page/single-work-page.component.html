@@ -6,6 +6,7 @@
 
 <app-grades-dialog
 *ngIf="isMode01"
+[notebookId]="notebookId" [workId]="workId"
 (cancelButtonClick)="switchMode01()">
 </app-grades-dialog>
 

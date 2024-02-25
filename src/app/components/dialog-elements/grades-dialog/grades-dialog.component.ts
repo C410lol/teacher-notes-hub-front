@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GradeService } from 'src/app/services/grade.service';
 import { StudentService } from 'src/app/services/student.service';
@@ -17,8 +17,8 @@ export class GradesDialogComponent extends DialogParent implements OnInit {
 
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
 
-  notebookId: string = '';
-  workId: string = '';
+  @Input() notebookId: string = '';
+  @Input() workId: string = '';
   
   studentsList: StudentType[] = [];
   gradesList: GradeType[] = [];
@@ -27,22 +27,10 @@ export class GradesDialogComponent extends DialogParent implements OnInit {
   gradeSelect = '0.0';
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
     private gradeService: GradeService,
   ) { 
     super();
-    this.getParamIds();
-  }
-
-  getParamIds(): void {
-    this.activatedRoute.params.subscribe({
-      next: (res) => {
-        this.notebookId = res['notebookId'];
-        this.workId = res['workId'];
-      },
-      error: (err) => console.error(err)
-    });
   }
 
   ngOnInit(): void {
@@ -101,6 +89,13 @@ export class GradesDialogComponent extends DialogParent implements OnInit {
 
   isGradesEmpty(): boolean {
     return this.gradesList.length < 1;
+  }
+
+  isStudentInGradesList(student: StudentType): string {
+    for (let x = 0; x < this.gradesList.length; x++) {
+      if (this.gradesList[x].student.id == student.id) return 'grade-exist';
+    }
+    return 'grade-unexist';
   }
 
 }

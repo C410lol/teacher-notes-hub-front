@@ -19,8 +19,8 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 export class SingleLessonPageComponent extends DialogParent implements OnInit {
 
   notebookId: string = '';
-
   lessonId: string = '';
+
   title: string = 'Carregando...';
   details: string = 'Carregando...';
   observations: string = 'Carregando...';
