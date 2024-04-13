@@ -5,23 +5,50 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="user-container">
-    <p class="title-txt">Editar Usuário</p>
-    <div class="form">
+<div class="user-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Editar Conta</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
         <div>
             <p>*Nome:</p>
-            <input type="text" placeholder="Insira seu nome" 
+            <input class="dialog-input" type="text" placeholder="Insira seu nome" 
             [(ngModel)]="userName">
         </div>
+
+
         <div>
             <p>*Email:</p>
-            <input type="text" placeholder="Insira seu email" 
+            <input class="dialog-input" type="text" placeholder="Insira seu email" 
             [(ngModel)]="userEmail">
         </div>
     </div>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Ao editar o email será necessário realizar o login</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
+        </div>
     </div>
 </div>
 
+
+
+
+<div class="mask-filter"></div>

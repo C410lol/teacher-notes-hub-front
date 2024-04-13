@@ -1,4 +1,4 @@
-import { StudentType } from "./StudentType";
+import { StudentType } from './StudentType';
 
 export type AttendanceType = {
     id?: number,

@@ -1,30 +1,16 @@
-.lesson-container {
-    width: 1000px;
-    height: 45px;
-    display: grid;
-    grid-template-columns: 12.5% auto 10% 10%;
-    cursor: pointer;
-    background-color: #bbbbbb;
+.lesson-list-element-container {
+    height: 155px;
 }
 
-.lesson-container:hover {
-    background-color: #bbbbbba9;
+.box-first-section-container {
+    margin-top: 15px;
 }
 
-.lesson-container div {
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    border: 1px solid #3F3F3F;
-    background-color: transparent;
+.box-bottom-left-container {
+    margin-top: 12.5px;
 }
 
-.SIM {
-    font-weight: bold;
-    color: #73a541;
-}
-
-.NÃO {
-    font-weight: bold;
-    color: #aa383a;
+.box-title-txt {
+    font-size: larger;
+    font-family: 'Roboto Condensed', sans-serif;
 }

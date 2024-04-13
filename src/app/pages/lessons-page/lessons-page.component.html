@@ -5,6 +5,7 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
+
 <app-lesson-dialog 
 *ngIf="isMode01"
 [notebookId]="notebookId"
@@ -13,44 +14,71 @@
 type="create" title="Criar Aula">
 </app-lesson-dialog>
 
+
+<app-sort-dialog
+*ngIf="isMode02" [orderByElementsList]="[
+{value: 'date', name: 'Data'},
+{value: 'title', name: 'Título'},
+{value: 'quantity', name: 'Quantidade'},
+{value: 'attendances', name: 'Chamada'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode02()"
+(confirmButtonClick)="receiveSortValues($event); switchMode02()">
+</app-sort-dialog>
+
+
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isMode01 }" class="lessons-page-container">
-    <h1 class="title-txt">Aulas</h1>
-    <h1 *ngIf="!isLessonsLoaded" class="loading-txt">Carregando...</h1>
-    <div *ngIf="isLessonsLoaded" class="content-container">
-        <button (click)="switchMode01()" class="create-btn">
-            <h1>Nova Aula</h1>
-        </button>
-        
-        <app-sorting [orderByElementsList]="[
-            {value: 'date', name: 'Data'},
-            {value: 'title', name: 'Título'},
-            {value: 'quantity', name: 'Quantidade'},
-            {value: 'attendances', name: 'Chamada'}
-        ]"
-        [totalPages]="totalPages"
-        (orderByOptionEvent)="orderByOnChange($event)"
-        (directionOptionEvent)="directionOnChange($event)"
-        (pageNumOptionEvent)="pageNumOnChange($event)">
 
-        </app-sorting>
 
-        <div class="lessons-container">
-            <div class="lessons-header">
-                <div><h1>Data</h1></div>
-                <div><h1>Conteúdo</h1></div>
-                <div><h1>Quantidade</h1></div>
-                <div><h1>Chamada Realizada?</h1></div>
+
+<div class="page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Aulas de {{notebookSubject}}</h1>
+            <div class="page-bottom-txt-container"><p class="page-bottom-txt">{{notebookClasse}}</p></div>
+        </div>
+
+
+        <div class="page-use-container">
+            <div (click)="switchMode02()" class="page-sort-container page-gray-hover">
+                <img class="page-sort-img page-gray-hover" src="../../../assets/document.png">
             </div>
-            <div *ngFor="let lesson of lessonsList" class="lessons-list">
-                <app-lesson-list-element
-                [id]="lesson.id"
-                [date]="formatDate(lesson.date)"
-                [title]="lesson.title"
-                [quantity]="lesson.quantity"
-                [attendance]="ifAttendanceExists(lesson.attendances)">
-                </app-lesson-list-element>
+            <button (click)="switchMode01()" class="page-create-btn page-gray-hover">
+                <p class="page-plus-txt">+</p>
+                <p class="page-new-txt">Nova Aula</p>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="lessonsState" class="notebooks-component-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando aulas...</h1>
+            </div>
+        </div>
+    
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-lesson-list-element *ngFor="let lesson of lessonsList"
+            [id]="lesson.id" [date]="formatDate(lesson.date)" [title]="lesson.title"
+            [details]="lesson.details" [bnccCodesLength]="lesson.bnccCodes?.length"
+            [quantity]="lesson.quantity" [attendance]="ifAttendanceExists(lesson.attendances)">    
+            </app-lesson-list-element>
+        </div>
+    
+    
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma aula encontrada</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão 'Nova Aula' e começe seus trabalhos ;)</p>
             </div>
         </div>
     </div>

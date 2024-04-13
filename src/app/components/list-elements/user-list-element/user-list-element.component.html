@@ -1,0 +1,26 @@
+<div class="user-list-element-container">
+    <div class="header-container">
+        <img src="../../../../assets/user (3).png">
+        <p class="truncate-txt">{{username}}</p>
+    </div>
+
+
+
+
+    <div class="user-info-container">
+        <p class="email-txt truncate-txt">{{email}}</p>
+
+
+        <div class="notebooks-length-container">
+            <p>Cadernetas:</p>
+            <p>{{notebooksLength}}</p>
+        </div>
+    </div>
+
+
+
+
+    <div class="footer-container">
+        <button (click)="navigateToTeacherNotebooks()" class="notebook-btn">Ver Cadernetas</button>
+    </div>
+</div>

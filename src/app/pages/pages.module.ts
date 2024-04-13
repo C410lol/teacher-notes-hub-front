@@ -18,47 +18,51 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { VerifyAccountPageComponent } from './verify-account-page/verify-account-page.component';
 import { ChangePasswordRequestPageComponent } from './change-password-request-page/change-password-request-page.component';
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
-import { TeachersPageComponent } from './teachers-page/teachers-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
 
 @NgModule({
-  declarations: [
-    PagesComponent,
-    HomePageComponent,
-    LessonsPageComponent,
-    WorksPageComponent,
-    SingleNotebookPageComponent,
-    SingleLessonPageComponent,
-    SingleWorkPageComponent,
-    UserPageComponent,
-    LoginPageComponent,
-    CreatePageComponent,
-    NotFoundPageComponent,
-    VerifyAccountPageComponent,
-    ChangePasswordRequestPageComponent,
-    ChangePasswordPageComponent,
-    TeachersPageComponent,
-  ],
-  exports: [
-    PagesComponent,
-    HomePageComponent,
-    LessonsPageComponent,
-    WorksPageComponent,
-    SingleNotebookPageComponent,
-    SingleLessonPageComponent,
-    SingleWorkPageComponent,
-    UserPageComponent,
-    VerifyAccountPageComponent,
-    ChangePasswordRequestPageComponent,
-    ChangePasswordPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    PagesRoutingModule,
-    FormsModule,
-    ComponentsModule,
-  ],
-  providers: [
-    DatePipe
-  ]
+    declarations: [
+        PagesComponent,
+        HomePageComponent,
+        LessonsPageComponent,
+        WorksPageComponent,
+        SingleNotebookPageComponent,
+        SingleLessonPageComponent,
+        SingleWorkPageComponent,
+        UserPageComponent,
+        LoginPageComponent,
+        CreatePageComponent,
+        NotFoundPageComponent,
+        VerifyAccountPageComponent,
+        ChangePasswordRequestPageComponent,
+        ChangePasswordPageComponent,
+        AdminPageComponent,
+        TeacherNotebooksPageComponent,
+    ],
+    exports: [
+        PagesComponent,
+        HomePageComponent,
+        LessonsPageComponent,
+        WorksPageComponent,
+        SingleNotebookPageComponent,
+        SingleLessonPageComponent,
+        SingleWorkPageComponent,
+        UserPageComponent,
+        VerifyAccountPageComponent,
+        ChangePasswordRequestPageComponent,
+        ChangePasswordPageComponent,
+        AdminPageComponent,
+        TeacherNotebooksPageComponent
+    ],
+    imports: [
+        CommonModule,
+        PagesRoutingModule,
+        FormsModule,
+        ComponentsModule
+    ],
+    providers: [
+        DatePipe
+    ]
 })
 export class PagesModule { }

@@ -6,89 +6,100 @@
 </app-status-dialog>
 
 <app-notebook-dialog 
-    *ngIf="isMode01" [teacherId]="teacherId" 
+    *ngIf="isMode01" [teacherId]="userId" 
     (cancelButtonClick)="switchMode01()"
     (confirmButtonClick)="refreshNotebooks(); switchMode01(); setCreateStatus(); switchStatusMode();" 
     type="create" title="Criar Caderneta">
 </app-notebook-dialog>
 
-<div [ngClass]="{ 'blur-filter': isMode01 }" class="home-container">
+<app-sort-dialog
+*ngIf="isMode02" [orderByElementsList]="[
+{value: 'classe', name: 'Classe'},
+{value: 'subject', name: 'Matéria'},
+{value: 'bimester', name: 'Bimestre'},
+{value: 'status', name: 'Status'},
+{value: 'createDate', name: 'Data'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode02()"
+(confirmButtonClick)="receiveSortValues($event); switchMode02()">
+</app-sort-dialog>
 
-    <h1 class="title-txt">Cadernetas</h1>
+
+
+
+<div class="home-container">
     <div [ngSwitch]="currentState">
-
-        <h1 *ngSwitchCase="'loading'" class="loading-txt">Carregando...</h1>
-
-        <div *ngSwitchCase="'loaded'" class="content-container">
-            <button (click)="switchMode01()" class="create-btn">
-                <h1>Nova Caderneta</h1>
-            </button>
-
-            <app-sorting [orderByElementsList]="[
-            {value: 'classe', name: 'Classe'},
-            {value: 'subject', name: 'Matéria'},
-            {value: 'bimester', name: 'Bimestre'},
-            {value: 'status', name: 'Status'},
-            {value: 'createDate', name: 'Data'}
-            ]" [totalPages]="totalPages" (orderByOptionEvent)="orderByOnChange($event)"
-            (directionOptionEvent)="directionOnChange($event)" (pageNumOptionEvent)="pageNumOnChange($event)">
-            </app-sorting>
-
-            <div class="notebooks-container">
-                <div class="notebooks-header">
-                    <div>
-                        <h1>Turma</h1>
-                    </div>
-                    <div>
-                        <h1>Disciplina</h1>
-                    </div>
-                    <div>
-                        <h1>Bimestre</h1>
-                    </div>
-                    <div>
-                        <h1>Aulas</h1>
-                    </div>
-                    <div>
-                        <h1>Trabalhos</h1>
-                    </div>
-                    <div>
-                        <h1>Status</h1>
-                    </div>
-                    <div>
-                        <h1>Criada Em</h1>
-                    </div>
-                </div>
-                <div *ngFor="let notebook of notebookList">
-                    <app-notebook-list-element [id]="notebook.id" 
-                    [classe]="notebook.classe.replaceAll('_', ' ')"
-                    [subject]="notebook.subject.replaceAll('_', ' ')" 
-                    [bimester]="notebook.bimester" [lessons]="notebook.lessons"
-                    [works]="notebook.works" [status]="notebook.status" 
-                    [date]="formatDate(notebook.createDate)">
-                    </app-notebook-list-element>
-                </div>
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando recursos...</h1>
             </div>
         </div>
 
-        <div *ngSwitchCase="'unlogged'" class="generic-error-container">
-            <h1>Parece que você não está logado!</h1>
-            <p>Para acessar o conteúdo é necessário realizar o login!</p>
-            <p>Clique aqui:</p>
-            <button [routerLink]="['/login']">Login</button>
+
+
+
+        <div *ngSwitchCase="'loaded'">
+            <div class="title-container">
+                <div class="user-info-container">
+                    <h1 class="user-txt">Olá, {{username}}!</h1>
+                    <div class="role-container"><p class="role-txt">{{userRole}}</p></div>
+                </div>
+        
+        
+                <div *ngIf="notebooksState != 'unverified'" class="notebook-use-container">
+                    <div (click)="switchMode02()" class="notebook-sort-container gray-hover">
+                        <img class="sort-img gray-hover" src="../../../assets/document.png">
+                    </div>
+                    <button (click)="switchMode01()" class="notebook-create-btn gray-hover">
+                        <p class="plus-txt">+</p>
+                        <p class="new-notebook-txt">Nova Caderneta</p>
+                    </button>
+                </div>
+            </div>
+        
+            <app-notebooks
+            [userId]="userId" [notebooksState]="notebooksState"
+            [notebooksList]="notebookList" [selectedBimester]="bimesterFilter"
+            (filterByBimesterEvent)="changeBimesterFilter($event)">
+            </app-notebooks>
+        </div>
+    
+    
+    
+    
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
+                <button (click)="refreshPage()" class="error-btn">Recarregar</button>
+            </div>
+        </div>
+    
+
+        <div *ngSwitchCase="'unlogged'" class="error-container">
+            <div>
+                <img src="../../../assets/log_6076227.png">
+                <h1 class="error-title">Parece que você não está logado!</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão abaixo para realizar login ou criar uma conta</p>
+                <button [routerLink]="['/login']" class="error-btn">Login/Criar</button>
+            </div>
         </div>
 
-        <div *ngSwitchCase="'unverified'" class="generic-error-container"> 
-            <h1>Parece que sua conta não está verificada :(</h1>
-            <p>Para acessar o conteúdo, você precisa verificar sua conta!</p>
-            <p>Não recebeu nenhum email? Clique aqui para reenviar:</p>
-            <button (click)="resendVerificationEmail()">Reenviar Email</button>
+        <div *ngSwitchCase="'offline'" class="error-container">
+            <div>
+                <img src="../../../assets/wifi.png">
+                <h1 class="error-title">Parece que você não está conectado à internet!</h1>
+            </div>
+            <div>
+                <p class="error-txt">Verifique sua conexão ou acesse os recursos offline na aba "Recursos Offline"</p>
+            </div>
         </div>
-
-        <div *ngSwitchCase="'error'" class="generic-error-container">
-            <h1>Ops, Algo Deu Errado...</h1>
-            <p>Algo não parece estar funcionando bem... Tente acessar mais tarde.</p>
-            <button (click)="refreshPage()">Refresh</button>
-        </div>
-
     </div>
 </div>

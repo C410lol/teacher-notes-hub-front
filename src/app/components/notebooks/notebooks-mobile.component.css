@@ -1,0 +1,33 @@
+@media screen and (width <= 1014px) {
+    
+    .mobile-component {
+        width: 754px;
+    }
+
+    .notebooks-container {
+        gap: 0;
+        row-gap: 20px;
+        grid-template-columns: 377px 377px;
+    }
+
+}
+
+@media screen and (width <= 768px) {
+
+    .mobile-component {
+        width: 350px;
+    }
+
+    .notebooks-container {
+        width: 350px;
+        gap: 20px;
+        grid-template-columns: auto;
+    }
+
+    .bimester-filter-container, .filter-container {
+        height: 55px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+}

@@ -1,4 +1,4 @@
-import { BNCCCodeType } from "./BNCCCodeType"
+import { BNCCCodeType } from './BNCCCodeType';
 
 export type LessonType = {
 

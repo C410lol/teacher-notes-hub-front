@@ -1,4 +1,77 @@
 <div class="header-container">
-    <h1 [routerLink]="['/cadernetas']" class="home-txt">Home</h1>
-    <h1 (click)="usernameOnClick()" class="username-txt">{{username}}</h1>
+
+
+    <div class="gray-hover">
+        <img [routerLink]="['/cadernetas']" src="../../../assets/sticky-notes_10819693 (5).png">
+    </div>
+
+
+    <div class="menu-txts-container">
+        <div 
+        [routerLink]="['/cadernetas']"
+        [ngClass]="menuTab == 'cadernetas' || menuTab == '' ? 'menu-container-selected' : ''"
+        class="gray-hover" 
+        >
+            <h1 class="menu-txt menu-txt-selected">Página Inicial</h1>
+        </div>
+        <div 
+        *ngIf="role == 'ROLE_ADM'"
+        [routerLink]="['/admin']"
+        [ngClass]="menuTab == 'admin' ? 'menu-container-selected' : ''"
+        class="gray-hover"
+        >
+            <h1 class="menu-txt">Admin</h1>
+        </div>
+    </div>
+
+
+    <div
+    (click)="switchIsUserTabFocus(); usernameOnClick()"
+    [ngClass]="menuTab == 'user' || menuTab == 'login' || menuTab == 'criar' ? 'menu-container-selected' : ''"
+    class="whole-user-info-container gray-hover" 
+    >
+        <div class="user-info-container">
+            <div>
+                <img src="../../../assets/user.png">
+            </div>
+            <div class="username-and-email-container">
+                <p>{{username}}</p>
+                <p *ngIf="type == 'logged'">{{email}}</p>
+            </div>
+            <div>
+                <img *ngIf="type == 'logged'" src="../../../assets/down-chevron (1).png">
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="isUserTabFocus && type == 'logged'" class="user-dropdown-container">
+        <div 
+        (click)="switchIsUserTabFocus()"
+        [routerLink]="['/user']" 
+        class="gray-hover"
+        >
+            <img src="../../../assets/user (1).png">
+            <p>Conta</p>
+        </div>
+        <hr>
+        <div 
+        (click)="switchIsUserTabFocus()"
+        [routerLink]="['/user']" 
+        class="gray-hover"
+        >
+            <img src="../../../assets/key_951705.png">
+            <p>Senha</p>
+        </div>
+        <hr>
+        <div 
+        (click)="switchIsUserTabFocus(); logoutUser()"
+        class="gray-hover"
+        >
+            <img src="../../../assets/arrow_9053110.png">
+            <p>Sair</p>
+        </div>
+    </div>
+
+    
 </div>

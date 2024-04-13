@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { OrderByElementType } from 'src/app/types/Others/OrderByElementType';
 
 @Component({
-  selector: 'app-sorting',
-  templateUrl: './sorting.component.html',
-  styleUrls: [
-    './sorting.component.css',
-    './sorting.mobile.component.css'
-  ]
+    selector: 'app-sorting',
+    templateUrl: './sorting.component.html',
+    styleUrls: [
+        './sorting.component.css',
+        './sorting.mobile.component.css'
+    ]
 })
 export class SortingComponent implements OnInit, OnChanges {
 
@@ -27,30 +27,30 @@ export class SortingComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    this.createPageNumbersOptions();
-    this.orderBy = this.orderByElementsList[0].value;
+      this.createPageNumbersOptions();
+      this.orderBy = this.orderByElementsList[0].value;
   }
 
   ngOnChanges(): void {
-    this.createPageNumbersOptions();
+      this.createPageNumbersOptions();
   }
 
   orderByOnChange(): void {
-    this.orderByOptionEvent.emit(this.orderBy);
+      this.orderByOptionEvent.emit(this.orderBy);
   }
 
   directionOnChange(): void {
-    this.directionOptionEvent.emit(this.direction);
+      this.directionOptionEvent.emit(this.direction);
   }
 
   pageNumOnChange(): void {
-    this.pageNumOptionEvent.emit(this.pageNum);
+      this.pageNumOptionEvent.emit(this.pageNum);
   }
 
   createPageNumbersOptions(): void {
-    for(let index: number = 1; index <= this.totalPages; index++) {
-      this.pageNumbersList.add(index);
-    }
+      for(let index: number = 1; index <= this.totalPages; index++) {
+          this.pageNumbersList.add(index);
+      }
   }
 
 }

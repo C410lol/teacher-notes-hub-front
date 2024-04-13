@@ -6,9 +6,12 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
-  selector: 'app-work-dialog',
-  templateUrl: './work-dialog.component.html',
-  styleUrls: ['./work-dialog.component.css']
+    selector: 'app-work-dialog',
+    templateUrl: './work-dialog.component.html',
+    styleUrls: [
+        './work-dialog.component.css',
+        '../dialog-shared-elements/css-shared-elements.css'
+    ]
 })
 export class WorkDialogComponent extends DialogParent {
 
@@ -30,59 +33,59 @@ export class WorkDialogComponent extends DialogParent {
   constructor(
     private workService: WorkService
   ) { 
-    super();
+      super();
   }
 
   cancelOnClick(): void {
-    this.cancelButtonClick.emit();
+      this.cancelButtonClick.emit();
   }
 
   confirmOnClick(): void {
-    if (!Validations.isNotBlank([this.workTitle, this.details])) { 
-      this.setStatusContent('Algum campo está vazio!');
-      this.switchStatusMode();
-      return; 
-    }
-    if(this.type === 'create') { this.createWork(); }
-    else if(this.type === 'edit') { this.editWork(); }
+      if (!Validations.isNotBlank([this.workTitle, this.details])) { 
+          this.setStatusContent('Algum campo está vazio!');
+          this.switchStatusMode();
+          return; 
+      }
+      if(this.type === 'create') { this.createWork(); }
+      else if(this.type === 'edit') { this.editWork(); }
   }
 
   createWork(): void {
-    this.workService.createWork(this.notebookId, this.createWorkObject()).subscribe({
-      next: () => this.confirmButtonClick.emit(),
-      error: () => {
-        this.setStatusContent(environment.fieldErrorMessage);
-        this.switchStatusMode();
-      }
-    });
+      this.workService.createWork(this.notebookId, this.createWorkObject()).subscribe({
+          next: () => this.confirmButtonClick.emit(),
+          error: () => {
+              this.setStatusContent(environment.fieldErrorMessage);
+              this.switchStatusMode();
+          }
+      });
   }
 
   editWork(): void {
-    this.workService.editWork(this.workId, this.createWorkObject()).subscribe({
-      next: () => this.confirmButtonClick.emit(),
-      error: () => {
-        this.setStatusContent(environment.fieldErrorMessage);
-        this.switchStatusMode();
-      }
-    });
+      this.workService.editWork(this.workId, this.createWorkObject()).subscribe({
+          next: () => this.confirmButtonClick.emit(),
+          error: () => {
+              this.setStatusContent(environment.fieldErrorMessage);
+              this.switchStatusMode();
+          }
+      });
   }
 
   createWorkObject(): WorkType {
-    return {
-      title: this.workTitle.trim(),
-      details: this.details.trim(),
-      observations: this.observations.trim(),
-      type: this.workType,
-      deliveryDate: this.date
-    }
+      return {
+          title: this.workTitle.trim(),
+          details: this.details.trim(),
+          observations: this.observations.trim(),
+          type: this.workType,
+          deliveryDate: this.date
+      };
   }
 
   isEditMode(): boolean {
-    return this.type == 'edit';
+      return this.type == 'edit';
   }
 
   setStatusContent(content: string): void {
-    this.setStatus('Erro Ao Salvar Ferramenta!', content);
+      this.setStatus('Erro Ao Salvar Ferramenta!', content);
   }
 
 }

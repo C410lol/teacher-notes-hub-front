@@ -6,28 +6,28 @@ import { Observable } from 'rxjs';
 import { BNCCCodeType } from '../types/BNCCCodeType';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class BnccService {
 
-  private getHeaders: HttpHeaders = new HttpHeaders();
-  private bnccUrl: string = '';
+    private getHeaders: HttpHeaders = new HttpHeaders();
+    private bnccUrl: string = '';
 
-  constructor(
+    constructor(
     private httpClient: HttpClient,
     eventService: EventService
     ) {
-    eventService.refreshServices.subscribe({
-      next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
-    });
-    this.getHeaders = environment.getHeaders(localStorage.getItem("token"));
-    this.bnccUrl = environment.bnccUrl;
-  }
+        eventService.refreshServices.subscribe({
+            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+        });
+        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.bnccUrl = environment.bnccUrl;
+    }
 
-  getBnccCodes(notebookId: string, pattern?: string): Observable<BNCCCodeType[]> {
-    return this.httpClient.get<BNCCCodeType[]>(
-      `${this.bnccUrl}/all-by-filters?notebookId=${notebookId}&pattern=${pattern}`, 
-      { headers: this.getHeaders });
-  }
+    getBnccCodes(notebookId: string, pattern?: string): Observable<BNCCCodeType[]> {
+        return this.httpClient.get<BNCCCodeType[]>(
+            `${this.bnccUrl}/all-by-filters?notebookId=${notebookId}&pattern=${pattern}`, 
+            { headers: this.getHeaders });
+    }
 
 }

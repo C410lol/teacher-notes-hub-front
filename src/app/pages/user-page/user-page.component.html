@@ -37,22 +37,33 @@ content="Deseja realmente trocar sua senha? Um email será enviado até você pa
 >
 </app-delete-dialog>
 
-<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 || isMode04 }" class="user-container">
-    <h1>Sobre Mim</h1>
-    <div class="info-container">
-        <div class="single-info-container">
-            <h1>Nome:</h1>
-            <input value="{{userName}}">
+
+
+
+<div class="user-container">
+    <h1 class="page-title-txt">Sobre Mim</h1>
+
+
+
+
+    <div class="page-content-container">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Nome:</h1>
+            <input class="page-input" value="{{userName}}">
         </div>
-        <div class="single-info-container">
-            <h1>Email:</h1>
-            <input value="{{userEmail}}">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Email:</h1>
+            <input class="page-input" value="{{userEmail}}">
         </div>
     </div>
-    <div class="btns-container">
-        <button (click)="switchMode01()" class="red-btn">Excluir Conta</button>
-        <button (click)="switchMode02()" class="yellow-btn">Sair</button>
-        <button (click)="switchMode03()" class="blue-btn">Editar Conta</button>
-        <button (click)="switchMode04()" class="blue-btn">Mudar Senha</button>
+
+
+
+
+    <div class="page-btns-container">
+        <button (click)="switchMode01()" class="page-btn red-btn">Excluir Conta</button>
+        <button (click)="switchMode02()" class="page-btn yellow-btn">Sair</button>
+        <button (click)="switchMode03()" class="page-btn blue-btn">Editar Conta</button>
+        <button (click)="switchMode04()" class="page-btn blue-btn">Mudar Senha</button>
     </div>
 </div>

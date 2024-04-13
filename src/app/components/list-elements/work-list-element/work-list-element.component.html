@@ -1,6 +1,23 @@
-<div (click)="navigateToSingleWork()" class="work-container">
-    <div><p>{{date}}</p></div>
-    <div><p>{{title}}</p></div>
-    <div><p>{{type}}</p></div>
-    <div><p>{{grades}}/{{students}}</p></div>
+<div (click)="navigateToSingleWork()" class="work-list-element-container box-list-element-container">
+    <h1 class="box-title-txt">{{title}}</h1>
+
+
+    <div class="box-first-section-container">
+        <p>{{details}}</p>
+        <p>{{grades}} nota(s)/{{students}} aluno(s)</p>
+    </div>
+
+
+    <div class="box-second-section-container">
+        <div>
+            <p>Categoria:</p>
+            <p>{{type}}</p>
+        </div>
+
+
+        <div>
+            <p>Data:</p>
+            <p>{{date}}</p>
+        </div>
+    </div>
 </div>

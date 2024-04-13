@@ -30,37 +30,50 @@ type="edit" title="Editar Caderneta">
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-notebook-container">
-    <h1 class="title-txt">Informações</h1>
-    <div class="info-container">
-        <div class="single-info-container">
-            <h1>Turma:</h1>
-            <input [value]="classe.replaceAll('_', ' ')">
+<div class="single-notebook-container">
+    <h1 class="page-title-txt">Informações</h1>
+
+
+
+
+    <div class="page-content-container">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Turma:</h1>
+            <input class="page-input" [value]="classe.replaceAll('_', ' ')">
         </div>
-        <div class="single-info-container">
-            <h1>Disciplina:</h1>
-            <input [value]="subject.replaceAll('_', ' ')">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Disciplina:</h1>
+            <input class="page-input" [value]="subject.replaceAll('_', ' ')">
         </div>
-        <div class="single-info-container">
-            <h1>Bimestre:</h1>
-            <input [value]="bimester">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Bimestre:</h1>
+            <input class="page-input" [value]="bimester">
         </div>
-        <div class="single-info-container">
-            <h1>Status:</h1>
-            <input [value]="status">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Status:</h1>
+            <input class="page-input" [value]="status">
         </div>
-        <div class="single-info-container">
-            <h1>Criada Em:</h1>
-            <input [value]="formatDate(date)">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Criada Em:</h1>
+            <input class="page-input" [value]="formatDate(date)">
         </div>
     </div>
-    <div class="txts-container">
-        <h1 (click)="navigateToLessons()">Ver Aulas</h1>
-        <h1 (click)="navigateToWorks()">Ver Ferramentas de Avaliação</h1>
+
+
+
+
+    <div class="interactive-txts-container">
+        <h1 (click)="navigateToLessons()" class="interactive-txt">Ver Aulas</h1>
+        <h1 (click)="navigateToWorks()" class="interactive-txt">Ver Ferramentas de Avaliação</h1>
     </div>
-    <div class="btns-container">
-        <button (click)="switchMode01()" class="red-btn">Excluir</button>
-        <button (click)="switchMode02()" class="yellow-btn">Finalizar</button>
-        <button (click)="switchMode03()" class="blue-btn">Editar</button>
+
+
+
+
+
+    <div class="page-btns-container">
+        <button (click)="switchMode01()" class="page-btn red-btn">Excluir</button>
+        <button (click)="switchMode02()" class="page-btn yellow-btn">Finalizar</button>
+        <button (click)="switchMode03()" class="page-btn blue-btn">Editar</button>
     </div>
 </div>

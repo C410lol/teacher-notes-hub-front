@@ -1,0 +1,30 @@
+.user-dropdown-container {
+    height: 150px !important;
+    top: 70px;
+    right: 15px;
+    padding: 10px 10px;
+    position: absolute;
+    z-index: 1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    background-color: #E0E0E0 !important;
+    border: 1px solid #bebebe;
+}
+
+.user-dropdown-container div {
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.user-dropdown-container hr {
+    width: 180px;
+    height: 1px;
+    border: 0;
+    background-color: #bebebe !important;
+}

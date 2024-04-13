@@ -4,7 +4,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './header/header.component';
-import { NotebookListElementComponent } from '../components/list-elements/notebook-list-element/notebook-list-element.component';
 import { LessonListElementComponent } from '../components/list-elements/lesson-list-element/lesson-list-element.component';
 import { WorkListElementComponent } from '../components/list-elements/work-list-element/work-list-element.component';
 import { NotebookDialogComponent } from './dialog-elements/notebook-dialog/create-edit-dialog/notebook-dialog.component';
@@ -20,49 +19,59 @@ import { FinalizeDialogComponent } from './dialog-elements/notebook-dialog/final
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
 import { SortingComponent } from './sorting/sorting.component';
 import { StatusDialogComponent } from './dialog-elements/status-dialog/status-dialog.component';
+import { NotebookListElement2Component } from './list-elements/notebook-list-element2/notebook-list-element2.component';
+import { SortDialogComponent } from './dialog-elements/sort-dialog/sort-dialog.component';
+import { UserListElementComponent } from './list-elements/user-list-element/user-list-element.component';
+import { NotebooksComponent } from './notebooks/notebooks.component';
 
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    NotebookListElementComponent,
-    LessonListElementComponent,
-    WorkListElementComponent,
-    NotebookDialogComponent,
-    LessonDialogComponent,
-    WorkDialogComponent,
-    DeleteDialogComponent,
-    UserDialogComponent,
-    AttendancesDialogComponent,
-    GradesDialogComponent,
-    AttendanceDialogListElementComponent,
-    GradesDialogListElementComponent,
-    FinalizeDialogComponent,
-    BackArrowComponent,
-    SortingComponent,
-    StatusDialogComponent,
-  ],
-  exports: [
-    HeaderComponent,
-    NotebookListElementComponent,
-    LessonListElementComponent,
-    WorkListElementComponent,
-    NotebookDialogComponent,
-    LessonDialogComponent,
-    WorkDialogComponent,
-    DeleteDialogComponent,
-    UserDialogComponent,
-    AttendancesDialogComponent,
-    GradesDialogComponent,
-    FinalizeDialogComponent,
-    BackArrowComponent,
-    SortingComponent,
-    StatusDialogComponent,
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    FormsModule,
-  ]
+    declarations: [
+        HeaderComponent,
+        LessonListElementComponent,
+        WorkListElementComponent,
+        NotebookDialogComponent,
+        LessonDialogComponent,
+        WorkDialogComponent,
+        DeleteDialogComponent,
+        UserDialogComponent,
+        AttendancesDialogComponent,
+        GradesDialogComponent,
+        AttendanceDialogListElementComponent,
+        GradesDialogListElementComponent,
+        FinalizeDialogComponent,
+        BackArrowComponent,
+        SortingComponent,
+        StatusDialogComponent,
+        NotebookListElement2Component,
+        SortDialogComponent,
+        UserListElementComponent,
+        NotebooksComponent,
+    ],
+    exports: [
+        HeaderComponent,
+        LessonListElementComponent,
+        WorkListElementComponent,
+        NotebookDialogComponent,
+        LessonDialogComponent,
+        WorkDialogComponent,
+        DeleteDialogComponent,
+        UserDialogComponent,
+        AttendancesDialogComponent,
+        GradesDialogComponent,
+        FinalizeDialogComponent,
+        BackArrowComponent,
+        SortingComponent,
+        StatusDialogComponent,
+        NotebookListElement2Component,
+        SortDialogComponent,
+        UserListElementComponent,
+        NotebooksComponent
+    ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FormsModule,
+    ]
 })
 export class ComponentsModule { }

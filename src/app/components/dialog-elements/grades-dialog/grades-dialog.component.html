@@ -5,16 +5,46 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="grades-dialog-container">
-    <p class="title-txt">Criar/Editar Nota</p>
-    <div class="creation-container">
-        <div class="creation-form-container">
-            <select [(ngModel)]="studentSelect">
+<div class="grades-dialog-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Salvar Notas</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="studentsStatus" class="creation-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1 class="error-title">Carregando recursos...</h1>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, verifique a conexão e tente novamente mais tarde</p>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'loaded'" class="creation-form-container">
+            <select [(ngModel)]="studentSelect" class="dialog-select">
                 <option *ngFor="let student of studentsList" [value]="student.id" [ngClass]="isStudentInGradesList(student)">
                     {{student.name}}
                 </option>
             </select>
-            <select [(ngModel)]="gradeSelect">
+
+
+            <select [(ngModel)]="gradeSelect" class="dialog-select">
                 <option>0.0</option>
                 <option>0.5</option>
                 <option>1.0</option>
@@ -38,16 +68,55 @@
                 <option>10.0</option>
             </select>
         </div>
-        <div class="creation-btns-container">
+
+
+        <div *ngIf="studentsStatus == 'loaded'" class="creation-btns-container">
             <button (click)="confirmOnClick()" class="green-btn">Criar/Editar</button>
         </div>
     </div>
-    <div *ngIf="!isGradesEmpty()" class="content-container">
-        <div class="grade-header">
+
+
+    <hr *ngIf="studentsStatus == 'loaded'" class="dialog-division-line">
+
+
+    <div [ngSwitch]="gradesStatus" class="dialog-content-container">
+        <div *ngSwitchCase="'loaded'" class="grade-header">
             <div><p>Aluno</p></div>
             <div><p>Nota</p></div>
         </div>
-        <div class="student-grades-list">  
+
+
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1 class="error-title">Carregando notas...</h1>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, verifique a conexão e tente novamente mais tarde</p>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma nota encontrada</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão 'Criar/Editar' para salvar uma nota ;)</p>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'loaded'" class="student-grades-list">  
             <app-grades-dialog-list-element
             *ngFor="let grade of gradesList"
             [studentName]="grade.student.name"
@@ -55,7 +124,9 @@
             </app-grades-dialog-list-element>
         </div>
     </div>
-    <div class="btns-container">
-        <button (click)="cancelOnClick()" class="red-btn">Voltar</button>
-    </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

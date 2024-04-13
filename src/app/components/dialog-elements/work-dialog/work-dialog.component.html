@@ -5,27 +5,42 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="work-container">
-    <p class="title-txt">{{title}}</p>
-    <div class="form">
+<div class="work-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">{{title}}</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
         <div>
             <p>*Conteúdo:</p>
-            <input type="text" placeholder="Insira o conteúdo (obrigatório)"
+            <input class="dialog-input" type="text" placeholder="Insira o conteúdo (obrigatório)"
             [(ngModel)]="workTitle">
         </div>
+
+
         <div>
             <p>*Desenvolvimento:</p>
-            <input type="text" placeholder="Insira o desenvolvimento (obrigatório)" 
+            <input class="dialog-input" type="text" placeholder="Insira o desenvolvimento (obrigatório)" 
             [(ngModel)]="details">
         </div>
+
+
         <div *ngIf="isEditMode()">
             <p>Observações:</p>
-            <input type="text" placeholder="Insira as observações" 
+            <input class="dialog-input" type="text" placeholder="Insira as observações" 
             [(ngModel)]="observations">
         </div>
+
+
         <div>
             <p>*Categoria:</p>
-            <select [(ngModel)]="workType">
+            <select class="dialog-select" [(ngModel)]="workType">
                 <option>TRABALHO</option>
                 <option>TAREFA</option>
                 <option>AVALIAÇÃO</option>
@@ -35,14 +50,33 @@
                 <option>OUTROS</option>
             </select>
         </div>
+
+
         <div>
             <p>Data de Entrega:</p>
-            <input id="date-input" type="date" 
+            <input class="dialog-input" id="date-input" type="date" 
             [(ngModel)]="date">
         </div>
     </div>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Campos marcados com * são obrigatórios</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
+        </div>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>
