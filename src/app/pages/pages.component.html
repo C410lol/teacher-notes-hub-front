@@ -1,4 +1,22 @@
 <div>
-    <app-header [username]="userName" [type]="type"></app-header>
-    <router-outlet></router-outlet>
+    <app-header 
+    [username]="userName" 
+    [email]="email"
+    [role]="role"
+    [type]="type">
+    </app-header>
+
+
+    <router-outlet *ngIf="!isOffline"></router-outlet>
+
+
+    <div *ngIf="isOffline" class="error-container white-backgroud">
+        <div>
+            <img src="../../../assets/wifi.png">
+            <h1 class="error-title">Parece que você não está conectado à internet!</h1>
+        </div>
+        <div>
+            <p class="error-txt">Verifique sua conexão ou acesse os recursos offline na aba "Recursos Offline"</p>
+        </div>
+    </div>
 </div>

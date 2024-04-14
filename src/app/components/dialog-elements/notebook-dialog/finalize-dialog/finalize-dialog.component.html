@@ -5,78 +5,112 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="finalize-notebook-dialog-container">
-    <p class="title-txt">Finalizar Caderneta</p>
-    <p class="content-txt">Deseja realmente finalizar essa caderneta? A confirmação iniciará um download
-        da tabela exel relacionada a ela.</p>
-    <div class="grades-weight-container">
-        <h1>Selecione O Peso Das Notas</h1>
-        <p>*Note que a soma dos pesos deve ser igual a 10!</p>
-        <div (change)="changeWeightSum()" class="grades-weight-selects">
-            <div>
-                <p>Trabalhos:</p>
-                <select [(ngModel)]="trabalhoSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
+<div class="dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Finalizar Caderneta</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
+        <div *ngIf="!isSecondModeEnable">
+            <p class="subtitle">Selecione as categorias que deseja incluir na média:</p>
+
+
+            <div class="grid-container">
+                <div class="category-container">
+                    <input type="checkbox" value="Trabalho" #categoryCheckBox>
+                    <p>Trabalhos</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Tarefa" #categoryCheckBox>
+                    <p>Tarefas</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Avaliação" #categoryCheckBox>
+                    <p>Avaliações</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Engajamento" #categoryCheckBox>
+                    <p>Engajamento</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Simulado" #categoryCheckBox>
+                    <p>Simulado</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Trilha" #categoryCheckBox>
+                    <p>Trilhas</p>
+                </div>
+
+                <div class="category-container">
+                    <input type="checkbox" value="Outros" #categoryCheckBox>
+                    <p>Outros</p>
+                </div>
             </div>
-            <div>
-                <p>Tarefas:</p>
-                <select [(ngModel)]="tarefaSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
+
+            <div class="dialog-footer-container">
+                <p></p>
+                <button (click)="onClickFirstSection()" class="dialog-btn smaller-btn">Próximo</button>
             </div>
-            <div>
-                <p>Avaliações:</p>
-                <select [(ngModel)]="avaliacaoSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
+        </div>
+
+
+
+
+        <div *ngIf="isSecondModeEnable" class="second-mode-container">
+            <div class="grades-weight-container">
+                <p class="subtitle">Selecione o peso das notas</p>
+                <p style="font-size: small;">*Note que a soma dos pesos deve ser igual a 10!</p>
+    
+    
+                <div  class="grid-container">
+                    <div *ngFor="let category of checkedCategories" class="weights-container">
+                        <p>{{category}}:</p>
+                        <select class="dialog-select" #weightsSelect>
+                            <option *ngFor="let weight of numbersArray" [value]="category + ' ' + weight">
+                                {{weight}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p>Engajamento:</p>
-                <select [(ngModel)]="engajamentoSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
-            </div>
-            <div>
-                <p>Simulado:</p>
-                <select [(ngModel)]="simuladoSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
-            </div>
-            <div>
-                <p>Trilhas:</p>
-                <select [(ngModel)]="trilhasSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
-            </div>
-            <div>
-                <p>Outros:</p>
-                <select [(ngModel)]="outrosSelect">
-                    <option *ngFor="let number of numbersArray">
-                        {{number}}
-                    </option>
-                </select>
+
+
+            <div class="dialog-footer-container">
+                <p></p>
+                <button (click)="onClickBackBtn()" class="dialog-btn smaller-btn">Voltar</button>
             </div>
         </div>
     </div>
-    <div class="weight-sum-container">
-        <h1>Soma Atual --></h1>
-        <p [ngClass]="weigthSumStyle">{{weightSum}}</p>
-    </div>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+
+
+    <hr *ngIf="isSecondModeEnable" class="dialog-division-line">
+
+
+    <div *ngIf="isSecondModeEnable" class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>A caderneta ainda ficará disponível após finalizada</p>
+        </div>
+
+
+        <div>
+            <button (click)="onClickSecondSection()" class="dialog-btn">Salvar</button>
+        </div>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

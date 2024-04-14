@@ -1,0 +1,27 @@
+<div (click)="navigateToSingleNotebook()" class="notebook-list-element2-container box-list-element-container">
+    <h1 class="box-title-txt">{{classe}}</h1>
+
+
+    <div class="box-first-section-container">
+        <p>{{subject}}</p>
+        <p>{{bimester}} Bimestre</p>
+    </div>
+
+
+    <div class="box-second-section-container">
+        <div>
+            <p>Aulas:</p>
+            <p>{{lessons}}</p>
+        </div>
+
+
+        <div>
+            <p>Ferramentas:</p>
+            <p>{{works}}</p>
+        </div>
+    </div>
+
+    <div class="box-bottom-left-container" [ngClass]="status == 'ON' ? 'status-green-container' : 'status-red-container'">
+        <p>{{status}}</p>
+    </div>
+</div>

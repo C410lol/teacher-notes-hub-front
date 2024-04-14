@@ -14,8 +14,8 @@
 *ngIf="isMode02" 
 [id]="workId"
 (cancelButtonClick)="switchMode02()" (confirmButtonClick)="goBack()"
-type="work" title="Deletar Trabalho/Tarefa"
-content="Deseja realmente deletar esse trabalho/tarefa? Todas as anotações e notas serão excluídas!">
+type="work" title="Deletar Ferramenta de Avaliação"
+content="Deseja realmente deletar essa ferramenta de avaliação? Todas as anotações e notas serão excluídas!">
 </app-delete-dialog>
 
 <app-work-dialog 
@@ -30,39 +30,51 @@ type="edit" title="Editar Ferramenta de Avaliação">
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-work-container">
-    <h1 class="title-txt">Informações</h1>
-    <div class="info-container">
-        <div class="single-info-container">
-            <h1>Título:</h1>
-            <input [value]="title">
+<div class="single-work-container">
+    <h1 class="page-title-txt">Informações</h1>
+
+
+
+
+    <div class="page-content-container">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Título:</h1>
+            <input class="page-input" [value]="title">
         </div>
-        <div class="single-info-container">
-            <h1>Detalhes:</h1>
-            <div class="single-info-container-txt-box">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Detalhes:</h1>
+            <div class="page-big-txt-container">
                 <p>{{details}}</p>
             </div>
         </div>
-        <div class="single-info-container">
-            <h1>Observações:</h1>
-            <div class="single-info-container-txt-box">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Observações:</h1>
+            <div class="page-big-txt-container">
                 <p>{{observations}}</p>
             </div>
         </div>
-        <div class="single-info-container">
-            <h1>Tipo:</h1>
-            <input [value]="workType">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Tipo:</h1>
+            <input class="page-input" [value]="workType">
         </div>
-        <div class="single-info-container">
-            <h1>Data De Entrega:</h1>
-            <input [value]="formatDate(deliveryDate)">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Data De Entrega:</h1>
+            <input class="page-input" [value]="formatDate(deliveryDate)">
         </div>
     </div>
-    <div class="txts-container">
-        <h1 (click)="switchMode01()">Criar/Editar Notas</h1>
+
+
+
+
+    <div class="interactive-txts-container">
+        <h1 (click)="switchMode01()" class="interactive-txt">Notas</h1>
     </div>
-    <div class="btns-container">
-        <button (click)="switchMode02()" class="red-btn">Excluir</button>
-        <button (click)="switchMode03()" class="blue-btn">Editar</button>
+
+
+
+
+    <div class="page-btns-container">
+        <button (click)="switchMode02()" class="page-btn red-btn">Excluir</button>
+        <button (click)="switchMode03()" class="page-btn blue-btn">Editar</button>
     </div>
 </div>

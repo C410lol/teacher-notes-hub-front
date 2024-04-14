@@ -1,0 +1,72 @@
+<div class="admin-page-container">
+    <div [ngSwitch]="currentState">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando recursos...</h1>
+            </div>
+        </div>
+
+
+
+
+        <div *ngSwitchCase="'loaded'">
+            <div class="title-container">
+                <div class="user-info-container">
+                    <h1 class="user-txt">Página do Admin</h1>
+                </div>
+            </div>
+        
+            <div [ngSwitch]="teachersStatus">
+                <div *ngSwitchCase="'loading'" class="error-container">
+                    <div>
+                        <img src="../../../assets/redo_12108539.png">
+                        <h1>Carregando professores...</h1>
+                    </div>
+                </div>
+
+                <div *ngSwitchCase="'loaded'" class="notebooks-container">
+                    <app-user-list-element
+                    *ngFor="let user of usersList"
+                    [id]="user.id" [username]="user.name"
+                    [email]="user.email" [notebooksLength]="user.notebooks">
+                    </app-user-list-element>
+                </div>
+            
+            
+                <div *ngSwitchCase="'empty'" class="error-container">
+                    <div>
+                        <img src="../../../assets/search_11756156.png">
+                        <h1 class="error-title">Nenhum professor cadastrado</h1>
+                    </div>
+                </div>
+
+
+                <div *ngSwitchCase="'error'" class="error-container">
+                    <div>
+                        <img src="../../../assets/close_12833099.png">
+                        <h1 class="error-title">Ops, algo deu errado ao carregar os professores :(</h1>
+                    </div>
+                    <div>
+                        <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
+                        <button class="error-btn">Recarregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+    
+    
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
+                <button class="error-btn">Recarregar</button>
+            </div>
+        </div>
+    </div>
+</div>

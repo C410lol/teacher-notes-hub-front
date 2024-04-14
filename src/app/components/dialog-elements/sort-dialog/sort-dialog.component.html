@@ -1,0 +1,62 @@
+<div class="dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Filtros</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
+        <div>
+            <p>Ordernar Por:</p>
+            <select class="dialog-select" [(ngModel)]="orderBy">
+                <option *ngFor="let orderByElement of orderByElementsList" [value]="orderByElement.value">
+                    {{orderByElement.name}}
+                </option>
+            </select>
+        </div>  
+
+
+        <div>
+            <p>Ordem:</p>
+            <select class="dialog-select" [(ngModel)]="direction">
+                <option value="asc">Crescente</option>
+                <option value="desc">Decrescente</option>
+            </select>
+        </div>
+
+
+        <div>
+            <p>Página:</p>
+            <select class="dialog-select" [(ngModel)]="pageNum">
+                <option *ngFor="let pageNum of pageNumbersList">
+                    {{pageNum}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+
+    <hr class="dialog-division-line">
+
+    
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Filtros não exluem itens</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Aplicar</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="dialog-mask-filter"></div>

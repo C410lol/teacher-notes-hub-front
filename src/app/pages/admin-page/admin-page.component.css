@@ -1,0 +1,66 @@
+* {
+    background-color: #d1d1d1;
+
+}
+
+h1 {
+    font-family: "Roboto Condensed", sans-serif !important;
+}
+
+.admin-page-container {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 417px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
+.title-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gray-hover:hover {
+    cursor: pointer;
+    background-color: #bebebe !important;
+}
+
+
+
+
+.title-container-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-txt {
+    max-width: 350px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+
+
+
+.notebooks-container {
+    width: 1000px;
+    margin-top: 35px;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    grid-template-columns: 333px 333px 333px;
+}

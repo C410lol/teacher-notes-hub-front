@@ -5,32 +5,48 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="lesson-container">
-    <p class="title-txt">{{title}}</p>
-    <div class="form">
+<div class="lesson-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">{{title}}</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
         <div>
             <p>*Conteúdo:</p>
-            <input type="text" placeholder="Insira o conteúdo (obrigatório)" 
+            <input class="dialog-input" type="text" placeholder="Insira o conteúdo (obrigatório)" 
             [(ngModel)]="lessonTitle">
         </div>
+
+
         <div>
             <p>*Desenvolivimento:</p>
-            <input type="text" placeholder="Insira o desenvolivimento (obrigatório)" 
+            <input class="dialog-input" type="text" placeholder="Insira o desenvolivimento (obrigatório)" 
             [(ngModel)]="details">
         </div>
+
+
         <div *ngIf="isEditMode()">
             <p>Observações:</p>
-            <input type="text" placeholder="Insira as observações" 
+            <input class="dialog-input" type="text" placeholder="Insira as observações" 
             [(ngModel)]="observations">
         </div>
+
+
         <div>
             <p>Habilidades:</p>
-            <input type="text" placeholder="Pesquisar Habilidades"
+            <input class="dialog-input" type="text" placeholder="Pesquisar Habilidades"
             (focus)="changeInputFocus()"
             (blur)="changeInputFocus()"
             (input)="bnccInputChange()"
             [(ngModel)]="bnccInput">
-            <p></p>
+
+
             <div *ngIf="isInputFocus">
                 <div class="dropdown-select">
                     <div *ngFor="let bncc_code of allBnccCodes" (click)="isCodeSelected = true; insertSelectCode(bncc_code.code)">
@@ -39,30 +55,55 @@
                 </div>
             </div>
         </div>
+
+
         <div *ngIf="isCodeSelected">
             <p>Habilidades Selecionadas:</p>
             <div class="selected-codes-container">
                 <div *ngFor="let selectedCode of selectedCodes" class="selected-codes">
                     <div><p class="selected-code-txt">{{selectedCode}}</p></div>
-                    <div class="remove-code-container"><p (click)="removeSelectedCode(selectedCode)" class="remove-selected-code-txt">&#10005;</p></div>
+                    <div class="remove-code-container">
+                        <p (click)="removeSelectedCode(selectedCode)" class="remove-selected-code-txt">&#10005;</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+
         <div>
             <p>Quantidade:</p>
-            <select [(ngModel)]="quantity">
+            <select class="dialog-select" [(ngModel)]="quantity">
                 <option>1</option>
                 <option>2</option>
             </select>
         </div>
+
+
         <div>
             <p>Data:</p>
-            <input type="date" 
+            <input class="dialog-input" type="date" 
             [(ngModel)]="date">
         </div>
     </div>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Campos marcados com * são obrigatórios</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
+        </div>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

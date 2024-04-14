@@ -6,28 +6,28 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventService } from './event.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class StudentService {
 
-  private getHeaders: HttpHeaders = new HttpHeaders();
-  private studentUrl: string = '';
+    private getHeaders: HttpHeaders = new HttpHeaders();
+    private studentUrl: string = '';
 
-  constructor(
+    constructor(
     private httpClient: HttpClient,
     eventService: EventService
     ) {
-    eventService.refreshServices.subscribe({
-      next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
-    });
-    this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
-    this.studentUrl = environment.studentUrl;
-  }
+        eventService.refreshServices.subscribe({
+            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+        });
+        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.studentUrl = environment.studentUrl;
+    }
 
-  getStudentsByNotebookId(notebookId: string): Observable<StudentType[]> {
-    return this.httpClient.get<StudentType[]>(`${this.studentUrl}/all/${notebookId}`, {
-      headers: this.getHeaders
-    });
-  }
+    getStudentsByNotebookId(notebookId: string): Observable<StudentType[]> {
+        return this.httpClient.get<StudentType[]>(`${this.studentUrl}/all/${notebookId}`, {
+            headers: this.getHeaders
+        });
+    }
 
 }

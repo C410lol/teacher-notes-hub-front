@@ -9,4 +9,4 @@ export const Validations = {
         return true;
     }
 
-}
+};

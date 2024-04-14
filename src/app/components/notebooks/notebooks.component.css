@@ -1,0 +1,57 @@
+* {
+    background-color: transparent;
+}
+
+
+
+
+.bimester-filter-container {
+    width: 100%;
+    height: 40px;
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.filter-element {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #e7e7e7;
+    font-family: "Roboto Condensed", sans-serif !important;
+}
+
+.filter-element:hover {
+    cursor: pointer;
+    background-color: #bebebe;
+}
+
+.selected-bimester {
+    background-color: #72309ebd;
+    color: whitesmoke;
+}
+
+.selected-bimester:hover {
+    background-color: #72309ebd;
+    color: whitesmoke;
+    cursor: auto;
+}
+
+.notebooks-container {
+    width: 100%;
+    margin-top: 25px;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    grid-template-columns: 333px 333px 333px;
+}
+
+app-notebook-list-element2 {
+    max-width: 330px;
+}
