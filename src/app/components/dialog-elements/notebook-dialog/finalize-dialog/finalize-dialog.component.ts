@@ -53,7 +53,7 @@ export class FinalizeDialogComponent extends DialogParent implements OnInit {
   constructor(
     private notebookService: NotebookService
   ) { 
-      super();
+      super('Finalizar');
   }
 
   ngOnInit(): void {
@@ -77,6 +77,8 @@ export class FinalizeDialogComponent extends DialogParent implements OnInit {
   }
 
   onClickSecondSection(): void {
+      this.confirmBtnClick('Finalizando...');
+
       this.setMapValues();
       this.ifThereIsMissingTasks();
   }
@@ -123,6 +125,8 @@ export class FinalizeDialogComponent extends DialogParent implements OnInit {
           error: () => {
               this.setStatusContent(environment.simpleErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Finalizar');
           }
       });
   }
@@ -144,6 +148,8 @@ export class FinalizeDialogComponent extends DialogParent implements OnInit {
           error: () => {
               this.setStatusContent('Algo deu errado ao finalizar sua caderneta, tente novamente mais tarde');
               this.switchStatusMode();
+
+              this.resetBtnProperties('Finalizar');
           }
       });
   }

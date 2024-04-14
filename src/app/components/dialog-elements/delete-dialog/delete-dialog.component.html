@@ -32,7 +32,10 @@
 
 
         <div>
-            <button (click)="confirmOnClick()" class="dialog-btn">Confirmar</button>
+            <app-confirm-btn
+            (clickEvent)="confirmOnClick()"
+            [isClicked]="isClicked" [text]="btnText">
+            </app-confirm-btn>
         </div>
     </div>
 </div>

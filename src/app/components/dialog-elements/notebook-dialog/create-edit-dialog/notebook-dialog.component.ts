@@ -30,7 +30,7 @@ export class NotebookDialogComponent extends DialogParent {
   constructor(
     private notebookService: NotebookService
   ) { 
-      super();
+      super('Salvar');
   }
 
   cancelOnClick(): void {
@@ -38,6 +38,8 @@ export class NotebookDialogComponent extends DialogParent {
   }
 
   confirmOnClick(): void {
+      this.confirmBtnClick('Salvando...');
+
       if(this.type === 'create') { this.createNotebook(); }
       else if(this.type === 'edit') { this.editNotebook(); }
   }
@@ -45,14 +47,20 @@ export class NotebookDialogComponent extends DialogParent {
   createNotebook(): void {
       this.notebookService.createNotebook(this.teacherId, this.createNotebookObject()).subscribe({
           next: () => this.confirmButtonClick.emit(),
-          error: () => this.switchStatusMode()
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Salvar');
+        }
       });
   }
 
   editNotebook(): void {
       this.notebookService.editNotebook(this.notebookId, this.createNotebookObject()).subscribe({
           next: () => this.confirmButtonClick.emit(),
-          error: () => this.switchStatusMode()
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Salvar');
+        }
       });
   }
 
