@@ -5,7 +5,6 @@ import { UserService } from 'src/app/services/user.service';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 import { Validations } from '../pages-shared-styles/Validations';
-import { HttpRequest, HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-login-page',
@@ -43,10 +42,6 @@ export class LoginPageComponent extends DialogParent {
                 if (res.body != null) {
                     localStorage.setItem('token', res.body.token);
                     localStorage.setItem('userId', res.body.userId);
-
-                    const request = new Request(new URL(`https://server2.teachernoteshub.online/users/${res.body.userId}`));
-                    const response = new Response(JSON.stringify(res.body));
-                    this.cacheUserInfo(request, response);
           
                     this.router.navigate(['/cadernetas']);
   
@@ -64,11 +59,6 @@ export class LoginPageComponent extends DialogParent {
                 this.switchStatusMode();
             }
         });
-    }
-
-    async cacheUserInfo(request: Request, response: Response) {
-        const cache = await caches.open("v1");
-        cache.put(request, response);
     }
 
 }

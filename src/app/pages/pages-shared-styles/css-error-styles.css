@@ -14,11 +14,13 @@
 }
 
 .error-title {
+    width: fit-content;
     font-size: large;
     text-align: center;
 }
 
 .error-txt {
+    width: fit-content;
     font-size: small;
     text-align: center;
     color: #83827a;

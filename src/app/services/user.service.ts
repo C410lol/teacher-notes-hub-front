@@ -85,7 +85,7 @@ export class UserService {
     }
 
     getAllTeachers(): Observable<UserType[]> {
-        return this.httpClient.get<UserType[]>(`${this.userUrl}/teachers`, {
+        return this.httpClient.get<UserType[]>(`${this.userUrl}/all/teachers`, {
             headers: this.getHeaders
         });
     }
