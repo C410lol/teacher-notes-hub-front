@@ -105,7 +105,10 @@
 
 
         <div>
-            <button (click)="onClickSecondSection()" class="dialog-btn">Salvar</button>
+            <app-confirm-btn
+            (clickEvent)="onClickSecondSection()"
+            [isClicked]="isClicked" [text]="btnText">
+            </app-confirm-btn>
         </div>
     </div>
 </div>

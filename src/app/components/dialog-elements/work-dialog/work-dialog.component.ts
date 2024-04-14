@@ -30,10 +30,13 @@ export class WorkDialogComponent extends DialogParent {
   @Input() workType: string = 'TRABALHO';
   @Input() date: string = '';
 
+
+
+
   constructor(
     private workService: WorkService
   ) { 
-      super();
+      super('Salvar');
   }
 
   cancelOnClick(): void {
@@ -46,6 +49,9 @@ export class WorkDialogComponent extends DialogParent {
           this.switchStatusMode();
           return; 
       }
+
+      this.confirmBtnClick('Salvando...');
+
       if(this.type === 'create') { this.createWork(); }
       else if(this.type === 'edit') { this.editWork(); }
   }
@@ -56,6 +62,8 @@ export class WorkDialogComponent extends DialogParent {
           error: () => {
               this.setStatusContent(environment.fieldErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }
@@ -66,6 +74,8 @@ export class WorkDialogComponent extends DialogParent {
           error: () => {
               this.setStatusContent(environment.fieldErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }

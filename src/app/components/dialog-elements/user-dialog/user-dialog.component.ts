@@ -24,7 +24,7 @@ export class UserDialogComponent extends DialogParent {
   constructor(
     private userService: UserService
   ) { 
-      super();
+      super('Salvar');
   }
 
   cancelOnClick(): void {
@@ -37,6 +37,9 @@ export class UserDialogComponent extends DialogParent {
           this.switchStatusMode();
           return; 
       }
+
+      this.confirmBtnClick('Salvando...');
+
       this.editUser();
   }
 
@@ -51,6 +54,8 @@ export class UserDialogComponent extends DialogParent {
           error: () => {
               this.setStautsContent(environment.fieldErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }

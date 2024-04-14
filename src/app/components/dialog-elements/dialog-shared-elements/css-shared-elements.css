@@ -109,6 +109,13 @@
     background-color: #612788d5;
 }
 
+.dialog-loading-btn {
+    background-color: #7932a89a;
+    color: #fffeddc0;
+    cursor: wait;
+    pointer-events: none;
+}
+
 
 
 

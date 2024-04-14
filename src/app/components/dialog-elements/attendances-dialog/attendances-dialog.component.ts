@@ -41,11 +41,14 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
   attendanceStatus: string = 'loading';
   //Status
 
+
+
+
   constructor(
     private studentService: StudentService,
     private attendanceService: AttendanceService,
   ) { 
-      super();
+      super('Salvar');
   }
 
   ngOnInit(): void {
@@ -131,6 +134,8 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
           error: () => {
               this.setStatus('Erro Ao Salvar Chamada!', environment.simpleErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }
@@ -140,6 +145,8 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
   }
 
   confirmOnClick(): void {
+      this.confirmBtnClick('Salvando...');
+
       const newAttendances: CreationAttendanceType[] = this.setNewAttendanceArray();
       this.createAttendance(newAttendances);
   }

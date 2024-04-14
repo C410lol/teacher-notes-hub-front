@@ -17,14 +17,21 @@ import { environment } from 'src/environments/environment.development';
 })
 export class DeleteDialogComponent extends DialogParent {
 
+
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirmButtonClick: EventEmitter<void> = new EventEmitter<void>();
+
 
   @Input() type: string = '';
   @Input() title: string = '';
   @Input() content: string = '';
 
+
   @Input() id?: string = '';
+
+
+
+
 
   constructor(
     private eventService: EventService,
@@ -33,7 +40,7 @@ export class DeleteDialogComponent extends DialogParent {
     private lessonService: LessonService,
     private workService: WorkService,
   ) { 
-      super();
+      super('Confirmar');
   }
 
   cancelOnClick(): void {
@@ -41,6 +48,8 @@ export class DeleteDialogComponent extends DialogParent {
   }
 
   confirmOnClick(): void {
+      this.confirmBtnClick('Confirmando...');
+
       switch(this.type) {
       case 'userDelete': {
           this.deleteUser();
@@ -76,7 +85,10 @@ export class DeleteDialogComponent extends DialogParent {
               this.confirmButtonClick.emit();
               this.eventService.triggerRefreshHeader();
           },
-          error: () => this.switchStatusMode()
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Confirmar');
+        }
       });
   }
 
@@ -90,8 +102,13 @@ export class DeleteDialogComponent extends DialogParent {
   passwordChange(): void {
       if(this.id != null) {
           this.userService.sendChangePasswordRequestById(this.id).subscribe({
-              next: () => this.confirmButtonClick.emit(),
-              error: () => this.switchStatusMode()
+              next: () => {
+                this.confirmButtonClick.emit()
+            },
+              error: () => {
+                this.switchStatusMode();
+                this.resetBtnProperties('Confirmar');
+            }
           });
           return;
       }
@@ -102,8 +119,13 @@ export class DeleteDialogComponent extends DialogParent {
       const userId = localStorage.getItem('userId');
       if (userId != null) {
           this.notebookService.sendDeleteNotebookRequest(this.id, userId).subscribe({
-              next: () => this.confirmButtonClick.emit(),
-              error: () => this.switchStatusMode()
+              next: () => {
+                this.confirmButtonClick.emit();
+            },
+              error: () => {
+                this.switchStatusMode();
+                this.resetBtnProperties('Confirmar');
+            }
           });
           return;
       }
@@ -112,15 +134,25 @@ export class DeleteDialogComponent extends DialogParent {
 
   deleteLesson(): void {
       this.lessonService.deleteLesson(this.id).subscribe({
-          next: () => this.confirmButtonClick.emit(),
-          error: () => this.switchStatusMode()
+          next: () => {
+            this.confirmButtonClick.emit();
+        },
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Confirmar');
+        }
       });
   }
 
   deleteWork(): void {
       this.workService.deleteWork(this.id).subscribe({
-          next: () => this.confirmButtonClick.emit(),
-          error: () => this.switchStatusMode()
+          next: () => {
+            this.confirmButtonClick.emit();
+        },
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Confirmar');
+        }
       });
   }
 

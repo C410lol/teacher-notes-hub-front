@@ -43,11 +43,14 @@ export class LessonDialogComponent extends DialogParent implements OnInit {
 
   timer: any;
 
+
+
+
   constructor(
     private lessonService: LessonService,
     private bnccService: BnccService,
   ) { 
-      super();
+      super('Salvar');
   }
 
   ngOnInit(): void {
@@ -81,6 +84,9 @@ export class LessonDialogComponent extends DialogParent implements OnInit {
           this.switchStatusMode();
           return; 
       }
+
+      this.confirmBtnClick('Salvando...');
+
       if(this.type === 'create') { this.createLesson(); } 
       if(this.type === 'edit') { this.editLesson(); }
   }
@@ -91,6 +97,8 @@ export class LessonDialogComponent extends DialogParent implements OnInit {
           error: () => {
               this.setStatusContent(environment.fieldErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }
@@ -101,6 +109,8 @@ export class LessonDialogComponent extends DialogParent implements OnInit {
           error: () => {
               this.setStatusContent(environment.fieldErrorMessage);
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }
