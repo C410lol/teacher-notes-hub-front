@@ -91,15 +91,5 @@
                 <button [routerLink]="['/login']" class="error-btn">Login/Criar</button>
             </div>
         </div>
-
-        <div *ngSwitchCase="'offline'" class="error-container">
-            <div>
-                <img src="../../../assets/wifi.png">
-                <h1 class="error-title">Parece que você não está conectado à internet!</h1>
-            </div>
-            <div>
-                <p class="error-txt">Verifique sua conexão ou acesse os recursos offline na aba "Recursos Offline"</p>
-            </div>
-        </div>
     </div>
 </div>

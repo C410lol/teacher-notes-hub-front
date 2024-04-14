@@ -53,8 +53,6 @@ export class HomePageComponent extends DialogParent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (!navigator.onLine) { this.currentState = 'offline'; return; }
-
         this.verifyUserStatus();
     }
 

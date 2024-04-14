@@ -6,15 +6,26 @@ import { UserService } from '../services/user.service';
 @Component({
     selector: 'app-pages',
     templateUrl: './pages.component.html',
-    styleUrls: ['./pages.component.css']
+    styleUrls: [
+        './pages.component.css',
+        './pages-shared-styles/css-error-styles.css'
+    ]
 })
 export class PagesComponent implements OnInit {
+
+
+    isOffline: boolean = false;
+
 
     userName: string = 'Carregando...';
     email: string = 'Carregando...';
     role:string = '';
 
+
     type: string = '';
+
+
+
 
     constructor(
     private router: Router,
@@ -27,6 +38,19 @@ export class PagesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
+        //Check if the navigator is offline
+        window.addEventListener('offline', () => {
+            if (!this.router.url.includes('/offline-resources')) { //Check if the current URL is different from the offline resources
+              this.isOffline = true; //Set the variable to true when it's offline
+            } 
+        });
+
+        //Check if the navigator is back online
+        window.addEventListener('online', () => {
+            this.isOffline = false; //Set the variable to false when it's back online
+        });
+
         this.loadUser();
     }
 
@@ -48,8 +72,8 @@ export class PagesComponent implements OnInit {
                 }
             });
         } else if (
-            this.removeQueryFromUrl(this.router.url) == 'verify-account' ||
-            this.removeQueryFromUrl(this.router.url) == 'change-password'
+            this.router.url.includes('verify-account') ||
+            this.router.url.includes('change-password')
         ) {
             this.setUnloggedUser();
         } else {
@@ -74,10 +98,6 @@ export class PagesComponent implements OnInit {
 
     navigateToLoginPage(): void {
         this.router.navigate(['/login']);
-    }
-
-    removeQueryFromUrl(url: string): string {
-        return url.split('/')[1];
     }
 
 }
