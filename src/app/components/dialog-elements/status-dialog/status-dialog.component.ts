@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-status-dialog',
-  templateUrl: './status-dialog.component.html',
-  styleUrls: ['./status-dialog.component.css']
+    selector: 'app-status-dialog',
+    templateUrl: './status-dialog.component.html',
+    styleUrls: ['./status-dialog.component.css']
 })
 export class StatusDialogComponent {
 
@@ -16,7 +16,7 @@ export class StatusDialogComponent {
   constructor() { }
 
   destroyComponent(): void {
-    this.destroyButtonClick.emit();
+      this.destroyButtonClick.emit();
   }
 
 }

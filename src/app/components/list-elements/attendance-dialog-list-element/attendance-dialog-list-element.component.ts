@@ -1,14 +1,14 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, QueryList, ViewChildren } from '@angular/core';
 
 @Component({
-  selector: 'app-attendance-dialog-list-element',
-  templateUrl: './attendance-dialog-list-element.component.html',
-  styleUrls: ['./attendance-dialog-list-element.component.css']
+    selector: 'app-attendance-dialog-list-element',
+    templateUrl: './attendance-dialog-list-element.component.html',
+    styleUrls: ['./attendance-dialog-list-element.component.css']
 })
 export class AttendanceDialogListElementComponent {
   
   @ViewChildren('checkBoxes') checkBoxes: QueryList<ElementRef<HTMLInputElement>> = 
-  new QueryList<ElementRef<HTMLInputElement>>();
+      new QueryList<ElementRef<HTMLInputElement>>();
 
   @Input() firstCheckboxStatus: boolean = false;
   @Input() secondCheckboxStatus: boolean = false;

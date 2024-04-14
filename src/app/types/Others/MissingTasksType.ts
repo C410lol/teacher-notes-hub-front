@@ -1,5 +1,5 @@
-import { MissingTaskLessonType } from "./MissingTaskLessonType"
-import { MissingTaskWorkType } from "./MissingTaskWorkType"
+import { MissingTaskLessonType } from './MissingTaskLessonType';
+import { MissingTaskWorkType } from './MissingTaskWorkType';
 
 export type MissingTasksType = {
 

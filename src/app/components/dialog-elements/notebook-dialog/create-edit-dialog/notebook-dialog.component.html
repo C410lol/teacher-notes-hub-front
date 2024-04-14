@@ -5,12 +5,21 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="notebook-dialog-container">
-    <p class="title-txt">{{title}}</p>
-    <div class="form">
+<div class="dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">{{title}}</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
         <div>
-            <p>Turma:</p>
-            <select [(ngModel)]="classe">
+            <p>*Turma:</p>
+            <select [(ngModel)]="classe" class="dialog-select">
                 <option value="Ensino_Fundamental_6_A">Ensino Fundamental 6-A</option>
                 <option value="Ensino_Fundamental_6_B">Ensino Fundamental 6-B</option>
                 <option value="Ensino_Fundamental_7_A">Ensino Fundamental 7-A</option>
@@ -23,9 +32,11 @@
                 <option value="Ensino_Médio_3_A">Ensino Médio 3-A</option>
             </select>
         </div>
+
+
         <div>
-            <p>Disciplina:</p>
-            <select [(ngModel)]="subject">
+            <p>*Disciplina:</p>
+            <select [(ngModel)]="subject" class="dialog-select">
                 <option>Arte</option>
                 <option>Biologia</option>
                 <option>Ciências</option>
@@ -45,9 +56,11 @@
                 <option value="Tecnologia_e_Comunicação">Tecnologia e Comunicação</option>
             </select>
         </div>
+
+
         <div>
-            <p>Bimestre:</p>
-            <select [(ngModel)]="bimester">
+            <p>*Bimestre:</p>
+            <select [(ngModel)]="bimester" class="dialog-select">
                 <option>Primeiro</option>
                 <option>Segundo</option>
                 <option>Terceiro</option>
@@ -55,8 +68,21 @@
             </select>
         </div>
     </div>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../../assets/alert_7586991.png">
+            <p>Campos marcados com * são obrigatórios</p>
+        </div>
+        <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

@@ -5,61 +5,60 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 
 @Component({
-  selector: 'app-user-page',
-  templateUrl: './user-page.component.html',
-  styleUrls: [
-    './user-page.component.css',
-    './user-page.mobile.component.css',
-    '../pages-shared-styles/blur-filter.css',
-  ]
+    selector: 'app-user-page',
+    templateUrl: './user-page.component.html',
+    styleUrls: [
+        './user-page.component.css',
+        '../pages-shared-styles/css-shared-styles.css',
+    ]
 })
 export class UserPageComponent extends DialogParent {
 
-  userId: string = '';
-  userName:string = 'Carregando...';
-  userEmail:string =  'Carregando...';
+    userId: string = '';
+    userName:string = 'Carregando...';
+    userEmail:string =  'Carregando...';
 
-  constructor(
+    constructor(
     private router: Router,
     private userService: UserService
-  ) { 
-    super();
-    this.getUser();
-  }
-
-  getUser(): void {
-    const userId: string | null = localStorage.getItem('userId');
-    if(userId !== null) {
-      this.userService.getUserById(userId).subscribe({
-        next: (res) => {
-          if (res.body != null) {
-            this.userId = res.body.id;
-            this.userName = res.body.name;
-            this.userEmail = res.body.email;
-          }
-        },
-        error: () => {
-          this.setStatus('Erro Ao Carregar Usuário!', environment.simpleErrorMessage, 'error');
-          this.switchStatusMode();
-        }
-      });
+    ) { 
+        super();
+        this.getUser();
     }
-  }
 
-  refreshPage(): void {
-    location.reload();
-  }
+    getUser(): void {
+        const userId: string | null = localStorage.getItem('userId');
+        if(userId !== null) {
+            this.userService.getUserById(userId).subscribe({
+                next: (res) => {
+                    if (res.body != null) {
+                        this.userId = res.body.id;
+                        this.userName = res.body.name;
+                        this.userEmail = res.body.email;
+                    }
+                },
+                error: () => {
+                    this.setStatus('Erro Ao Carregar Usuário!', environment.simpleErrorMessage, 'error');
+                    this.switchStatusMode();
+                }
+            });
+        }
+    }
 
-  goToLoginPage(): void {
-    this.router.navigate(['/login']);
-  }
+    refreshPage(): void {
+        location.reload();
+    }
 
-  setEditStatus(): void {
-    this.setStatus('Conta Editada Com Sucesso!', 'Conta editada com sucesso!', 'success');
-  }
+    goToLoginPage(): void {
+        this.router.navigate(['/login']);
+    }
 
-  setPasswordChangeStatus(): void {
-    this.setStatus('Email Enviado Com Sucesso!', 'Vá até seu email para trocar de senha', 'success');
-  }
+    setEditStatus(): void {
+        this.setStatus('Conta Editada Com Sucesso!', 'Conta editada com sucesso!', 'success');
+    }
+
+    setPasswordChangeStatus(): void {
+        this.setStatus('Email Enviado Com Sucesso!', 'Vá até seu email para trocar de senha', 'success');
+    }
 
 }

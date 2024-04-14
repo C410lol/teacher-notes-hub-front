@@ -34,47 +34,59 @@ type="edit" title="Editar Aula">
 
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isMode01 || isMode02 || isMode03 }" class="single-lesson-container">
-    <h1 class="title-txt">Informações</h1>
-    <div class="info-container">
-        <div class="single-info-container">
-            <h1>Conteúdo:</h1>
-            <input [value]="title">
+<div class="single-lesson-container">
+    <h1 class="page-title-txt">Informações</h1>
+
+
+
+
+    <div class="page-content-container">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Conteúdo:</h1>
+            <input class="page-input" [value]="title">
         </div>
-        <div class="single-info-container">
-            <h1>Desenvolvimento:</h1>
-            <div class="single-info-container-txt-box">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Desenvolvimento:</h1>
+            <div class="page-big-txt-container">
                 <p>{{details}}</p>
             </div>
         </div>
-        <div class="single-info-container">
-            <h1>Observações:</h1>
-            <div class="single-info-container-txt-box">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Observações:</h1>
+            <div class="page-big-txt-container">
                 <p>{{observations}}</p>
             </div>
         </div>
-        <div class="single-info-container">
-            <h1>Habilidades:</h1>
-            <div class="single-info-container-txt-box">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Habilidades:</h1>
+            <div class="page-big-txt-container">
                 <p *ngFor="let bnccCode of bnccCodes">
                     {{bnccCode.description}}
                 </p>
             </div>
         </div>
-        <div class="single-info-container">
-            <h1>Quantidade:</h1>
-            <input [value]="quantity">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Quantidade:</h1>
+            <input class="page-input" [value]="quantity">
         </div>
-        <div class="single-info-container">
-            <h1>Data:</h1>
-            <input [value]="formatDate(date)">
+        <div class="page-info-container">
+            <h1 class="page-info-title-txt">Data:</h1>
+            <input class="page-input" [value]="formatDate(date)">
         </div>
     </div>
-    <div class="txts-container">
-        <h1 (click)="switchMode01()">Fazer/Editar Chamada</h1>
+
+
+
+
+    <div class="interactive-txts-container">
+        <h1 (click)="switchMode01()" class="interactive-txt">Chamada</h1>
     </div>
-    <div class="btns-container">
-        <button (click)="switchMode02()" class="red-btn">Excluir</button>
-        <button (click)="switchMode03()" class="blue-btn">Editar</button>
+
+
+
+
+    <div class="page-btns-container">
+        <button (click)="switchMode02()" class="page-btn red-btn">Excluir</button>
+        <button (click)="switchMode03()" class="page-btn blue-btn">Editar</button>
     </div>
 </div>

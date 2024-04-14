@@ -1,0 +1,43 @@
+<app-sort-dialog
+*ngIf="isMode02" [orderByElementsList]="[
+{value: 'classe', name: 'Classe'},
+{value: 'subject', name: 'Matéria'},
+{value: 'bimester', name: 'Bimestre'},
+{value: 'status', name: 'Status'},
+{value: 'createDate', name: 'Data'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode02()"
+(confirmButtonClick)="receiveSortValues($event); switchMode02()">
+</app-sort-dialog>
+
+
+<app-back-arrow></app-back-arrow>
+
+
+
+
+<div class="page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Cadernetas de {{teacherName}}</h1>
+            <div class="page-bottom-txt-container"><p class="page-bottom-txt">{{teacherRole}}</p></div>
+        </div>
+
+
+        <div class="page-use-container">
+            <div (click)="switchMode02()" class="page-sort-container page-gray-hover">
+                <img class="page-sort-img page-gray-hover" src="../../../assets/document.png">
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <app-notebooks
+    [userId]="teacherId" [notebooksState]="teacherNotebooksState"
+    [notebooksList]="teacherNotebooksList"
+    (filterByBimesterEvent)="changeBimesterFilter($event)">
+    </app-notebooks>
+</div>

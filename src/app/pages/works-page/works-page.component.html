@@ -12,45 +12,71 @@
 type="create" title="Criar Ferramenta de Avaliação">
 </app-work-dialog>
 
+
+<app-sort-dialog
+*ngIf="isMode02" [orderByElementsList]="[
+{value: 'deliveryDate', name: 'Data'},
+{value: 'title', name: 'Título'},
+{value: 'type', name: 'Categoria'},
+{value: 'grades', name: 'Quantidade de Notas'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode02()"
+(confirmButtonClick)="receiveSortValues($event); switchMode02()">
+</app-sort-dialog>
+
+
 <app-back-arrow></app-back-arrow>
 
-<div [ngClass]="{ 'blur-filter': isMode01 }" class="works-page-container">
-    <h1 class="title-txt">Ferramentas de Avaliação</h1>
-    <h1 *ngIf="!isWorksLoaded" class="loading-txt">Carregando...</h1>
-    <div *ngIf="isWorksLoaded" class="content-container">
-        <button (click)="switchMode01()" class="create-btn">
-            <h1>Nova Ferramenta de Avaliação</h1>
-        </button>
-        
-        <app-sorting [orderByElementsList]="[
-            {value: 'deliveryDate', name: 'Data'},
-            {value: 'title', name: 'Título'},
-            {value: 'type', name: 'Tipo'},
-            {value: 'grades', name: 'Notas'}
-        ]"
-        [totalPages]="totalPages"
-        (orderByOptionEvent)="orderByOnChange($event)"
-        (directionOptionEvent)="directionOnChange($event)"
-        (pageNumOptionEvent)="pageNumOnChange($event)">
 
-        </app-sorting>
 
-        <div class="works-container">
-            <div class="works-header">
-                <div><h1>Data</h1></div>
-                <div><h1>Conteúdo</h1></div>
-                <div><h1>Categoria</h1></div>
-                <div><h1>Notas/Alunos</h1></div>
+
+<div class="page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Ferramentas de {{notebookSubject}}</h1>
+            <div class="page-bottom-txt-container"><p class="page-bottom-txt">{{notebookClasse}}</p></div>
+        </div>
+
+
+        <div class="page-use-container">
+            <div (click)="switchMode02()" class="page-sort-container page-gray-hover">
+                <img class="page-sort-img page-gray-hover" src="../../../assets/document.png">
             </div>
-            <div *ngFor="let work of worksList" class="works-list">
-                <app-work-list-element
-                [id]="work.id"
-                [date]="formatDate(work.deliveryDate)"
-                [title]="work.title"
-                [type]="work.type"
-                [grades]="work.grades"
-                [students]="studentsLength">
-                </app-work-list-element>
+            <button (click)="switchMode01()" class="page-create-btn page-gray-hover">
+                <p class="page-plus-txt">+</p>
+                <p class="page-new-txt">Nova Ferramenta</p>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="worksState" class="notebooks-component-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando ferramentas...</h1>
+            </div>
+        </div>
+    
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-work-list-element *ngFor="let work of worksList"
+            [id]="work.id" [date]="formatDate(work.deliveryDate)" [title]="work.title" 
+            [details]="work.details"
+            [type]="work.type" [grades]="work.grades" [students]="studentsLength">
+            </app-work-list-element>
+        </div>
+    
+    
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma ferramenta encontrada</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão 'Nova Ferramenta' e começe seus trabalhos ;)</p>
             </div>
         </div>
     </div>

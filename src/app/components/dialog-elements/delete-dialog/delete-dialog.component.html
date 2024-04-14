@@ -5,11 +5,39 @@
 (destroyButtonClick)="isStatusMode = false">    
 </app-status-dialog>
 
-<div class="delete-dialog-container">
-    <p class="title-txt">{{title}}</p>
-    <p class="content-txt">{{content}}</p>
-    <div class="btns-box">
-        <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-        <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+<div class="dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">{{title}}</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
+        <p class="content-txt">{{content}}</p>
+    </div>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Essa é uma ação sensível</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Confirmar</button>
+        </div>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

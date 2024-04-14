@@ -1,0 +1,25 @@
+.error-container {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.error-title {
+    font-size: large;
+    text-align: center;
+}
+
+.error-txt {
+    font-size: medium;
+    text-align: center;
+    color: #83827a;
+}

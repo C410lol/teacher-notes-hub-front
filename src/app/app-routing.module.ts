@@ -5,13 +5,13 @@ import { PagesRoutingModule } from './pages/pages-routing.module';
 
 
 const routes: Routes = [
-  {
-    path: "", component: PagesComponent, loadChildren: () => PagesRoutingModule
-  },
+    {
+        path: '', component: PagesComponent, loadChildren: () => PagesRoutingModule
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

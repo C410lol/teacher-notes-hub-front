@@ -7,35 +7,35 @@ import { CreationGradeType } from '../types/Others/CreationGradeType';
 import { EventService } from './event.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class GradeService {
 
-  private getHeaders: HttpHeaders = new HttpHeaders();
-  private gradesUrl: string = '';
+    private getHeaders: HttpHeaders = new HttpHeaders();
+    private gradesUrl: string = '';
 
-  constructor(
+    constructor(
     private httpClient: HttpClient,
     eventService: EventService
     ) {
-    eventService.refreshServices.subscribe({
-      next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
-    });
-    this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
-    this.gradesUrl = environment.gradesUrl;
-  }
+        eventService.refreshServices.subscribe({
+            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+        });
+        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.gradesUrl = environment.gradesUrl;
+    }
 
-  getAllGradesByWorkId(workId: string): Observable<HttpResponse<GradeType[]>> {
-    return this.httpClient.get<GradeType[]>(`${this.gradesUrl}/all/${workId}`, {
-      headers: this.getHeaders,
-      observe: 'response'
-    });
-  }
+    getAllGradesByWorkId(workId: string): Observable<HttpResponse<GradeType[]>> {
+        return this.httpClient.get<GradeType[]>(`${this.gradesUrl}/all/${workId}`, {
+            headers: this.getHeaders,
+            observe: 'response'
+        });
+    }
 
-  createGrade(workId: string, grade: CreationGradeType): Observable<void> {
-    return this.httpClient.post<void>(`${this.gradesUrl}/create?workId=${workId}`, grade, {
-      headers: this.getHeaders
-    });
-  }
+    createGrade(workId: string, grade: CreationGradeType): Observable<void> {
+        return this.httpClient.post<void>(`${this.gradesUrl}/create?workId=${workId}`, grade, {
+            headers: this.getHeaders
+        });
+    }
 
 }

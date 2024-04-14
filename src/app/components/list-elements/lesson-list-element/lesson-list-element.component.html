@@ -1,6 +1,27 @@
-<div (click)="navigateToSingleLesson()" class="lesson-container">
-    <div><p>{{date}}</p></div>
-    <div><p>{{title}}</p></div>
-    <div><p>{{quantity}}</p></div>
-    <div><p [ngClass]="attendance">{{attendance}}</p></div>
+<div (click)="navigateToSingleLesson()" class="lesson-list-element-container box-list-element-container">
+    <h1 class="box-title-txt">{{title}}</h1>
+
+
+    <div class="box-first-section-container">
+        <p>{{details}}</p>
+        <p>{{bnccCodesLength}} Habilidade(s)</p>
+    </div>
+
+
+    <div class="box-second-section-container">
+        <div>
+            <p>Quantidade:</p>
+            <p>{{quantity}}</p>
+        </div>
+
+
+        <div>
+            <p>Data:</p>
+            <p>{{date}}</p>
+        </div>
+    </div>
+
+    <div class="box-bottom-left-container" [ngClass]="attendance == 'SIM' ? 'status-green-container' : 'status-red-container'">
+        <p>{{attendanceDoneOrNot()}}</p>
+    </div>
 </div>

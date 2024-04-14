@@ -1,6 +1,9 @@
-import { HttpHeaders } from "@angular/common/http";
+import { HttpHeaders } from '@angular/common/http';
 
-const prefix: string = "http://localhost:8080";
+const prefix: string = 'http://localhost:9090';
+
+// http://localhost:8080
+// https://server.teachernoteshub.online:8443
 
 export const environment = {
     production: false,

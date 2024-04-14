@@ -1,0 +1,7 @@
+@media screen and (width <= 1014px) {
+
+    .username-and-email-container {
+        display: none !important;
+    }
+
+}

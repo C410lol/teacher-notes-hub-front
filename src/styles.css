@@ -21,3 +21,7 @@ p, a, input {
     font-family: 'Roboto Condensed', sans-serif;
     background-color: transparent;
 }
+
+::placeholder {
+    color: #3f3f3fd0;
+}

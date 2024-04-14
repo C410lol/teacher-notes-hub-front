@@ -1,0 +1,90 @@
+<div [ngSwitch]="notebooksState" class="notebooks-component-container">
+    <div *ngSwitchCase="'loading'" class="error-container">
+        <div>
+            <img src="../../../assets/redo_12108539.png">
+            <h1>Carregando cadernetas...</h1>
+        </div>
+    </div>
+
+    <div *ngIf="notebooksState == 'loaded' || notebooksState == 'empty'" class="mobile-component">
+        <div class="bimester-filter-container mobile-component">
+            <li class="filter-container">
+                <ul 
+                (click)="onClickFilterElement('%')" 
+                [ngClass]="selectedBimester == '%' ? 'selected-bimester' : ''"
+                class="filter-element">Tudo
+                </ul>
+
+                <ul 
+                (click)="onClickFilterElement('Primeiro')" 
+                [ngClass]="selectedBimester == 'Primeiro' ? 'selected-bimester' : ''"
+                class="filter-element">Primeiro Bimestre
+                </ul>
+
+                <ul 
+                (click)="onClickFilterElement('Segundo')" 
+                [ngClass]="selectedBimester == 'Segundo' ? 'selected-bimester' : ''"
+                class="filter-element">Segundo Bimestre
+                </ul>
+
+                <ul 
+                (click)="onClickFilterElement('Terceiro')"
+                [ngClass]="selectedBimester == 'Terceiro' ? 'selected-bimester' : ''"
+                class="filter-element">Terceiro Bimestre
+                </ul>
+
+                <ul 
+                (click)="onClickFilterElement('Quarto')" 
+                [ngClass]="selectedBimester == 'Quarto' ? 'selected-bimester' : ''"
+                class="filter-element">Quarto Bimestre
+                </ul>
+            </li>
+        </div>
+
+
+        <div *ngSwitchCase="'loaded'" class="notebooks-container mobile-component">
+            <app-notebook-list-element2
+                *ngFor="let notebook of notebooksList"
+                [id]="notebook.id"
+                [classe]="notebook.classe.replaceAll('_', ' ')" [subject]="notebook.subject.replaceAll('_', ' ')"
+                [bimester]="notebook.bimester" [lessons]="notebook.lessons"
+                [works]="notebook.works" [status]="notebook.status">
+            </app-notebook-list-element2>
+        </div>
+
+
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma caderneta encontrada</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão 'Nova Caderneta' e começe seus trabalhos ;)</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngSwitchCase="'unverified'" class="error-container">
+        <div>
+            <img src="../../../assets/alert_12832889.png">
+            <h1 class="error-title">Parece que sua conta ainda não foi verificada!</h1>
+        </div>
+        <div>
+            <p class="error-txt">Se você não recebeu o email de verificação, clique abaixo para enviar novamente</p>
+            <button (click)="resendVerificationEmail()" class="error-btn">Reenviar</button>
+        </div>
+    </div>
+
+
+    <div *ngSwitchCase="'error'" class="error-container">
+        <div>
+            <img src="../../../assets/close_12833099.png">
+            <h1 class="error-title">Ops, algo deu errado ao carregar suas cadernetas :(</h1>
+        </div>
+        <div>
+            <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
+            <button (click)="refreshPage()" class="error-btn">Recarregar</button>
+        </div>
+    </div>
+</div>

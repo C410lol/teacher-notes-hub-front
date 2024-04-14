@@ -1,0 +1,44 @@
+.error-container {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.error-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.error-title {
+    width: fit-content;
+    font-size: large;
+    text-align: center;
+}
+
+.error-txt {
+    width: fit-content;
+    font-size: small;
+    text-align: center;
+    color: #83827a;
+}
+
+.error-btn {
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #7932a8;
+    color: #fffedd;
+    font-family: "Roboto Condensed", sans-serif !important;
+    font-weight: 500;
+    font-size: medium;
+}
+
+.error-btn:hover {
+    cursor: pointer;
+    background-color: #612788d5;
+}

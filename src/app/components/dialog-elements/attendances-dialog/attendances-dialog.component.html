@@ -5,15 +5,48 @@
 (destroyButtonClick)="isStatusMode = false">
 </app-status-dialog>
 
-<div class="attendances-dialog-container">
-    <p class="title-txt">Criar/Editar Chamada</p>
-    <div class="content-container">
-        <div class="attendance-header">
+
+
+
+<div class="dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Chamada</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="attendanceStatus" class="dialog-content-container">
+        <div *ngSwitchCase="'loaded'" class="attendance-header">
             <div><p>Aluno</p></div>
             <div><p>1º Aula Faltas</p></div>
             <div><p>2º Aula Faltas</p></div>
         </div>
-        <div class="students-list">  
+
+        
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1 class="error-title">Carregando chamada...</h1>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, verifique a conexão e tente novamente mais tarde</p>
+            </div>
+        </div>
+
+
+        <div *ngSwitchCase="'loaded'" class="students-list">  
             <app-attendance-dialog-list-element
             *ngFor="let student of studentAttendanceList"
             #attendanceDialogListElements
@@ -23,9 +56,26 @@
             [secondCheckboxStatus]="student.secondAttendancePresent">
             </app-attendance-dialog-list-element>
         </div>
-        <div class="btns-container">
-            <button (click)="cancelOnClick()" class="red-btn">Cancelar</button>
-            <button (click)="confirmOnClick()" class="green-btn">Confirmar</button>
+    </div>
+
+
+    <hr *ngIf="attendanceStatus == 'loaded'" class="dialog-division-line">
+
+
+    <div *ngIf="attendanceStatus == 'loaded'" class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Marque os alunos que NÃO estão presentes</p>
+        </div>
+
+
+        <div>
+            <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
         </div>
     </div>
 </div>
+
+
+
+
+<div class="mask-filter"></div>

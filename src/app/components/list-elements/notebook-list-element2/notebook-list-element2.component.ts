@@ -2,12 +2,15 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-notebook-list-element',
-  templateUrl: './notebook-list-element.component.html',
-  styleUrls: ['./notebook-list-element.component.css']
+    selector: 'app-notebook-list-element2',
+    templateUrl: './notebook-list-element2.component.html',
+    styleUrls: [
+        './notebook-list-element2.component.css',
+        '../shared-styles/shared-boxes-styles.css'
+    ]
 })
-export class NotebookListElementComponent {
-  
+export class NotebookListElement2Component {
+
   @Input() id?: number = 0;
   @Input() classe: string = '';
   @Input() subject: string = '';
@@ -17,10 +20,12 @@ export class NotebookListElementComponent {
   @Input() status?: string = '';
   @Input() date?: string = '';
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router
+  ) { }
 
   navigateToSingleNotebook(): void {
-    this.router.navigate([`${this.router.url}/${this.id}`]);
+      this.router.navigate([`${this.router.url}/${this.id}`]);
   }
 
 }
