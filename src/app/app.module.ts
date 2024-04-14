@@ -17,10 +17,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         PagesModule,
         HttpClientModule,
         ServiceWorkerModule.register('service-worker.js', {
-          enabled: !isDevMode(),
+          enabled: 'serviceWorker' in navigator,
           // Register the ServiceWorker as soon as the application is stable
           // or after 30 seconds (whichever comes first).
-          registrationStrategy: 'registerWhenStable:30000'
+          registrationStrategy: 'registerWhenStable:30000' 
         })
     ],
     providers: [],
