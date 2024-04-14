@@ -39,17 +39,17 @@ export class PagesComponent implements OnInit {
 
     ngOnInit(): void {
 
-        //Check if the navigator is offline
-        window.addEventListener('offline', () => {
-            if (!this.router.url.includes('/offline-resources')) { //Check if the current URL is different from the offline resources
-              this.isOffline = true; //Set the variable to true when it's offline
-            } 
-        });
-
-        //Check if the navigator is back online
-        window.addEventListener('online', () => {
-            this.isOffline = false; //Set the variable to false when it's back online
-        });
+//        //Check if the navigator is offline
+//        window.addEventListener('offline', () => {
+//            if (!this.router.url.includes('/offline-resources')) { //Check if the current URL is different from the offline resources
+//              this.isOffline = true; //Set the variable to true when it's offline
+//            } 
+//        });
+//
+//        //Check if the navigator is back online
+//        window.addEventListener('online', () => {
+//            this.isOffline = false; //Set the variable to false when it's back online
+//        });
 
         this.loadUser();
     }

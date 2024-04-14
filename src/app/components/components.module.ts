@@ -23,6 +23,7 @@ import { NotebookListElement2Component } from './list-elements/notebook-list-ele
 import { SortDialogComponent } from './dialog-elements/sort-dialog/sort-dialog.component';
 import { UserListElementComponent } from './list-elements/user-list-element/user-list-element.component';
 import { NotebooksComponent } from './notebooks/notebooks.component';
+import { ConfirmBtnComponent } from './dialog-elements/dialog-shared-elements/confirm-btn/confirm-btn.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { NotebooksComponent } from './notebooks/notebooks.component';
         SortDialogComponent,
         UserListElementComponent,
         NotebooksComponent,
+        ConfirmBtnComponent,
     ],
     exports: [
         HeaderComponent,
