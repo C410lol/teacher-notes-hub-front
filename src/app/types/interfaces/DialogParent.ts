@@ -10,6 +10,19 @@ export class DialogParent {
     statusTitle: string = '';
     statusContent: string = '';
 
+
+    //Button properties
+    isClicked: boolean = false;
+    btnText: string | undefined = '';
+
+
+
+
+    constructor(btnText?: string) {
+        this.btnText = btnText;
+    }
+
+
     switchMode01(): void {
         this.isMode01 = !this.isMode01;
     }
@@ -39,6 +52,18 @@ export class DialogParent {
         if (title != null) this.statusTitle = title;
         if (content != null) this.statusContent = content;
         if (status != null) this.statusType = status;
+    }
+
+
+    //Button functions 
+    confirmBtnClick(btnText: string): void {
+        this.isClicked = true;
+        this.btnText = btnText;
+    }
+
+    resetBtnProperties(btnText: string): void {
+        this.isClicked = false;
+        this.btnText = btnText;
     }
 
 }

@@ -70,7 +70,9 @@
 
 
         <div>
-            <button (click)="confirmOnClick()" class="dialog-btn">Salvar</button>
+            <app-confirm-btn 
+            [isClicked]="isClicked" [text]="btnText"
+            (clickEvent)="confirmOnClick()"></app-confirm-btn>
         </div>
     </div>
 </div>
