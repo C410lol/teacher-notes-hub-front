@@ -1,118 +1,77 @@
 .login-container {
-    width: 350px;
-    height: auto;
-    margin: 90px auto;
-    background-color: #3F3F3F;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 208px;
+    padding-top: 50px;
 }
 
-.title-txt {
-    width: fit-content;
-    margin-top: 75px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: xx-large;
-    font-family: 'Bebas Neue', sans-serif;
-    color: #EFEFEF;
-}
 
-.form {
-    width: 325px;
-    height: auto;
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-.form div {
-    margin-bottom: 10px;
-    display: grid;
-    grid-template-columns: 17.5% auto;
-}
 
-.form h1 {
-    width: 100%;
-    height: 40px;
-    padding-top: 14.5px;
-    border-top-left-radius: 2.5px;
-    border-bottom-left-radius: 2.5px;
-    background-color: #e03437;
-    text-align: center;
-    font-size: larger;
-    color: #EFEFEF;
-}
-
-.form input {
-    border: 0;
-    border-top-right-radius: 2.5px;
-    border-bottom-right-radius: 2.5px;
-    padding-left: 10px;
-    background-color: #EFEFEF4D;
-    font-family: 'Roboto', sans-serif;
-    color: #EFEFEF;
-}
-
-.form input::placeholder {
-    color: #efefefb0;
-}
-
-.change-password-txt {
-    cursor: pointer;
-    font-size: small;
-    font-style: italic;
-    text-decoration: underline;
-    color: #EFEFEF;
-}
-
-.change-password-txt:hover {
-    color: #f15c5c;
-}
-
-.btns-container {
-    width: fit-content;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 35px;
+.page-inputs-container {
+    width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-.btns-container button {
-    width: 300px;
-    height: 35px;
-    border: 0;
-    border-radius: 2.5px;
-    cursor: pointer;
+.page-input {
+    width: 400px;
+    border: 1px solid #7932a8;
+    background-color: #9524a41a;
+}
+
+
+
+
+.page-btns-container {
+    margin-top: 10px;
+}
+
+.page-btn {
+    width: 350px;
+    background-color: #7932a8;
+    color: #fffedd;
+    font-family: "Roboto Condensed", sans-serif !important;
+    font-weight: 500;
     font-size: medium;
-    font-family: 'Bebas Neue', sans-serif;
-    color: #EFEFEF;
 }
 
-.red-btn {
-    background-color: #e03437;
+
+
+
+.interactive-txts-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    gap: 40px;
 }
 
-.red-btn:hover {
-    background-color: #e03437b9;
-}
-
-.btns-container p {
-    margin-top: 12.5px;
-    text-align: center;
-    font-family: 'Bebas Neue', sans-serif;
-    color: #EFEFEF;
-}
-
-.link-txt {
-    margin-left: 5px;
-    cursor: pointer;
-    font-family: 'Bebas Neue', sans-serif;
+.forgot-password-txt {
+    color: #7932a8;
     font-style: italic;
-    text-decoration: underline;
-    color: #EFEFEF;
 }
 
-.link-txt:hover {
-    color: #f15c5c;
+.forgot-password-txt:hover {
+    color: #7932a8c4;
+    cursor: pointer;
+}
+
+.login-create-interactive-txt {
+    font-size: large;
+}
+
+.clickable-txt {
+    color: #7932a8;
+    font-style: italic;
+}
+
+.clickable-txt:hover {
+    color: #7932a8c4;
+    cursor: pointer;
 }

@@ -4,25 +4,33 @@
 (destroyButtonClick)="setStatusModeFalse()">
 </app-status-dialog>
 
-<div class="login-page-container">
-    <div class="login-container">
-        <p class="title-txt">Login</p>
-        <div class="form">
-            <div>
-                <h1>Email:</h1>
-                <input type="text" placeholder="Insira seu email"
-                [(ngModel)]="email">
-            </div>
-            <a [routerLink]="['/mudar-senha-request']" class="change-password-txt">Não Lembra de sua senha?</a>
-            <div>
-                <h1>Senha:</h1>
-                <input type="password" placeholder="Insira sua senha"
-                [(ngModel)]="password">
-            </div>
+
+
+
+<div class="login-container">
+    <h1 class="page-title-txt">Login</h1>
+
+
+
+    <div class="page-content-container">
+        <div class="page-inputs-container">
+            <input class="page-input" type="text" placeholder="Email" [(ngModel)]="email">
+            <input class="page-input" type="password" placeholder="Senha" [(ngModel)]="password">
         </div>
-        <div class="btns-container">
-            <button (click)="loginOnClick()" class="red-btn">Login</button>
-            <p>Não possui uma conta?<a [routerLink]="['/criar']" class="link-txt">Crie uma agora</a></p>
+
+
+
+
+        <div class="page-btns-container">
+            <button class="page-btn">Login</button>
+        </div>
+
+
+
+
+        <div class="interactive-txts-container">
+            <p class="forgot-password-txt">Esqueceu sua senha?</p>
+            <p class="login-create-interactive-txt">Não tem uma conta? <a class="clickable-txt">Crie uma agora</a></p>
         </div>
     </div>
 </div>

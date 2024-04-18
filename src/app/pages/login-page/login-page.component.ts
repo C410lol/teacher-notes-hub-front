@@ -9,7 +9,10 @@ import { Validations } from '../pages-shared-styles/Validations';
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.css']
+    styleUrls: [
+        '../pages-shared-styles/css-shared-styles.css',
+        './login-page.component.css',
+    ]
 })
 export class LoginPageComponent extends DialogParent {
 
