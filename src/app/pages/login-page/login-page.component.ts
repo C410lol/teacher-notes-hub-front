@@ -10,8 +10,9 @@ import { Validations } from '../pages-shared-styles/Validations';
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: [
-        '../pages-shared-styles/css-shared-styles.css',
         './login-page.component.css',
+        '../pages-shared-styles/css-shared-styles.css',
+        '../pages-shared-styles/login-create-styles.css',
     ]
 })
 export class LoginPageComponent extends DialogParent {
@@ -24,11 +25,17 @@ export class LoginPageComponent extends DialogParent {
     private eventService: EventService,
     private userService: UserService
     ) { 
-        super();
+        super('Login');
     }
 
     loginOnClick(): void {
+        this.confirmBtnClick('Logando...');
+    
+
         if (!Validations.isNotBlank([this.email, this.password])) { 
+            this.resetBtnProperties('Login');
+
+
             this.setStatus('Erro Ao Realizar Login!', 'Algum campo está vazio', 'error');
             this.switchStatusMode();
             return; 
@@ -53,6 +60,9 @@ export class LoginPageComponent extends DialogParent {
                 }
             },
             error: (err) => {
+                this.resetBtnProperties('Login');
+
+
                 if(typeof err.error == 'string') {
                     this.setStatus('Erro Ao Realizar Login!', err.error, 'error');
                     this.switchStatusMode();

@@ -8,7 +8,11 @@ import { Validations } from '../pages-shared-styles/Validations';
 @Component({
     selector: 'app-create-page',
     templateUrl: './create-page.component.html',
-    styleUrls: ['./create-page.component.css']
+    styleUrls: [
+        './create-page.component.css',
+        '../pages-shared-styles/css-shared-styles.css',
+        '../pages-shared-styles/login-create-styles.css'
+    ]
 })
 export class CreatePageComponent extends DialogParent {
 
@@ -21,16 +25,25 @@ export class CreatePageComponent extends DialogParent {
     private router: Router,
     private userService: UserService
     ) { 
-        super();
+        super('Criar');
     }
 
     createOnClick(): void {
+        this.confirmBtnClick('Criando...');
+
+
         if(!Validations.isNotBlank([this.name, this.email, this.password])) { 
+            this.resetBtnProperties('Criar');
+
+
             this.setStatus('Erro Ao Criar Conta!', 'Algum campo está vazio', 'error');
             this.switchStatusMode();
             return; 
         }
-        if(!this.isPasswordOK()) return;
+        if(!this.isPasswordOK()) {
+            this.resetBtnProperties('Criar');
+            return;
+        }
         this.createUser();
     }
 
@@ -55,6 +68,9 @@ export class CreatePageComponent extends DialogParent {
             password: this.password.trim().replaceAll(' ', '')
         }).subscribe({
             next: () => {
+                this.confirmBtnClick('Redirecionando...');
+
+
                 this.setStatus(
                     'Conta Criada Com Sucesso!', 
                     'Uma mensagem foi enviada ao seu email para verificar sua conta',
@@ -64,6 +80,9 @@ export class CreatePageComponent extends DialogParent {
                 setTimeout(() => this.router.navigate(['/login']), 3000);
             },
             error: (err) => {
+                this.resetBtnProperties('Criar');
+
+
                 if (typeof err.error == 'string') {
                     this.setStatus('Erro Ao Criar Conta!', err.error, 'error');
                     this.switchStatusMode(); 

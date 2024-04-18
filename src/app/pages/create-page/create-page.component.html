@@ -4,34 +4,34 @@
 (destroyButtonClick)="setStatusModeFalse()">
 </app-status-dialog>
 
-<div class="create-page-container">
-    <div class="create-container">
-        <p class="title-txt">Criar</p>
-        <div class="form">
-            <div>
-                <h1>Nome:</h1>
-                <input type="text" placeholder="Insira seu nome"
-                [(ngModel)]="name">
-            </div>
-            <div>
-                <h1>Email:</h1>
-                <input type="text" placeholder="Insira seu email"
-                [(ngModel)]="email">
-            </div>
-            <div>
-                <h1>Senha:</h1>
-                <input type="password" placeholder="Insira sua senha"
-                [(ngModel)]="password">
-            </div>
-            <div>
-                <h1 class="smaller-txt">Confirmar Senha:</h1>
-                <input type="password" placeholder="Confirme sua senha"
-                [(ngModel)]="confPassword">
-            </div>
+<div class="login-create-container">
+    <h1 class="page-title-txt">Criar</h1>
+
+
+
+    <div class="page-content-container">
+        <div class="page-inputs-container">
+            <input class="page-input" type="text" placeholder="Nome" [(ngModel)]="name">
+            <input class="page-input" type="text" placeholder="Email" [(ngModel)]="email">
+            <input class="page-input" type="password" placeholder="Senha" [(ngModel)]="password">
+            <input class="page-input" type="password" placeholder="Confirmar Senha" [(ngModel)]="confPassword">
         </div>
-        <div class="btns-container">
-            <button (click)="createOnClick()" class="red-btn">Criar</button>
-            <p>Já possui uma conta?<a class="link-txt" [routerLink]="['/login']">Faça login agora</a></p>
+
+
+
+
+        <div class="page-btns-container">
+            <button 
+            (click)="createOnClick()" 
+            [ngClass]="isClicked ? 'loading-btn' : ''"
+            class="page-btn">{{btnText}}</button>
+        </div>
+
+
+
+
+        <div class="interactive-txts-container">
+            <p class="login-create-interactive-txt">Já tem uma conta? <a [routerLink]="['/login']" class="clickable-txt">Faça login agora</a></p>
         </div>
     </div>
 </div>

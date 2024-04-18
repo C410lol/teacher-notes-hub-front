@@ -7,7 +7,7 @@
 
 
 
-<div class="login-container">
+<div class="login-create-container">
     <h1 class="page-title-txt">Login</h1>
 
 
@@ -22,15 +22,18 @@
 
 
         <div class="page-btns-container">
-            <button class="page-btn">Login</button>
+            <button 
+            (click)="loginOnClick()" 
+            [ngClass]="isClicked ? 'loading-btn' : ''"
+            class="page-btn">{{btnText}}</button>
         </div>
 
 
 
 
         <div class="interactive-txts-container">
-            <p class="forgot-password-txt">Esqueceu sua senha?</p>
-            <p class="login-create-interactive-txt">Não tem uma conta? <a class="clickable-txt">Crie uma agora</a></p>
+            <p [routerLink]="['/mudar-senha-request']" class="forgot-password-txt">Esqueceu sua senha?</p>
+            <p class="login-create-interactive-txt">Não tem uma conta? <a [routerLink]="['/criar']" class="clickable-txt">Crie uma agora</a></p>
         </div>
     </div>
 </div>
