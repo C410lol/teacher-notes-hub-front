@@ -1,0 +1,44 @@
+<app-back-arrow></app-back-arrow>
+
+
+<div class="page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Desempenho dos Alunos em {{notebookSubject}}</h1>
+            <div class="page-bottom-txt-container"><p class="page-bottom-txt">{{notebookClasse}}</p></div>
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="studentsListState" class="notebooks-component-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando relatório...</h1>
+            </div>
+        </div>
+    
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-student-performance-list-element *ngFor="let student of studentsList"
+            [studentId]="student.student.id" [studentName]="student.student.name"
+            [notebookLessons]="notebookLessons"
+            [absences]="student.absences" [absencesPercentage]="student.absencesPercentage" 
+            [absencesStatus]="student.absencesStatus"
+            ></app-student-performance-list-element>
+        </div>
+    
+    
+        <div *ngSwitchCase="'error'" class="error-container">
+            <div>
+                <img src="../../../assets/close_12833099.png">
+                <h1 class="error-title">Ops, algo deu errado :(</h1>
+            </div>
+            <div>
+                <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
+                <button (click)="refreshPage()" class="error-btn">Recarregar</button>
+            </div>
+        </div>
+    </div>
+</div>

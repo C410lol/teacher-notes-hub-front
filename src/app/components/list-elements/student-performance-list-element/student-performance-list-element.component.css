@@ -1,0 +1,33 @@
+.box-list-element-container:hover {
+    background-color: rgba(86, 31, 131, 0.856);
+    cursor: auto;
+}
+
+
+
+
+.span-txt {
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.EXCELENTE {
+    color: #00b900;
+}
+
+.BOM {
+    color: #009100;
+}
+
+.CUIDADO {
+    color: yellow;
+}
+
+.RUIM {
+    color: #ff8686;
+}
+
+.PÉSSIMO {
+    color: #b35151;
+}
