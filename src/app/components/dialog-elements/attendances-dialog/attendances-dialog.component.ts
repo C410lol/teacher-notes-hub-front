@@ -7,7 +7,7 @@ import { StudentAttendanceType } from 'src/app/types/Others/StudentAttendanceTyp
 import { StudentType } from 'src/app/types/StudentType';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
-import { AttendanceDialogListElementComponent } from '../../list-elements/attendance-dialog-list-element/attendance-dialog-list-element.component';
+import { AttendanceDialogListElement2Component } from '../../list-elements/attendance-dialog-list-element-2/attendance-dialog-list-element-2.component';
 
 @Component({
     selector: 'app-attendances-dialog',
@@ -21,8 +21,8 @@ import { AttendanceDialogListElementComponent } from '../../list-elements/attend
 export class AttendancesDialogComponent extends DialogParent implements OnInit {
 
   @ViewChildren('attendanceDialogListElements') attendanceDialogsListElements: 
-  QueryList<AttendanceDialogListElementComponent> = 
-          new QueryList<AttendanceDialogListElementComponent>();
+  QueryList<AttendanceDialogListElement2Component> = 
+          new QueryList<AttendanceDialogListElement2Component>();
 
   @Output() cancelButtonClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() confirmButtonClick: EventEmitter<void> = new EventEmitter<void>();

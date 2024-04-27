@@ -29,7 +29,7 @@ export class AttendanceDialogListElement2Component {
   }
 
   getSecondBoxPresenceValue(condition: boolean): string {
-    if (!this.isTwoLessons) return 'X';
+    if (!this.isTwoLessons) return ' ';
     if (condition) return 'F';
     return 'C';
   }
