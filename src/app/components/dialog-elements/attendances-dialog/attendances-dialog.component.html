@@ -47,14 +47,14 @@
 
 
         <div *ngSwitchCase="'loaded'" class="students-list">  
-            <app-attendance-dialog-list-element
+            <app-attendance-dialog-list-element-2
             *ngFor="let student of studentAttendanceList"
             #attendanceDialogListElements
-            [isTwoLessons]="!isTwoLessons()"
+            [isTwoLessons]="isTwoLessons()"
             [studentId]="student.id" [studentName]="student.name"
             [firstCheckboxStatus]="student.firstAttendancePresent"
             [secondCheckboxStatus]="student.secondAttendancePresent">
-            </app-attendance-dialog-list-element>
+            </app-attendance-dialog-list-element-2>
         </div>
     </div>
 

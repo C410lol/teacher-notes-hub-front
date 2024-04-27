@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { UserService } from '../services/user.service';
 
@@ -38,18 +38,11 @@ export class PagesComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
-//        //Check if the navigator is offline
-//        window.addEventListener('offline', () => {
-//            if (!this.router.url.includes('/offline-resources')) { //Check if the current URL is different from the offline resources
-//              this.isOffline = true; //Set the variable to true when it's offline
-//            } 
-//        });
-//
-//        //Check if the navigator is back online
-//        window.addEventListener('online', () => {
-//            this.isOffline = false; //Set the variable to false when it's back online
-//        });
+        this.router.events.subscribe(event => {
+          if (event instanceof NavigationEnd) {
+            window.scrollTo(0, 0);
+          }
+        });
 
         this.loadUser();
     }

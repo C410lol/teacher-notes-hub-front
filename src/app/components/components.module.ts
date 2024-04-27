@@ -25,6 +25,7 @@ import { UserListElementComponent } from './list-elements/user-list-element/user
 import { NotebooksComponent } from './notebooks/notebooks.component';
 import { ConfirmBtnComponent } from './dialog-elements/dialog-shared-elements/confirm-btn/confirm-btn.component';
 import { StudentPerformanceListElementComponent } from './list-elements/student-performance-list-element/student-performance-list-element.component';
+import { AttendanceDialogListElement2Component } from './list-elements/attendance-dialog-list-element-2/attendance-dialog-list-element-2.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { StudentPerformanceListElementComponent } from './list-elements/student-
         NotebooksComponent,
         ConfirmBtnComponent,
         StudentPerformanceListElementComponent,
+        AttendanceDialogListElement2Component,
     ],
     exports: [
         HeaderComponent,

@@ -1,0 +1,18 @@
+<div class="attendance-dialog-student-container">
+    <div><p>{{studentName}}</p></div>
+    <div>
+        <div 
+        (click)="firstCheckboxStatus = !firstCheckboxStatus" 
+        class="checkbox" [ngClass]="firstCheckboxStatus ? 'isChecked' : 'isNotChecked'">
+            {{getPresenceValue(firstCheckboxStatus)}}
+        </div>
+    </div>
+    <div>
+        <div 
+        (click)="secondCheckboxStatus = !secondCheckboxStatus" 
+        class="checkbox" 
+        [ngClass]="[secondCheckboxStatus ? 'isChecked' : 'isNotChecked', !isTwoLessons ? 'emptyBox' : '']">
+            {{getSecondBoxPresenceValue(secondCheckboxStatus)}}
+        </div>
+    </div>
+</div>
