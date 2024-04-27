@@ -6,6 +6,7 @@ import { NotebookType } from '../types/NotebookType';
 import { MissingTasksType } from '../types/Others/MissingTasksType';
 import { PageType } from '../types/Others/PageType';
 import { EventService } from './event.service';
+import { StudentPerformanceType } from '../types/Others/StudentPerformanceType';
 
 @Injectable({
     providedIn: 'root'
@@ -51,6 +52,15 @@ export class NotebookService {
             headers: this.getHeaders
         });
     }
+
+    getStudentsPerformance(notebookId?: string): Observable<StudentPerformanceType[]> {
+        return this.httpClient.get<StudentPerformanceType[]>(`${this.notebooksUrl}/${notebookId}/students-performance`, {
+            headers: this.getHeaders
+        })
+    }
+
+
+
 
     editNotebook(notebookId?: string, notebook?: NotebookType): Observable<void> {
         return this.httpClient.put<void>(`${this.notebooksUrl}/edit/${notebookId}`, notebook, {

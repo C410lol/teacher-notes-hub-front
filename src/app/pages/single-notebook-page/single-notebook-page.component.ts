@@ -68,13 +68,11 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
         this.switchStatusMode();
     }
 
-    navigateToLessons(): void {
-        this.router.navigate([`${this.router.url}/aulas`]);
+
+    navigateToUrl(endpoint: string): void {
+        this.router.navigate([`${this.router.url}/${endpoint}`]);
     }
 
-    navigateToWorks(): void {
-        this.router.navigateByUrl(`${this.router.url}/trabalhos`);
-    }
 
     formatDate(date: string | undefined): string {
         const dateFormatted: string | null = this.dateFormatter.transform(date, 'dd/MM/yyyy');

@@ -20,6 +20,7 @@ import { ChangePasswordRequestPageComponent } from './change-password-request-pa
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
+import { StudentsPerformancePageComponent } from './students-performance-page/students-performance-page.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-
         ChangePasswordPageComponent,
         AdminPageComponent,
         TeacherNotebooksPageComponent,
+        StudentsPerformancePageComponent,
     ],
     exports: [
         PagesComponent,

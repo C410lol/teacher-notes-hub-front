@@ -16,6 +16,7 @@ import { ChangePasswordRequestPageComponent } from './change-password-request-pa
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
+import { StudentsPerformancePageComponent } from './students-performance-page/students-performance-page.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,11 @@ const routes: Routes = [
                                     { path: '', component: WorksPageComponent },
                                     { path: ':workId', component: SingleWorkPageComponent }
                                 ]
+                            },
+                            {
+                                path: 'alunos-performace', children: [
+                                    { path: '', component: StudentsPerformancePageComponent }
+                                ]
                             }
                         ]
                     }
@@ -72,6 +78,11 @@ const routes: Routes = [
                         path: 'trabalhos', children: [
                             { path: '', component: WorksPageComponent },
                             { path: ':workId', component: SingleWorkPageComponent }
+                        ]
+                    },
+                    {
+                        path: 'alunos-performace', children: [
+                            { path: '', component: StudentsPerformancePageComponent }
                         ]
                     }
                 ]
