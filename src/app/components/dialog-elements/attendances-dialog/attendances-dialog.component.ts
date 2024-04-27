@@ -123,7 +123,7 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
   }
 
   isTwoLessons(): boolean {
-      return this.lessonQuantity === 2;
+      return this.lessonQuantity == 2;
   }
 
   createAttendance(attendances: any[]): void {
@@ -155,29 +155,20 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
 
       const attendances: CreationAttendanceType[] = [];
 
-      for(let x: number = 0; x < 2; x++) {
+      const firstAttendance: CreationAttendanceType = { absentStudentsIds: [], presentStudentsIds: [] };
+      const secondAttendance: CreationAttendanceType = { absentStudentsIds: [], presentStudentsIds: [] };
 
-          const presentStudents: any[] = [];
-          const absentStudents: any[] = [];
+      this.attendanceDialogsListElements.forEach((element) => {
+        if (element.firstCheckboxStatus) {
+            firstAttendance.absentStudentsIds.push(element.studentId);
+        } else firstAttendance.presentStudentsIds.push(element.studentId);
 
-          for(let y: number = 0; y < this.attendanceDialogsListElements.length; y++) {
-              const currentInput = 
-        this.attendanceDialogsListElements.get(y)?.checkBoxes.get(x)?.nativeElement;
+        if (element.secondCheckboxStatus) {
+            secondAttendance.absentStudentsIds.push(element.studentId);
+        } else secondAttendance.presentStudentsIds.push(element.studentId);
+      });
 
-              if(!currentInput?.disabled) {
-                  const currentInputChecked = currentInput?.checked;
-                  const currentInputValue = currentInput?.value;
-                  if(currentInputChecked) {
-                      absentStudents.push(currentInputValue);
-                  } else presentStudents.push(currentInputValue);
-              }
-          }
-
-          attendances.push({
-              presentStudentsIds: presentStudents,
-              absentStudentsIds: absentStudents
-          });
-      }
+      attendances.push(firstAttendance, secondAttendance);
 
       return attendances;
   }

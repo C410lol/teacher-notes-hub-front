@@ -1,0 +1,54 @@
+.attendance-dialog-student-container {
+    width: 100%;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 60% auto auto;
+    border-radius: 5px;
+    border: 1px solid #bebebe;
+    background-color: #d6d6d6e7;
+}
+
+.attendance-dialog-student-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: transparent;
+}
+
+.attendance-dialog-student-container div p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical; 
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.attendance-dialog-student-container div input {
+    cursor: pointer;
+}
+
+
+
+
+.checkbox {
+    padding: 1px 7px !important;
+    border-radius: 2.5px;
+    color: #E0E0E0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.isChecked {
+    background-color: #e03437 !important;
+}
+
+.isNotChecked {
+    background-color: #49bd2d !important;
+}
+
+.emptyBox {
+    background-color: #797979b7 !important;
+    filter: blur(1px);
+    pointer-events: none;
+    color: #e0e0e0ad;
+}
