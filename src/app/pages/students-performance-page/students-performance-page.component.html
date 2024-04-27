@@ -23,7 +23,7 @@
         <div *ngSwitchCase="'loaded'" class="page-content-container">
             <app-student-performance-list-element *ngFor="let student of studentsList"
             [studentId]="student.student.id" [studentName]="student.student.name"
-            [notebookLessons]="notebookLessons"
+            [notebookLessons]="student.totalLessons"
             [absences]="student.absences" [absencesPercentage]="student.absencesPercentage" 
             [absencesStatus]="student.absencesStatus"
             ></app-student-performance-list-element>

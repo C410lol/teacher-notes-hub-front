@@ -14,7 +14,7 @@ export class StudentPerformanceListElementComponent {
   @Input()  studentName: string = 'Carregando...';
 
   
-  @Input()  notebookLessons?: number = 0;
+  @Input()  notebookLessons: number = 0;
 
 
   @Input()  absences: number = 0;

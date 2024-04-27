@@ -19,7 +19,6 @@ export class StudentsPerformancePageComponent implements OnInit {
 
   notebookClasse: string = 'Carreagndo...';
   notebookSubject: string = 'Carregando...';
-  notebookLessons?: number = 0;
 
 
   studentsListState: string = 'loading';
@@ -56,7 +55,6 @@ export class StudentsPerformancePageComponent implements OnInit {
       next: (res) => {
         this.notebookClasse = res.classe.replaceAll('_', ' ');
         this.notebookSubject = res.subject.replaceAll('_', ' ');
-        this.notebookLessons = res.lessons;
       },
       error: (err) => console.error(err)
     })
