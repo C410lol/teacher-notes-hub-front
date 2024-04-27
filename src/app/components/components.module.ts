@@ -13,7 +13,6 @@ import { DeleteDialogComponent } from './dialog-elements/delete-dialog/delete-di
 import { UserDialogComponent } from './dialog-elements/user-dialog/user-dialog.component';
 import { AttendancesDialogComponent } from './dialog-elements/attendances-dialog/attendances-dialog.component';
 import { GradesDialogComponent } from './dialog-elements/grades-dialog/grades-dialog.component';
-import { AttendanceDialogListElementComponent } from './list-elements/attendance-dialog-list-element/attendance-dialog-list-element.component';
 import { GradesDialogListElementComponent } from './list-elements/grades-dialog-list-element/grades-dialog-list-element.component';
 import { FinalizeDialogComponent } from './dialog-elements/notebook-dialog/finalize-dialog/finalize-dialog.component';
 import { BackArrowComponent } from './back-arrow/back-arrow.component';
@@ -40,7 +39,6 @@ import { AttendanceDialogListElement2Component } from './list-elements/attendanc
         UserDialogComponent,
         AttendancesDialogComponent,
         GradesDialogComponent,
-        AttendanceDialogListElementComponent,
         GradesDialogListElementComponent,
         FinalizeDialogComponent,
         BackArrowComponent,
