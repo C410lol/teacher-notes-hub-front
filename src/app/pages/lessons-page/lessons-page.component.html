@@ -67,7 +67,8 @@ type="create" title="Criar Aula">
             <app-lesson-list-element *ngFor="let lesson of lessonsList"
             [id]="lesson.id" [date]="formatDate(lesson.date)" [title]="lesson.title"
             [details]="lesson.details" [bnccCodesLength]="lesson.bnccCodes?.length"
-            [quantity]="lesson.quantity" [attendance]="ifAttendanceExists(lesson.attendances)">    
+            [quantity]="lesson.quantity" [attendance]="ifAttendanceExists(lesson.attendances)"
+            (refreshLessons)="refreshLessons()">    
             </app-lesson-list-element>
         </div>
     

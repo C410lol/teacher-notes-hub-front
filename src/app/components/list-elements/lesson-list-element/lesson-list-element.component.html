@@ -1,4 +1,33 @@
-<div (click)="navigateToSingleLesson()" class="lesson-list-element-container box-list-element-container">
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="statusType" [title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
+
+
+
+<div 
+*ngIf="isInflated" 
+class="inflate-container"
+[style.top.px]="positionY"
+[style.left.px]="positionX"
+>
+    <div (click)="duplicateLesson()" class="inflate-child"><p>Duplicar Aula</p></div>
+    <hr class="inflate-division-line">
+    <div (click)="deleteLesson()" class="inflate-child"><p class="red-txt">Excluir Aula</p></div>
+</div>
+
+
+
+
+<div 
+(click)="navigateToSingleLesson(); isInflated = false" 
+(contextmenu)="inflateContainer($event)"
+[ngClass]="isInflated ? 'disabled' : ''"
+class="lesson-list-element-container box-list-element-container"
+>
     <h1 class="box-title-txt">{{title}}</h1>
 
 
