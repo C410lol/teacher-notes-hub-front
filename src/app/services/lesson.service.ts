@@ -26,6 +26,9 @@ export class LessonService {
         this.lessonsUrl = environment.lessonsUrl;
     }
 
+
+
+
     createLesson(notebookId: string, lesson: LessonCreationType): Observable<HttpResponse<void>> {
         return this.httpClient.post<void>(`${this.lessonsUrl}/create?notebookId=${notebookId}`, 
             lesson, 
@@ -34,6 +37,17 @@ export class LessonService {
                 observe: 'response'
             });
     }
+
+
+    duplicateLesson(lessonId?: number): Observable<string> {
+        return this.httpClient.post<string>(`${this.lessonsUrl}/${lessonId}/duplicate`, null, {
+            headers: this.getHeaders,
+            responseType: 'text' as 'json',
+        });
+    }
+
+
+
 
     getAllLessonsByNotebookId(notebookId: string, sortBy: string, direction: string, pageNum: number): Observable<HttpResponse<PageType<LessonType>>> {
         return this.httpClient.get<PageType<LessonType>>(
@@ -50,6 +64,9 @@ export class LessonService {
         });
     }
 
+
+
+
     editLesson(lessonId: string, lesson: LessonCreationType): Observable<HttpResponse<void>> {
         return this.httpClient.put<void>(`${this.lessonsUrl}/edit/${lessonId}`, 
             lesson, 
@@ -58,6 +75,9 @@ export class LessonService {
                 observe: 'response'
             });
     } 
+
+
+
 
     deleteLesson(lessonId?: string): Observable<HttpResponse<void>> {
         return this.httpClient.delete<void>(`${this.lessonsUrl}/delete/${lessonId}`, {
