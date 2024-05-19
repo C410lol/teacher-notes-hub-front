@@ -35,10 +35,10 @@ h1 {
 
 
 
-.title-container-container {
+.user-info-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2.5px;
 }
 
 .user-txt {
@@ -50,6 +50,12 @@ h1 {
     text-overflow: ellipsis;
     font-size: x-large;
     font-weight: 600;
+}
+
+.subinfo-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .role-container {
@@ -115,15 +121,8 @@ h1 {
 
 
 
-.notebooks-container {
+.home-content-container {
+    margin-top: 50px;
     width: 1000px;
-    margin-top: 35px;
-    display: grid;
-    justify-items: center;
-    gap: 10px;
-    grid-template-columns: 333px 333px 333px;
-}
-
-app-notebook-list-element2 {
-    max-width: 330px;
+    background-color: transparent;
 }

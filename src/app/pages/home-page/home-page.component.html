@@ -5,25 +5,28 @@
     (destroyButtonClick)="setStatusModeFalse()">
 </app-status-dialog>
 
-<app-notebook-dialog 
-    *ngIf="isMode01" [teacherId]="userId" 
-    (cancelButtonClick)="switchMode01()"
-    (confirmButtonClick)="refreshNotebooks(); switchMode01(); setCreateStatus(); switchStatusMode();" 
-    type="create" title="Criar Caderneta">
-</app-notebook-dialog>
 
 <app-sort-dialog
-*ngIf="isMode02" [orderByElementsList]="[
+*ngIf="isMode01" 
+[orderByElementsList]="[
 {value: 'classe', name: 'Classe'},
 {value: 'subject', name: 'Matéria'},
 {value: 'bimester', name: 'Bimestre'},
 {value: 'status', name: 'Status'},
-{value: 'createDate', name: 'Data'}
-]" [totalPages]="totalPages"
+{value: 'createDate', name: 'Data'}]" 
+[totalPages]="totalPages"
 [orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
-(cancelButtonClick)="switchMode02()"
-(confirmButtonClick)="receiveSortValues($event); switchMode02()">
+(cancelButtonClick)="switchMode01()"
+(confirmButtonClick)="receiveSortValues($event); switchMode01()">
 </app-sort-dialog>
+
+
+<app-notebook-dialog
+*ngIf="isMode02"
+[teacherId]="userId"
+[type]="'create'" [title]="'Criar Caderneta'"
+(cancelButtonClick)="switchMode02()" (confirmButtonClick)="triggerRefreshNotebooks(); switchMode02()">
+</app-notebook-dialog>
 
 
 
@@ -43,27 +46,49 @@
         <div *ngSwitchCase="'loaded'">
             <div class="title-container">
                 <div class="user-info-container">
-                    <h1 class="user-txt">Olá, {{username}}!</h1>
-                    <div class="role-container"><p class="role-txt">{{userRole}}</p></div>
+                    <h1 class="user-txt">Olá, {{userName}}!</h1>
+
+
+                    <div class="subinfo-container">
+                        <img src="../../../assets/driver-license.png">
+                        <div class="role-container"><p class="role-txt">{{getRoleName()}}</p></div>
+                    </div>
+
+
+                    <div class="subinfo-container">
+                        <img src="../../../assets/home.png">
+                        <div class="role-container"><p class="role-txt">{{userInstitution?.name}}</p></div>
+                    </div>
                 </div>
         
         
-                <div *ngIf="notebooksState != 'unverified'" class="notebook-use-container">
-                    <div (click)="switchMode02()" class="notebook-sort-container gray-hover">
+                <div *ngIf="userRole == 'ROLE_TCHR'" class="notebook-use-container">
+                    <div (click)="switchMode01()" class="notebook-sort-container gray-hover">
                         <img class="sort-img gray-hover" src="../../../assets/document.png">
                     </div>
-                    <button (click)="switchMode01()" class="notebook-create-btn gray-hover">
+                    <button (click)="switchMode02()" class="notebook-create-btn gray-hover">
                         <p class="plus-txt">+</p>
                         <p class="new-notebook-txt">Nova Caderneta</p>
                     </button>
                 </div>
             </div>
-        
-            <app-notebooks
-            [userId]="userId" [notebooksState]="notebooksState"
-            [notebooksList]="notebookList" [selectedBimester]="bimesterFilter"
-            (filterByBimesterEvent)="changeBimesterFilter($event)">
-            </app-notebooks>
+
+
+
+
+            <div class="home-content-container">
+                <app-admin-page
+                *ngIf="userRole == 'ROLE_ADM' || userRole == 'ROLE_SUPER'"
+                [adminId]="userId" [adminRole]="userRole"
+                [institutionId]="userInstitution?.id" [institutionName]="userInstitution?.name">
+                </app-admin-page>
+
+
+                <app-teacher-page
+                *ngIf="userRole == 'ROLE_TCHR'"
+                [teacherId]="userId">
+                </app-teacher-page>
+            </div>
         </div>
     
     

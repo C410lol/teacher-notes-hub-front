@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { UserService } from '../services/user.service';
+import { AuthReturnType } from '../types/Others/AuthReturnType';
 
 @Component({
     selector: 'app-pages',
@@ -48,10 +49,10 @@ export class PagesComponent implements OnInit {
     }
 
     loadUser(): void {
-        const token: string | null = localStorage.getItem('token');
-        const userId: string | null = localStorage.getItem('userId');
-        if(token != null && userId != null) {
-            this.userService.getUserById(userId).subscribe({
+        const lStorage = localStorage.getItem('userAuth');
+        if(lStorage != null) {
+            const userAuth: AuthReturnType = JSON.parse(lStorage);
+            this.userService.getUserById(userAuth.userId).subscribe({
                 next: (res) => {
                     if (res.body != null) {
                         this.userName = res.body.name;

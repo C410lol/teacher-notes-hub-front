@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment, requestsUtils } from 'src/environments/environment.development';
 import { LessonType } from '../types/LessonType';
 import { PageType } from '../types/Others/PageType';
 import { EventService } from './event.service';
@@ -20,9 +20,9 @@ export class LessonService {
     eventService: EventService
     ) {
         eventService.refreshServices.subscribe({
-            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+            next: () => this.getHeaders = requestsUtils.getHeaders()
         });
-        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.getHeaders = requestsUtils.getHeaders();
         this.lessonsUrl = environment.lessonsUrl;
     }
 

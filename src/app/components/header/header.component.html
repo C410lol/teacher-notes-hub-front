@@ -2,18 +2,20 @@
 
 
     <div class="gray-hover">
-        <img [routerLink]="['/cadernetas']" src="../../../assets/sticky-notes_10819693 (5).png">
+        <img [routerLink]="['/home']" src="../../../assets/sticky-notes_10819693 (5).png">
     </div>
 
 
     <div class="menu-txts-container">
         <div 
-        [routerLink]="['/cadernetas']"
-        [ngClass]="menuTab == 'cadernetas' || menuTab == '' ? 'menu-container-selected' : ''"
+        [routerLink]="['/home']"
+        [ngClass]="menuTab == 'home' || menuTab == '' ? 'menu-container-selected' : ''"
         class="gray-hover" 
         >
             <h1 class="menu-txt menu-txt-selected">Página Inicial</h1>
         </div>
+
+
         <div 
         *ngIf="role == 'ROLE_ADM'"
         [routerLink]="['/admin']"

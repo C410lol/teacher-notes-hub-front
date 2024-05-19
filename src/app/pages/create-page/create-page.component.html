@@ -10,11 +10,79 @@
 
 
     <div class="page-content-container">
+        <div class="select-option-container">
+            <div 
+            (click)="createType = 'teacher'"
+            [ngClass]="createType == 'teacher' ? 'selected-option' : ''"
+            class="gray-hover select-option">
+            Professor</div>
+
+
+            <div 
+            (click)="createType = 'admin'"
+            [ngClass]="createType == 'admin' ? 'selected-option' : ''"
+            class="gray-hover select-option">
+            Admin</div>
+        </div>
+
+
+
+
         <div class="page-inputs-container">
             <input class="page-input" type="text" placeholder="Nome" [(ngModel)]="name">
             <input class="page-input" type="text" placeholder="Email" [(ngModel)]="email">
             <input class="page-input" type="password" placeholder="Senha" [(ngModel)]="password">
             <input class="page-input" type="password" placeholder="Confirmar Senha" [(ngModel)]="confPassword">
+
+
+            <app-dropdown
+            *ngIf="createType == 'teacher'"
+            (searchItems)="getAllInstitutionsByName($event)"
+            (selectedValue)="institutionSelectedId = $event"
+            [elements]="institutions"
+            [inputClass]="'page-input'" [inputPlaceholder]="'Selecione a Instituição que deseja entrar'">
+            </app-dropdown>
+        </div>
+
+
+
+
+        <div *ngIf="createType == 'admin'" class="admin-selected-options-container">
+            <div class="select-option-container">
+                <div 
+                (click)="adminType = 'join'"
+                [ngClass]="adminType == 'join' ? 'selected-option' : ''"
+                class="gray-hover select-option">
+                Entrar em uma Instituição</div>
+
+
+                <div 
+                (click)="adminType = 'createInstitution'"
+                [ngClass]="adminType == 'createInstitution' ? 'selected-option' : ''"
+                class="gray-hover select-option">
+                Criar uma Instituição</div>
+            </div>
+
+
+
+
+            <div class="admin-selected-content-container">
+                <app-dropdown
+                *ngIf="adminType == 'join'"
+                (searchItems)="getAllInstitutionsByName($event)"
+                (selectedValue)="institutionSelectedId = $event"
+                [elements]="institutions"
+                [inputClass]="'page-input'" [inputPlaceholder]="'Selecione a Instituição que deseja entrar'">
+                </app-dropdown>
+
+
+                <input 
+                *ngIf="adminType == 'createInstitution'"
+                class="page-input" 
+                type="text" 
+                placeholder="Insira o nome da nova Instituição"
+                [(ngModel)]="institutionCreateName">
+            </div>
         </div>
 
 

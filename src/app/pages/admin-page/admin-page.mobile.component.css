@@ -1,28 +1,19 @@
 @media screen and (width <= 1014px) {
     
-    .notebooks-container {
-        width: 754px;
-        gap: 0;
-        row-gap: 20px;
-        grid-template-columns: 377px 377px;
-    }
-
-    .title-container {
-        width: 754px;
+    .tools-container {
+        grid-template-columns: auto auto;
     }
 
 }
 
 @media screen and (width <= 768px) {
 
-    .notebooks-container {
+    .page-input {
         width: 350px;
-        gap: 20px;
-        grid-template-columns: auto;
     }
 
-    .title-container {
-        width: 350px;
+    .tools-container {
+        grid-template-columns: auto;
     }
 
 }

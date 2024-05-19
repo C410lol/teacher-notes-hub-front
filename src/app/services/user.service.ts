@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment, requestsUtils } from 'src/environments/environment.development';
 import { CreationUserType } from '../types/Others/CreationUserType';
 import { UserType } from '../types/UserType';
 import { UserWithoutPasswordType } from '../types/Others/UserWithoutPasswordType';
@@ -21,9 +21,9 @@ export class UserService {
     eventService: EventService
     ) {
         eventService.refreshServices.subscribe({
-            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+            next: () => this.getHeaders = requestsUtils.getHeaders()
         });
-        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.getHeaders = requestsUtils.getHeaders();
         this.userUrl = environment.userUrl;
     }
 

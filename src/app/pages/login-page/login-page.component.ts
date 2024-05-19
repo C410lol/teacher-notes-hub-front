@@ -49,15 +49,14 @@ export class LoginPageComponent extends DialogParent {
             password: this.password.trim().replaceAll(' ', '')
         }).subscribe({
             next: (res) => {
-                if (res.body != null) {
-                    localStorage.setItem('token', res.body.token);
-                    localStorage.setItem('userId', res.body.userId);
+                if (res.body == null) return;
+
+                localStorage.setItem('userAuth', JSON.stringify(res.body));
           
-                    this.router.navigate(['/cadernetas']);
+                this.router.navigate(['/home']);
   
-                    this.eventService.triggerRefreshServices();
-                    this.eventService.triggerRefreshHeader();
-                }
+                this.eventService.triggerRefreshServices();
+                this.eventService.triggerRefreshHeader();
             },
             error: (err) => {
                 this.resetBtnProperties('Login');

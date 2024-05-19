@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EventService } from './event.service';
-import { environment } from 'src/environments/environment.development';
+import { environment, requestsUtils } from 'src/environments/environment.development';
 import { Observable } from 'rxjs';
 import { BNCCCodeType } from '../types/BNCCCodeType';
 
@@ -18,9 +18,9 @@ export class BnccService {
     eventService: EventService
     ) {
         eventService.refreshServices.subscribe({
-            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+            next: () => this.getHeaders = requestsUtils.getHeaders()
         });
-        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.getHeaders = requestsUtils.getHeaders();
         this.bnccUrl = environment.bnccUrl;
     }
 

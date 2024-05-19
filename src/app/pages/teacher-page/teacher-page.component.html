@@ -1,0 +1,9 @@
+<div class="teacher-page-container">
+    <app-notebooks
+    [userId]="teacherId"
+    [notebooksState]="notebooksState"
+    [notebooksList]="notebooks"
+    [selectedBimester]="bimesterFilter"
+    (filterByBimesterEvent)="changeBimesterFilter($event)">
+    </app-notebooks>
+</div>
