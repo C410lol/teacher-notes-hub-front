@@ -39,7 +39,7 @@ export class AdminService {
     let url = `${this.adminUrl}/create`;
 
     if (institutionId != null && institutionId.length > 0) {
-      url.concat(`?institutionId=${institutionId}`);
+      url = url.concat(`?institutionId=${institutionId}`);
     }
 
     return this.httpClient.post<AuthReturnType>(

@@ -14,17 +14,17 @@
 
 
         <div class="tools-container">
-            <div class="tool page-gray-hover">
+            <div (click)="navigateToPages('admins')" class="tool page-gray-hover">
                 <img src="../../../assets/setting.png">
                 <p class="tool-txt">Admins</p>
             </div>
 
-            <div class="tool page-gray-hover">
+            <div (click)="navigateToPages('teachers')" class="tool page-gray-hover">
                 <img src="../../../assets/teacher.png">
                 <p class="tool-txt">Professores</p>
             </div>
 
-            <div class="tool page-gray-hover">
+            <div (click)="navigateToPages('students')" class="tool page-gray-hover">
                 <img src="../../../assets/graduation.png">
                 <p class="tool-txt">Alunos</p>
             </div>
