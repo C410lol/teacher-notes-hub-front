@@ -14,16 +14,6 @@
         >
             <h1 class="menu-txt menu-txt-selected">Página Inicial</h1>
         </div>
-
-
-        <div 
-        *ngIf="role == 'ROLE_ADM'"
-        [routerLink]="['/admin']"
-        [ngClass]="menuTab == 'admin' ? 'menu-container-selected' : ''"
-        class="gray-hover"
-        >
-            <h1 class="menu-txt">Admin</h1>
-        </div>
     </div>
 
 
