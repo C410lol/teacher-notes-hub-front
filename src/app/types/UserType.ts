@@ -6,5 +6,5 @@ export type UserType = {
     email: string,
     role: string,
     institution: InstitutionType,
-    notebooks: number
+    notebooks?: number
 }
