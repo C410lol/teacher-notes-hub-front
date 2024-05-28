@@ -116,6 +116,14 @@
     background-color: #e03437b9;
 }
 
+.purple-btn {
+    background-color: #7932a8;
+}
+
+.purple-btn:hover {
+    background-color: #7932a8ce;
+}
+
 .yellow-btn {
     background-color: #ebc622;
 }
