@@ -65,18 +65,6 @@
     </div>
 
 
-    <div *ngSwitchCase="'unverified'" class="error-container">
-        <div>
-            <img src="../../../assets/alert_12832889.png">
-            <h1 class="error-title">Parece que sua conta ainda não foi verificada!</h1>
-        </div>
-        <div>
-            <p class="error-txt">Se você não recebeu o email de verificação, clique abaixo para enviar novamente</p>
-            <button (click)="resendVerificationEmail()" class="error-btn">Reenviar</button>
-        </div>
-    </div>
-
-
     <div *ngSwitchCase="'error'" class="error-container">
         <div>
             <img src="../../../assets/close_12833099.png">
