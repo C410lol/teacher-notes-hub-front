@@ -53,11 +53,11 @@ export class ChangePasswordPageComponent extends DialogParent {
             this.switchStatusMode();
             return;
         }
-        this.userService.changePassword(this.userId, this.vCode, this.password.trim().replaceAll(' ', ''))
+        this.userService.changePassword(this.userId, this.password.trim().replaceAll(' ', ''))
             .subscribe({
                 next: () => this.currentStatus = 'success',
                 error: () => this.currentStatus = 'error'
-            });
+        });
     }
 
     isTheSamePassword(): boolean {
