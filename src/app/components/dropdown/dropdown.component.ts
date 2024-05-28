@@ -15,6 +15,9 @@ export class DropdownComponent {
   @Input() inputPlaceholder: string = '';
 
 
+  @Input() dropDownWidth: string = '360px';
+
+
   @Output() searchItems: EventEmitter<string> = new EventEmitter<string>();
   @Output() selectedValue: EventEmitter<any> = new EventEmitter<any>();
 

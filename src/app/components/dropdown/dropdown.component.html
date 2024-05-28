@@ -7,7 +7,7 @@ type="text"
 [placeholder]="inputPlaceholder"
 [(ngModel)]="inputText">
 
-<div *ngIf="isInputFocus" class="dropdown-container">
+<div *ngIf="isInputFocus" [style.width]="dropDownWidth" class="dropdown-container">
     <div 
     (click)="selectValue(element.value); inputText = element.content"
     *ngFor="let element of elements"
