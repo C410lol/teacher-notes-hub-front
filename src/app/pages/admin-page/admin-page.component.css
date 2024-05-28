@@ -25,12 +25,18 @@
 
 
 
+.content-container {
+    margin-top: 35px;
+}
+
+
+
+
 .tools-container {
     margin-top: 25px;
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 25px 100px;
-    justify-content: center;
 }
 
 .tool {

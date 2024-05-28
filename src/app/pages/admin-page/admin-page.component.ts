@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { OutletContext, Router } from '@angular/router';
+import { InstitutionService } from 'src/app/services/institution.service';
 
 @Component({
     selector: 'app-admin-page',
@@ -14,25 +15,62 @@ import { Router } from '@angular/router';
 })
 export class AdminPageComponent implements OnInit {
 
+    @Output() openInstitutionDialog: EventEmitter<void> = new EventEmitter<void>();
+
+
     @Input() adminId: string = '';
     @Input() adminRole: string = 'ROLE_ADM';
 
 
+    @Input() hasInstitution: boolean = false;
     @Input() institutionId?: string = '';
     @Input() institutionName?: string = 'Carregando...';
 
 
+    isInputFocus: boolean = false;
+    institutionOGname?: string;
+
 
 
     constructor(
-        private router: Router
+        private router: Router,
+        private institutionService: InstitutionService
     ) {
 
     }
 
 
     ngOnInit(): void {
-        
+        this.institutionOGname = this.institutionName;
+    }
+
+
+
+
+    checkIfIsOGname(): void {
+        if (this.institutionName?.trim() != this.institutionOGname) { 
+            this.isInputFocus = true 
+        } else this.isInputFocus = false;
+    }
+
+
+    closeButton(): void {
+        setTimeout(() => {
+           this.isInputFocus = false; 
+        }, 250);
+    }
+
+
+    editInstitutionName(): void {
+        if (this.institutionId == null || this.institutionName == null) return;
+        this.institutionService.editInstitution(
+            this.institutionId, 
+            { 
+                name: this.institutionName.trim()
+            }).subscribe({
+            next: () => location.reload(),
+            error: (err) => console.error(err)
+        });
     }
 
 

@@ -1,33 +1,63 @@
 <div class="admin-page-container">
-    <div class="institution-container">
-        <img class="institution-img" src="../../../assets/home (1).png">
+    <div *ngIf="hasInstitution">
+        <div class="institution-container">
+            <img class="institution-img" src="../../../assets/home (1).png">
+    
+    
+            <input 
+            (focus)="checkIfIsOGname()"
+            (blur)="closeButton()"
+            (input)="checkIfIsOGname()"
+            class="page-input" 
+            [disabled]="adminRole == 'ROLE_ADM'"
+            [(ngModel)]="institutionName">
 
 
-        <input class="page-input" [(ngModel)]="institutionName" disabled="true">
+            <button 
+            *ngIf="isInputFocus"
+            (click)="editInstitutionName()"
+            [style.color]="'#E0E0E0'"
+            class="page-btn purple-btn">
+            Salvar</button>
+        </div>
+    
+    
+    
+    
+        <div class="content-container">
+            <p class="page-top-txt">Ferramentas</p>
+    
+    
+            <div class="tools-container">
+                <div *ngIf="adminRole == 'ROLE_SUPER'" (click)="navigateToPages('admins')" class="tool page-gray-hover">
+                    <img src="../../../assets/setting.png">
+                    <p class="tool-txt">Admins</p>
+                </div>
+    
+                <div (click)="navigateToPages('teachers')" class="tool page-gray-hover">
+                    <img src="../../../assets/teacher.png">
+                    <p class="tool-txt">Professores</p>
+                </div>
+    
+                <div (click)="navigateToPages('students')" class="tool page-gray-hover">
+                    <img src="../../../assets/graduation.png">
+                    <p class="tool-txt">Alunos</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
 
-    <div class="content-container">
-        <p class="page-top-txt">Ferramentas</p>
-
-
-        <div class="tools-container">
-            <div (click)="navigateToPages('admins')" class="tool page-gray-hover">
-                <img src="../../../assets/setting.png">
-                <p class="tool-txt">Admins</p>
-            </div>
-
-            <div (click)="navigateToPages('teachers')" class="tool page-gray-hover">
-                <img src="../../../assets/teacher.png">
-                <p class="tool-txt">Professores</p>
-            </div>
-
-            <div (click)="navigateToPages('students')" class="tool page-gray-hover">
-                <img src="../../../assets/graduation.png">
-                <p class="tool-txt">Alunos</p>
-            </div>
+    <div *ngIf="!hasInstitution" class="error-container">
+        <div>
+            <img src="../../../assets/search_11756156.png">
+            <h1 class="error-title">Parece que você não tem Instituição!</h1>
+        </div>
+        <div>
+            <p class="error-txt">Clique no botão abaixo para entrar/criar uma</p>
+            <button (click)="openInstitutionDialog.emit()" class="error-btn">Entrar/Criar Instituição</button>
         </div>
     </div>
 </div>
