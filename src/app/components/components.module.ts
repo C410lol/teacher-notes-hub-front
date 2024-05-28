@@ -26,6 +26,8 @@ import { ConfirmBtnComponent } from './dialog-elements/dialog-shared-elements/co
 import { StudentPerformanceListElementComponent } from './list-elements/student-performance-list-element/student-performance-list-element.component';
 import { AttendanceDialogListElement2Component } from './list-elements/attendance-dialog-list-element-2/attendance-dialog-list-element-2.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { InstitutionDialogComponent } from './dialog-elements/institution-dialog/institution-dialog.component';
+import { StudentDialogComponent } from './dialog-elements/student-dialog/student-dialog.component';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
         StudentPerformanceListElementComponent,
         AttendanceDialogListElement2Component,
         DropdownComponent,
+        InstitutionDialogComponent,
+        StudentDialogComponent,
     ],
     exports: [
         HeaderComponent,
@@ -74,7 +78,9 @@ import { DropdownComponent } from './dropdown/dropdown.component';
         UserListElementComponent,
         NotebooksComponent,
         StudentPerformanceListElementComponent,
-        DropdownComponent
+        DropdownComponent,
+        InstitutionDialogComponent,
+        StudentDialogComponent
     ],
     imports: [
         CommonModule,
