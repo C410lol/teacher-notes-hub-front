@@ -15,13 +15,13 @@ import { UserPageComponent } from '../pages/user-page/user-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
-import { VerifyAccountPageComponent } from './verify-account-page/verify-account-page.component';
-import { ChangePasswordRequestPageComponent } from './change-password-request-page/change-password-request-page.component';
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
 import { StudentsPerformancePageComponent } from './students-performance-page/students-performance-page.component';
 import { TeacherPageComponent } from './teacher-page/teacher-page.component';
+import { TeachersListPageComponent } from './teachers-list-page/teachers-list-page.component';
+import { StudentsPageComponent } from './students-page/students-page.component';
 
 @NgModule({
     declarations: [
@@ -36,13 +36,13 @@ import { TeacherPageComponent } from './teacher-page/teacher-page.component';
         LoginPageComponent,
         CreatePageComponent,
         NotFoundPageComponent,
-        VerifyAccountPageComponent,
-        ChangePasswordRequestPageComponent,
         ChangePasswordPageComponent,
         AdminPageComponent,
         TeacherNotebooksPageComponent,
         StudentsPerformancePageComponent,
         TeacherPageComponent,
+        TeachersListPageComponent,
+        StudentsPageComponent,
     ],
     exports: [
         PagesComponent,
@@ -53,8 +53,6 @@ import { TeacherPageComponent } from './teacher-page/teacher-page.component';
         SingleLessonPageComponent,
         SingleWorkPageComponent,
         UserPageComponent,
-        VerifyAccountPageComponent,
-        ChangePasswordRequestPageComponent,
         ChangePasswordPageComponent,
         AdminPageComponent,
         TeacherNotebooksPageComponent
