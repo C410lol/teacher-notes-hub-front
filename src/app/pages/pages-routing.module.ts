@@ -13,6 +13,8 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { ChangePasswordPageComponent } from './change-password-page/change-password-page.component';
 import { StudentsPerformancePageComponent } from './students-performance-page/students-performance-page.component';
 import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
+import { TeachersListPageComponent } from './teachers-list-page/teachers-list-page.component';
+import { StudentsPageComponent } from './students-page/students-page.component';
 
 
 const childRoutes: Routes = [
@@ -50,10 +52,14 @@ const routes: Routes = [
     { path: 'cadernetas', children: childRoutes },
     { path: 'institution', children: [
         { path: ':institutionId', children: [
-            //{ path: 'admins' },
-            //{ path: 'students' },
+            { path: 'admins', children: [
+                { path: '', component: TeachersListPageComponent }
+            ]},
+            { path: 'students', children: [
+                { path: '', component: StudentsPageComponent }
+            ]},
             { path: 'teachers', children: [
-                //{ path: '' },
+                { path: '', component: TeachersListPageComponent },
                 { path: ':teacherId', children: [
                     //{ path: '' },
                     { path: 'cadernetas', children: [
