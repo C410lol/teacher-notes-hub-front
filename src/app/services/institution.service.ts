@@ -61,4 +61,22 @@ export class InstitutionService {
     )
   }
 
+
+
+
+  editInstitution(
+    institutionId: string,
+    institutionObject: CreationInstitutionType
+  ): Observable<HttpResponse<string>> {
+    return this.httpClient.put<string>(
+      `${this.institutionUrl}/${institutionId}/edit`,
+      institutionObject,
+      {
+        headers: this.getHeaders,
+        responseType: 'text' as 'json',
+        observe: 'response' 
+      }
+    );
+  }
+
 }

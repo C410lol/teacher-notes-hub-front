@@ -49,4 +49,18 @@ export class AdminService {
     );
   }
 
+
+
+
+  getAllAdminsByInstitutionId(
+    institutionId: string
+  ): Observable<HttpResponse<UserType[]>> {
+    return this.httpClient.get<UserType[]>(
+      `${this.adminUrl}/${institutionId}/all`,
+      {
+        headers: this.getHeaders,
+        observe: 'response'
+      }
+    );
+  }
 }

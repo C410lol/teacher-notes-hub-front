@@ -48,4 +48,19 @@ export class TeacherService {
     );
   }
 
+
+
+
+  getAllTeachersByInstitutionId(
+    institutionId: string
+  ): Observable<HttpResponse<UserType[]>> {
+    return this.httpClient.get<UserType[]>(
+      `${this.teacherUrl}/${institutionId}/all`,
+      { 
+        headers: this.getHeaders,
+        observe: 'response' 
+      },
+    );
+  }
+
 }
