@@ -6,8 +6,15 @@
 </app-status-dialog>
 
 
+<app-institution-dialog
+*ngIf="isMode01"
+[userId]="userId" [isAdmin]="userRole == 'ROLE_ADM'"
+(cancelEmitter)="switchMode01()" (confirmEmitter)="refreshPage()">
+</app-institution-dialog>
+
+
 <app-sort-dialog
-*ngIf="isMode01" 
+*ngIf="isMode02" 
 [orderByElementsList]="[
 {value: 'classe', name: 'Classe'},
 {value: 'subject', name: 'Matéria'},
@@ -16,16 +23,16 @@
 {value: 'createDate', name: 'Data'}]" 
 [totalPages]="totalPages"
 [orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
-(cancelButtonClick)="switchMode01()"
-(confirmButtonClick)="receiveSortValues($event); switchMode01()">
+(cancelButtonClick)="switchMode02()"
+(confirmButtonClick)="receiveSortValues($event); switchMode02()">
 </app-sort-dialog>
 
 
 <app-notebook-dialog
-*ngIf="isMode02"
+*ngIf="isMode03"
 [teacherId]="userId"
 [type]="'create'" [title]="'Criar Caderneta'"
-(cancelButtonClick)="switchMode02()" (confirmButtonClick)="triggerRefreshNotebooks(); switchMode02()">
+(cancelButtonClick)="switchMode03()" (confirmButtonClick)="triggerRefreshNotebooks(); switchMode03()">
 </app-notebook-dialog>
 
 
@@ -57,16 +64,25 @@
 
                     <div class="subinfo-container">
                         <img src="../../../assets/home.png">
-                        <div class="role-container"><p class="role-txt">{{userInstitution?.name}}</p></div>
+                        <div class="role-container">
+                            <p 
+                            *ngIf="userInstitution == null" 
+                            (click)="switchMode01()"
+                            class="role-txt enter-institution-txt">
+                            ENTRAR EM UMA INSTITUIÇÃO</p>
+
+
+                            <p *ngIf="userInstitution != null" class="role-txt">{{userInstitution.name}}</p>
+                        </div>
                     </div>
                 </div>
         
         
                 <div *ngIf="userRole == 'ROLE_TCHR'" class="notebook-use-container">
-                    <div (click)="switchMode01()" class="notebook-sort-container gray-hover">
+                    <div (click)="switchMode02()" class="notebook-sort-container gray-hover">
                         <img class="sort-img gray-hover" src="../../../assets/document.png">
                     </div>
-                    <button (click)="switchMode02()" class="notebook-create-btn gray-hover">
+                    <button (click)="switchMode03()" class="notebook-create-btn gray-hover">
                         <p class="plus-txt">+</p>
                         <p class="new-notebook-txt">Nova Caderneta</p>
                     </button>
@@ -80,7 +96,9 @@
                 <app-admin-page
                 *ngIf="userRole == 'ROLE_ADM' || userRole == 'ROLE_SUPER'"
                 [adminId]="userId" [adminRole]="userRole"
-                [institutionId]="userInstitution?.id" [institutionName]="userInstitution?.name">
+                [hasInstitution]="userInstitution != null"
+                [institutionId]="userInstitution?.id" [institutionName]="userInstitution?.name"
+                (openInstitutionDialog)="switchMode01()">
                 </app-admin-page>
 
 

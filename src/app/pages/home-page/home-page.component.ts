@@ -57,11 +57,15 @@ export class HomePageComponent extends DialogParent implements OnInit {
 
     loadPageInfo(): void {
         const lStorage = localStorage.getItem('userAuth');
-        if (lStorage == null) { this.currentState = 'unlogged'; return; }
+        if (lStorage == null) { 
+            this.currentState = 'unlogged'; 
+            return; 
+        }
 
         const userAuth: AuthReturnType = JSON.parse(lStorage);
         if (userAuth.userId == null || userAuth.token == null) {
             this.currentState == 'unlogged';
+            localStorage.removeItem('userAuth');
             return;
         }
 
@@ -81,8 +85,12 @@ export class HomePageComponent extends DialogParent implements OnInit {
                 this.userInstitution = user.institution;
 
                 this.currentState = 'loaded';
+            },
+            error: (err) => {
+                this.currentState = 'error',
+                console.error(err);
             }
-        })
+        });
     }
 
 

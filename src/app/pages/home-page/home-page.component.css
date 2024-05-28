@@ -66,9 +66,19 @@ h1 {
 }
 
 .role-txt {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #ffb7b7f3;
     font-size: small;
     background-color: transparent;
+}
+
+.enter-institution-txt:hover {
+    cursor: pointer;
+    color: #3913c4;
 }
 
 

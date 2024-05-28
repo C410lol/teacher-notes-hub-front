@@ -25,4 +25,8 @@
         width: 350px;
     }
 
+    .role-container {
+        max-width: 100px;
+    }
+
 }
