@@ -139,7 +139,7 @@ export class CreatePageComponent extends DialogParent {
                     
                     if (res.body != null) {
                         this.institutionService.createInstitution(
-                            { name: this.institutionCreateName },
+                            { name: this.institutionCreateName.trim() },
                             res.body.userId,
                             res.body.token
                         ).subscribe();
@@ -148,7 +148,7 @@ export class CreatePageComponent extends DialogParent {
 
                 this.setStatus(
                     'Conta Criada Com Sucesso!', 
-                    'Uma mensagem foi enviada ao seu email para verificar sua conta',
+                    'Conta criada com sucesso!',
                     'success'
                 );
                 this.switchStatusMode();  
