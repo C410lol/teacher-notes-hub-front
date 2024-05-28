@@ -6,7 +6,6 @@ export type NotebookType = {
     bimester: string,
     status?: string,
     createDate?: string,
-    students?: number,
     lessons?: number,
     works?: number,
 
