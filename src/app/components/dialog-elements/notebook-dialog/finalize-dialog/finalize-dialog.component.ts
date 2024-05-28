@@ -119,8 +119,11 @@ export class FinalizeDialogComponent extends DialogParent implements OnInit {
       this.notebookService.verifyMissingTasks(this.notebookId).subscribe({
           next: (res) => {
               if(res.status == HttpStatusCode.NoContent) { this.finalizeNotebook(); return; } 
+
               this.setStatusContent('Você possue aula(s)/ferramenta(s) sem chamada/notas');
               this.switchStatusMode();
+              this.resetBtnProperties('Finalizar');
+
           },
           error: () => {
               this.setStatusContent(environment.simpleErrorMessage);
