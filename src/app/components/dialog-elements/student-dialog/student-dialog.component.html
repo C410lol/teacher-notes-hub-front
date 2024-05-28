@@ -1,0 +1,77 @@
+<div class="student-dialog-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">{{title}}</h1>
+        <div (click)="cancelButtonClick.emit()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
+        <div>
+            <p>*Nome:</p>
+            <input class="dialog-input" type="text" placeholder="Insira o nome do aluno (obrigatório)"
+            [(ngModel)]="studentName">
+        </div>
+
+
+        <div>
+            <p>*Turma:</p>
+
+
+            <input *ngIf="type == 'create'" class="dialog-input disabled-input" type="text" disabled="true" 
+            [(ngModel)]="studentClasse">
+
+
+            <select 
+            *ngIf="type == 'edit'"
+            [(ngModel)]="studentClasse" class="dialog-select">
+                <option value="Ensino_Fundamental_6_A">Ensino Fundamental 6-A</option>
+                <option value="Ensino_Fundamental_6_B">Ensino Fundamental 6-B</option>
+                <option value="Ensino_Fundamental_7_A">Ensino Fundamental 7-A</option>
+                <option value="Ensino_Fundamental_7_B">Ensino Fundamental 7-B</option>
+                <option value="Ensino_Fundamental_8_A">Ensino Fundamental 8-A</option>
+                <option value="Ensino_Fundamental_9_A">Ensino Fundamental 9-A</option>
+                <option value="Ensino_Fundamental_9_B">Ensino Fundamental 9-B</option>
+                <option value="Ensino_Médio_1_A">Ensino Médio 1-A</option>
+                <option value="Ensino_Médio_2_A">Ensino Médio 2-A</option>
+                <option value="Ensino_Médio_3_A">Ensino Médio 3-A</option>
+            </select>
+        </div>
+
+
+        <div>
+            <p>É ordenado?:</p>
+            <select [(ngModel)]="studentIsOrder" class="dialog-select">
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+            </select>
+        </div>
+    </div>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+            <img src="../../../../assets/alert_7586991.png">
+            <p>Alunos ordenados entrarão na lista alfabética</p>
+        </div>
+
+
+        <div>
+            <app-confirm-btn
+            [isClicked]="isClicked" [text]="btnText"
+            (clickEvent)="confirmClickEvent()">
+            </app-confirm-btn>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="mask-filter"></div>
