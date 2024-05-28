@@ -40,10 +40,10 @@
 
 .selected-codes {
   height: 25px;
-  background-color: #857597;
+  padding: 2.5px 0px;
+  background-color: #9943d3bd;
   display: grid !important;
   grid-template-columns: 80% auto !important;
-  border: 1px solid #464646b7;
   border-radius: 5px;
 }
 
