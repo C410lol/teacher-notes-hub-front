@@ -4,13 +4,43 @@
 
 .user-list-element-container {
     width: 225px;
-    height: 300px;
-    padding: 10px;
-    border-radius: 5px;
+    height: auto;
+    padding: 20px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #aa49eb;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    background-color: #7e7e7e !important;
+    gap: 20px;
+    background-color: #E0E0E0 !important;
+}
+
+.user-list-element-container:hover {
+    cursor: pointer;
+    background-color: #dbdbdbb0 !important;
+}
+
+
+
+
+.top-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.more-img-container {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.more-img-container:hover {
+    cursor: pointer;
+    background-color: #b3b3b3b0;
 }
 
 
@@ -30,15 +60,15 @@
 
 
 .header-container {
-    width: 100%;
-    height: 175px;
+    height: auto;
+    padding: 15px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background-color: #999999;
+    background-color: #9c70c5b6;
 }
 
 
