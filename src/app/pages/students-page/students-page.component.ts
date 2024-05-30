@@ -1,3 +1,4 @@
+import { HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentService } from 'src/app/services/student.service';
@@ -26,12 +27,12 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
 
   studentsState: string = 'empty';
   studentsList: StudentType[] | null = null;
+  totalPages: number = 1;
 
 
-//  isInflated: boolean = false;
-//  positionX: number = 0;
-//  positionY: number = 0;
-//  inflatedStudentId: string = '';
+  sortBy: string = 'number';
+  direction: string = 'asc';
+  pageNum: number = 1;
 
 
 
@@ -60,10 +61,40 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
 
 
   getStudents(): void {
-    this.studentService.getStudentsByInstitutionAndClasse(this.institutionId, this.selectedClasse).subscribe({
-      next: (res) => { this.studentsList = res.body; this.studentsState = 'loaded' },
+    this.studentService.getStudentsByInstitutionAndClasse(
+      this.institutionId, 
+      this.selectedClasse,
+      this.sortBy,
+      this.direction,
+      this.pageNum - 1
+    ).subscribe({
+      next: (res) => { 
+        if (res.status == HttpStatusCode.NoContent) { this.studentsState = 'empty'; return; }
+
+        const body = res.body;
+        if (body == null) { this.studentsState = 'error'; return; }
+
+        this.studentsList = body.content; 
+        this.studentsState = 'loaded';
+      },
       error: (err) => { this.studentsState = 'error'; console.error(err); }
     });
+  }
+
+
+
+
+  receiveSortValues(values: Map<string, string>): void {
+    const val0 = values.get('sortBy');
+    const val1 = values.get('direction');
+    const val2 = values.get('pageNum');
+
+    if (val0 != null && val1 != null && val2 != null) {
+        this.sortBy = val0;
+        this.direction = val1;
+        this.pageNum = Number.parseInt(val2);
+        this.getStudents();
+    }
   }
 
 
@@ -73,12 +104,10 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
     this.clickedStudentId = student.id;
     this.clickedStudentName = student.name;
     this.clickedStudentIsOrder = student.isOrder;
-    console.log("BBBBBBBBB");
   } 
 
 
   deleteStudentClick(studentId: string): void {
-    console.log("AAAAAAAA");
     this.clickedStudentId = studentId;
     this.switchMode03();
   }
@@ -90,20 +119,5 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
     location.reload();
   }
 
-//  inflateContainer(array: string[]): void {
-//    if (array[0] != this.inflatedStudentId) {
-//      this.isInflated = true;
-//      this.inflatedStudentId = array[0];
-//
-//      this.positionX = Number.parseInt(array[1]);
-//      this.positionY = Number.parseInt(array[2]);
-//
-//      const pageWidth = window.innerWidth;
-//      const pageHeigth = window.innerHeight;
-//
-//      if (this.positionX + 165 > pageWidth) this.positionX = pageWidth - (165 + 20);
-//      if (this.positionY + 80 > pageHeigth) this.positionY = pageHeigth - (80 + 20);
-//    } else this.isInflated = !this.isInflated;  
-//  }
 
 }
