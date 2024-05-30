@@ -4,6 +4,7 @@ import { environment, requestsUtils } from 'src/environments/environment.develop
 import { StudentType } from '../types/StudentType';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { EventService } from './event.service';
+import { PageType } from '../types/Others/PageType';
 
 @Injectable({
     providedIn: 'root'
@@ -60,12 +61,18 @@ export class StudentService {
 
     getStudentsByInstitutionAndClasse(
         institutionId: string,
-        classe?: string
-    ): Observable<HttpResponse<StudentType[]>> {
+        classe?: string,
+        sortby?: string, 
+        direction?: string, 
+        pageNum?: number
+    ): Observable<HttpResponse<PageType<StudentType>>> {
         let url = `${this.studentUrl}/${institutionId}/all`;
         if (classe != null) url = url.concat(`?classe=${classe}`);
+        if (sortby != null) url = url.concat(`&sortyBy=${sortby}`);
+        if (direction != null) url = url.concat(`&direction=${direction}`);
+        if (pageNum != null) url = url.concat(`&pageNum=${pageNum}`);
 
-        return this.httpClient.get<StudentType[]>(
+        return this.httpClient.get<PageType<StudentType>>(
             url,
             {
                 headers: this.getHeaders,

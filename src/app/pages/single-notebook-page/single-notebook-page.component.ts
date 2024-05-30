@@ -10,7 +10,7 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
     templateUrl: './single-notebook-page.component.html',
     styleUrls: [
         './single-notebook-page.component.css',
-        '../pages-shared-styles/css-shared-styles.css',
+        '../pages-shared-styles/css-shared-styles.css'
     ]
 })
 export class SingleNotebookPageComponent extends DialogParent implements OnInit {

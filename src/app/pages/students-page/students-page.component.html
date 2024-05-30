@@ -1,13 +1,3 @@
-<!--
-<div 
-*ngIf="isInflated" 
-class="inflate-container"
-[style.top.px]="positionY"
-[style.left.px]="positionX"
->
-<div class="inflate-child"><p class="red-txt">Excluir Aluno</p></div>
-</div>
--->
 <app-student-dialog
 *ngIf="isMode01"
 [institutionId]="institutionId"
@@ -37,6 +27,17 @@ content="Deseja realmente deletar esse aluno? Não é possível reverter essa a�
 </app-delete-dialog>
 
 
+<app-sort-dialog
+*ngIf="isMode04" [orderByElementsList]="[
+{value: 'name', name: 'Nome'},
+{value: 'number', name: 'Número'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode04()"
+(confirmButtonClick)="receiveSortValues($event); switchMode04()">
+</app-sort-dialog>
+
+
 
 
 <app-back-arrow></app-back-arrow>
@@ -64,7 +65,7 @@ content="Deseja realmente deletar esse aluno? Não é possível reverter essa a�
 
 
         <div class="page-use-container">
-            <div class="page-sort-container page-gray-hover">
+            <div (click)="switchMode04()" class="page-sort-container page-gray-hover">
                 <img class="page-sort-img page-gray-hover" src="../../../assets/document.png">
             </div>
             <button (click)="switchMode01()" class="page-create-btn page-gray-hover">

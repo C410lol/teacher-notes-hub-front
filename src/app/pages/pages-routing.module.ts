@@ -47,7 +47,7 @@ const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
     { path: 'criar', component: CreatePageComponent },
     { path: 'user', component: UserPageComponent },
-    { path: 'change-password', children: [ { path: ':userId', component: ChangePasswordPageComponent } ] },
+    { path: 'change-password', component: ChangePasswordPageComponent },
     { path: 'home', component: HomePageComponent },
     { path: 'cadernetas', children: childRoutes },
     { path: 'institution', children: [

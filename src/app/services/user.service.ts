@@ -68,6 +68,17 @@ export class UserService {
         });
     }
 
+    getUserByEmail(
+        email: string
+    ): Observable<HttpResponse<UserType>> {
+        return this.httpClient.get<UserType>(
+            `${this.userUrl}/get-by-email?email=${email}`,
+            {
+                observe: 'response'
+            }
+        );
+    }
+
 
 
 
