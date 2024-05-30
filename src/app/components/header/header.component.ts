@@ -20,7 +20,7 @@ export class HeaderComponent {
 
   @Input() type: string = '';
 
-  menuTab: string = 'cadernetas';
+  menuTab: string = 'home';
 
   isUserTabFocus: boolean = false;
 

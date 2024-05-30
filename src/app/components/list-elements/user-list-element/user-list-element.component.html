@@ -1,4 +1,14 @@
 <div class="user-list-element-container">
+    <div class="top-container">
+        <p>{{getTypeName()}}</p>
+        <div *ngIf="type == 'students'" (click)="deleteStudentEvent($event)" class="more-img-container">
+            <img class="more-img" src="../../../../assets/delete.png">
+        </div>
+    </div>
+
+
+
+
     <div class="header-container">
         <img src="../../../../assets/user (3).png">
         <p class="truncate-txt">{{username}}</p>
@@ -11,8 +21,7 @@
         <p class="email-txt truncate-txt">{{email}}</p>
 
 
-        <div class="notebooks-length-container">
-            <p>Cadernetas:</p>
+        <div *ngIf="type == 'teachers' || type == 'students'" class="notebooks-length-container">
             <p>{{notebooksLength}}</p>
         </div>
     </div>
@@ -20,7 +29,7 @@
 
 
 
-    <div class="footer-container">
+    <div *ngIf="type == 'teachers'" class="footer-container">
         <button (click)="navigateToTeacherNotebooks()" class="notebook-btn">Ver Cadernetas</button>
     </div>
 </div>

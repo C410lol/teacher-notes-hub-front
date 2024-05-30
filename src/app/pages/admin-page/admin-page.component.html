@@ -1,72 +1,63 @@
 <div class="admin-page-container">
-    <div [ngSwitch]="currentState">
-        <div *ngSwitchCase="'loading'" class="error-container">
-            <div>
-                <img src="../../../assets/redo_12108539.png">
-                <h1>Carregando recursos...</h1>
-            </div>
-        </div>
+    <div *ngIf="hasInstitution">
+        <div class="institution-container">
+            <img class="institution-img" src="../../../assets/home (1).png">
+    
+    
+            <input 
+            (focus)="checkIfIsOGname()"
+            (blur)="closeButton()"
+            (input)="checkIfIsOGname()"
+            class="page-input" 
+            [disabled]="adminRole == 'ROLE_ADM'"
+            [(ngModel)]="institutionName">
 
 
-
-
-        <div *ngSwitchCase="'loaded'">
-            <div class="title-container">
-                <div class="user-info-container">
-                    <h1 class="user-txt">Página do Admin</h1>
-                </div>
-            </div>
-        
-            <div [ngSwitch]="teachersStatus">
-                <div *ngSwitchCase="'loading'" class="error-container">
-                    <div>
-                        <img src="../../../assets/redo_12108539.png">
-                        <h1>Carregando professores...</h1>
-                    </div>
-                </div>
-
-                <div *ngSwitchCase="'loaded'" class="notebooks-container">
-                    <app-user-list-element
-                    *ngFor="let user of usersList"
-                    [id]="user.id" [username]="user.name"
-                    [email]="user.email" [notebooksLength]="user.notebooks">
-                    </app-user-list-element>
-                </div>
-            
-            
-                <div *ngSwitchCase="'empty'" class="error-container">
-                    <div>
-                        <img src="../../../assets/search_11756156.png">
-                        <h1 class="error-title">Nenhum professor cadastrado</h1>
-                    </div>
-                </div>
-
-
-                <div *ngSwitchCase="'error'" class="error-container">
-                    <div>
-                        <img src="../../../assets/close_12833099.png">
-                        <h1 class="error-title">Ops, algo deu errado ao carregar os professores :(</h1>
-                    </div>
-                    <div>
-                        <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
-                        <button class="error-btn">Recarregar</button>
-                    </div>
-                </div>
-            </div>
+            <button 
+            *ngIf="isInputFocus"
+            (click)="editInstitutionName()"
+            [style.color]="'#E0E0E0'"
+            class="page-btn purple-btn">
+            Salvar</button>
         </div>
     
     
     
     
-        <div *ngSwitchCase="'error'" class="error-container">
-            <div>
-                <img src="../../../assets/close_12833099.png">
-                <h1 class="error-title">Ops, algo deu errado :(</h1>
+        <div class="content-container">
+            <p class="page-top-txt">Ferramentas</p>
+    
+    
+            <div class="tools-container">
+                <div *ngIf="adminRole == 'ROLE_SUPER'" (click)="navigateToPages('admins')" class="tool page-gray-hover">
+                    <img src="../../../assets/setting.png">
+                    <p class="tool-txt">Admins</p>
+                </div>
+    
+                <div (click)="navigateToPages('teachers')" class="tool page-gray-hover">
+                    <img src="../../../assets/teacher.png">
+                    <p class="tool-txt">Professores</p>
+                </div>
+    
+                <div (click)="navigateToPages('students')" class="tool page-gray-hover">
+                    <img src="../../../assets/graduation.png">
+                    <p class="tool-txt">Alunos</p>
+                </div>
             </div>
-            <div>
-                <p class="error-txt">Algo não está funcionando como deveria, clique no botão abaixo para recarregar a página</p>
-                <button class="error-btn">Recarregar</button>
-            </div>
+        </div>
+    </div>
+
+
+
+
+    <div *ngIf="!hasInstitution" class="error-container">
+        <div>
+            <img src="../../../assets/search_11756156.png">
+            <h1 class="error-title">Parece que você não tem Instituição!</h1>
+        </div>
+        <div>
+            <p class="error-txt">Clique no botão abaixo para entrar/criar uma</p>
+            <button (click)="openInstitutionDialog.emit()" class="error-btn">Entrar/Criar Instituição</button>
         </div>
     </div>
 </div>

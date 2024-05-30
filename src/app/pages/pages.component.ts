@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { UserService } from '../services/user.service';
+import { AuthReturnType } from '../types/Others/AuthReturnType';
 
 @Component({
     selector: 'app-pages',
@@ -47,39 +48,53 @@ export class PagesComponent implements OnInit {
         this.loadUser();
     }
 
+
+
+
     loadUser(): void {
-        const token: string | null = localStorage.getItem('token');
-        const userId: string | null = localStorage.getItem('userId');
-        if(token != null && userId != null) {
-            this.userService.getUserById(userId).subscribe({
-                next: (res) => {
-                    if (res.body != null) {
-                        this.userName = res.body.name;
-                        this.email = res.body.email;
-                        this.role = res.body.role;
-                        this.type = 'logged';
+        const lStorage = localStorage.getItem('userAuth');
+        if (lStorage == null) { this.setUnloggedUser(); return; }
+
+        const userAuth: AuthReturnType = JSON.parse(lStorage);
+        if (userAuth.userId == null || userAuth.token == null) { this.setUnloggedUser(); return; }
+
+        this.userService.getUserById(userAuth.userId).subscribe({
+            next: (res) => {
+                const body = res.body;
+                if (body == null) { this.setErrorUser(); return; }
+                
+                this.userName = body.name;
+                this.email = body.email;
+                this.role = body.role;
+                this.type = 'logged';
+            },
+            error: () => {
+                this.userService.checkUserAuth(userAuth).subscribe({
+                    next: (res) => {
+                        const body = res.body;
+                        if (body == null) { this.setErrorUser(); return; }
+
+                        if (!body) { this.setUnloggedUser(); return }
+                        this.setErrorUser();
+                    },
+                    error: (err) => {
+                        this.setErrorUser();
+                        console.error(err);
                     }
-                },
-                error: () => {
-                    this.setErrorUser();
-                }
-            });
-        } else if (
-            this.router.url.includes('verify-account') ||
-            this.router.url.includes('change-password')
-        ) {
-            this.setUnloggedUser();
-        } else {
-            this.navigateToLoginPage(); 
-            this.setUnloggedUser();
-        }
+                });
+            }
+        });
     }
+
+
 
     setUnloggedUser(): void {
         this.userName = 'Login/Criar';
         this.email = '';
         this.role = '';
         this.type = 'unlogged';
+
+        this.router.navigate(['/login']);
     }
 
     setErrorUser(): void {
@@ -87,10 +102,6 @@ export class PagesComponent implements OnInit {
         this.email = 'Erro';
         this.role = '';
         this.type = 'error';
-    }
-
-    navigateToLoginPage(): void {
-        this.router.navigate(['/login']);
     }
 
 }

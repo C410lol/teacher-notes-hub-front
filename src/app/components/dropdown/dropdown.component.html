@@ -1,0 +1,17 @@
+<input 
+(focus)="changeInputFocus(); searchItemsEmmit();"
+(blur)="changeInputFocus()"
+(input)="searchItemsEmmit()"
+[ngClass]="inputClass" 
+type="text" 
+[placeholder]="inputPlaceholder"
+[(ngModel)]="inputText">
+
+<div *ngIf="isInputFocus" [style.width]="dropDownWidth" class="dropdown-container">
+    <div 
+    (click)="selectValue(element.value); inputText = element.content"
+    *ngFor="let element of elements"
+    class="dropdown-element">
+    {{element.content}}
+    </div>
+</div>

@@ -6,6 +6,7 @@ import { WorkService } from 'src/app/services/work.service';
 import { WorkType } from 'src/app/types/WorkType';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { SortInterface } from '../../types/interfaces/SortInterface';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
     selector: 'app-works-page',
@@ -37,6 +38,7 @@ export class WorksPageComponent extends DialogParent implements OnInit, SortInte
     private activedRoute: ActivatedRoute, 
     private notebookService: NotebookService,
     private workService: WorkService,
+    private studentService: StudentService,
     private dateFormatter: DatePipe
     ) {
         super();
@@ -75,11 +77,24 @@ export class WorksPageComponent extends DialogParent implements OnInit, SortInte
             next: (res) => {
                 this.notebookSubject = res.subject.replaceAll('_', ' ');
                 this.notebookClasse = res.classe.replaceAll('_', ' ');
-                this.studentsLength = res.students;
+
+                this.getStudentsLength(res.classe);
             },
             error: (err) => console.error(err)
         });
     }
+
+
+    getStudentsLength(classe: string): void {
+        this.studentService.getStudentsSizeByClasse(classe).subscribe({
+            next: (res) => {
+                if (res.body == null) return;
+                this.studentsLength = res.body;
+            },
+            error: (err) => console.error(err)
+        });
+    }
+
 
     getAllWorks(): void {
         this.workService.getAllWorks(this.notebookId, this.sortBy, this.direction, this.pageNum - 1).subscribe({

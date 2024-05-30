@@ -1,0 +1,41 @@
+<app-back-arrow></app-back-arrow>
+
+
+
+
+<div class="teachers-list-page page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Lista de {{getPageTypeName()}}</h1>
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="usersState" class="teachers-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando elementos...</h1>
+            </div>
+        </div>
+    
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-user-list-element
+            *ngFor="let user of usersList"
+            [type]="pageType"
+            [id]="user.id" [username]="user.name"
+            [email]="user.email" [notebooksLength]="'Cadernetas: ' + user.notebooks">
+            </app-user-list-element>
+        </div>
+    
+    
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhum elemento encontrado</h1>
+            </div>
+        </div>
+    </div>
+</div>

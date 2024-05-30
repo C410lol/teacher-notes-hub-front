@@ -158,17 +158,21 @@ export class AttendancesDialogComponent extends DialogParent implements OnInit {
       const firstAttendance: CreationAttendanceType = { absentStudentsIds: [], presentStudentsIds: [] };
       const secondAttendance: CreationAttendanceType = { absentStudentsIds: [], presentStudentsIds: [] };
 
+
       this.attendanceDialogsListElements.forEach((element) => {
         if (element.firstCheckboxStatus) {
             firstAttendance.absentStudentsIds.push(element.studentId);
         } else firstAttendance.presentStudentsIds.push(element.studentId);
 
-        if (element.secondCheckboxStatus) {
-            secondAttendance.absentStudentsIds.push(element.studentId);
-        } else secondAttendance.presentStudentsIds.push(element.studentId);
+        if (this.lessonQuantity > 1) {
+            if (element.secondCheckboxStatus) {
+                secondAttendance.absentStudentsIds.push(element.studentId);
+            } else secondAttendance.presentStudentsIds.push(element.studentId);
+        }
       });
 
-      attendances.push(firstAttendance, secondAttendance);
+      attendances.push(firstAttendance);
+      if (this.lessonQuantity > 1) attendances.push(secondAttendance);
 
       return attendances;
   }

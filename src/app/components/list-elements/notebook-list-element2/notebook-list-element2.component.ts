@@ -25,7 +25,7 @@ export class NotebookListElement2Component {
   ) { }
 
   navigateToSingleNotebook(): void {
-      this.router.navigate([`${this.router.url}/${this.id}`]);
+      this.router.navigate([`cadernetas/${this.id}`]);
   }
 
 }

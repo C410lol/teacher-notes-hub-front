@@ -1,0 +1,112 @@
+<app-student-dialog
+*ngIf="isMode01"
+[institutionId]="institutionId"
+[type]="'create'" [title]="'Criar Aluno'"
+[studentClasse]="selectedClasse"
+(cancelButtonClick)="switchMode01()" (confirmButtonClick)="switchMode01(); getStudents()">
+</app-student-dialog>
+
+
+<app-student-dialog
+*ngIf="isMode02"
+[institutionId]="institutionId"
+[type]="'edit'" [title]="'Editar Aluno'"
+[studentClasse]="selectedClasse"
+[studentId]="clickedStudentId"
+[studentName]="clickedStudentName" [studentIsOrder]="clickedStudentIsOrder"
+(cancelButtonClick)="switchMode02()" (confirmButtonClick)="switchMode02(); getStudents()">
+</app-student-dialog>
+
+
+<app-delete-dialog
+*ngIf="isMode03"
+[id]="clickedStudentId"
+type="student" title="Deletar Aluno"
+content="Deseja realmente deletar esse aluno? Não é possível reverter essa ação!"
+(cancelButtonClick)="switchMode03()" (confirmButtonClick)="getStudents(); switchMode03()">
+</app-delete-dialog>
+
+
+<app-sort-dialog
+*ngIf="isMode04" [orderByElementsList]="[
+{value: 'name', name: 'Nome'},
+{value: 'number', name: 'Número'}
+]" [totalPages]="totalPages"
+[orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
+(cancelButtonClick)="switchMode04()"
+(confirmButtonClick)="receiveSortValues($event); switchMode04()">
+</app-sort-dialog>
+
+
+
+
+<app-back-arrow></app-back-arrow>
+
+
+
+
+<div class="students-page-container page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Alunos do</h1>
+            <select [(ngModel)]="selectedClasse" (change)="getStudents()" class="classe-selector-container">
+                <option value="Ensino_Fundamental_6_A">Ensino Fundamental 6-A</option>
+                <option value="Ensino_Fundamental_6_B">Ensino Fundamental 6-B</option>
+                <option value="Ensino_Fundamental_7_A">Ensino Fundamental 7-A</option>
+                <option value="Ensino_Fundamental_7_B">Ensino Fundamental 7-B</option>
+                <option value="Ensino_Fundamental_8_A">Ensino Fundamental 8-A</option>
+                <option value="Ensino_Fundamental_9_A">Ensino Fundamental 9-A</option>
+                <option value="Ensino_Fundamental_9_B">Ensino Fundamental 9-B</option>
+                <option value="Ensino_Médio_1_A">Ensino Médio 1-A</option>
+                <option value="Ensino_Médio_2_A">Ensino Médio 2-A</option>
+                <option value="Ensino_Médio_3_A">Ensino Médio 3-A</option>
+            </select>
+        </div>
+
+
+        <div class="page-use-container">
+            <div (click)="switchMode04()" class="page-sort-container page-gray-hover">
+                <img class="page-sort-img page-gray-hover" src="../../../assets/document.png">
+            </div>
+            <button (click)="switchMode01()" class="page-create-btn page-gray-hover">
+                <p class="page-plus-txt">+</p>
+                <p class="page-new-txt">Novo Aluno</p>
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <div [ngSwitch]="studentsState" class="notebooks-component-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando alunos...</h1>
+            </div>
+        </div>
+    
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-user-list-element
+            (click)="setStudentClicked(student); switchMode02()"
+            *ngFor="let student of studentsList"
+            [type]="'students'"
+            [id]="student.id" [username]="student.name"
+            [email]="selectedClasse.replaceAll('_', ' ')"
+            [notebooksLength]="'Nº ' + student.number"
+            (clickEmitter)="deleteStudentClick($event)">
+            </app-user-list-element>
+        </div>
+    
+    
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma aluno encontrado</h1>
+            </div>
+            <div>
+                <p class="error-txt">Clique no botão 'Novo Aluno' para adicionar um</p>
+            </div>
+        </div>
+    </div>
+</div>

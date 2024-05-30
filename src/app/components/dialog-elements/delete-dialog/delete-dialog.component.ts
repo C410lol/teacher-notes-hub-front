@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 import { LessonService } from 'src/app/services/lesson.service';
 import { NotebookService } from 'src/app/services/notebook.service';
+import { StudentService } from 'src/app/services/student.service';
 import { UserService } from 'src/app/services/user.service';
 import { WorkService } from 'src/app/services/work.service';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
@@ -36,6 +37,7 @@ export class DeleteDialogComponent extends DialogParent {
   constructor(
     private eventService: EventService,
     private userService: UserService,
+    private studentService: StudentService,
     private notebookService: NotebookService,
     private lessonService: LessonService,
     private workService: WorkService,
@@ -59,9 +61,10 @@ export class DeleteDialogComponent extends DialogParent {
           this.logoutUser();
           break;
       }
-      case 'userPasswordChange':
-          this.passwordChange();
-          break;
+      case 'student': {
+        this.deleteStudent();
+        break;
+      }
       case 'notebookDelete': {
           this.deleteNotebook();
           break;
@@ -99,37 +102,25 @@ export class DeleteDialogComponent extends DialogParent {
       this.eventService.triggerRefreshHeader();
   }
 
-  passwordChange(): void {
-      if(this.id != null) {
-          this.userService.sendChangePasswordRequestById(this.id).subscribe({
-              next: () => {
-                this.confirmButtonClick.emit()
-            },
-              error: () => {
-                this.switchStatusMode();
-                this.resetBtnProperties('Confirmar');
-            }
-          });
-          return;
-      }
-      this.switchStatusMode();
+  deleteStudent(): void {
+    if (this.id == null) return;
+    this.studentService.deleteStudent(this.id).subscribe({
+        next: () => this.confirmButtonClick.emit(),
+        error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Confirmar');
+        }
+    })
   }
 
   deleteNotebook(): void {
-      const userId = localStorage.getItem('userId');
-      if (userId != null) {
-          this.notebookService.sendDeleteNotebookRequest(this.id, userId).subscribe({
-              next: () => {
-                this.confirmButtonClick.emit();
-            },
-              error: () => {
-                this.switchStatusMode();
-                this.resetBtnProperties('Confirmar');
-            }
-          });
-          return;
-      }
-      this.switchStatusMode();
+    this.notebookService.deleteNotebook(this.id).subscribe({
+          next: () =>  this.confirmButtonClick.emit(),
+          error: () => {
+            this.switchStatusMode();
+            this.resetBtnProperties('Confirmar');
+        }
+    });
   }
 
   deleteLesson(): void {

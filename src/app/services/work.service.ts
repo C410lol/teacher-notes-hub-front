@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment, requestsUtils } from 'src/environments/environment.development';
 import { WorkType } from '../types/WorkType';
 import { Observable } from 'rxjs';
 import { PageType } from '../types/Others/PageType';
@@ -19,9 +19,9 @@ export class WorkService {
     eventService: EventService
     ) {
         eventService.refreshServices.subscribe({
-            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+            next: () => this.getHeaders = requestsUtils.getHeaders()
         });
-        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.getHeaders = requestsUtils.getHeaders();
         this.worksUrl = environment.worksUrl;
     }
 

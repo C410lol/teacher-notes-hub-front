@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NotebookService } from 'src/app/services/notebook.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { InstitutionType } from 'src/app/types/InstitutionType';
 import { NotebookType } from 'src/app/types/NotebookType';
+import { AuthReturnType } from 'src/app/types/Others/AuthReturnType';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
-import { environment } from 'src/environments/environment.development';
+import { TeacherPageComponent } from '../teacher-page/teacher-page.component';
 
 @Component({
     selector: 'app-home-page',
@@ -19,97 +19,104 @@ import { environment } from 'src/environments/environment.development';
 })
 export class HomePageComponent extends DialogParent implements OnInit {
 
-    currentState: string = 'loading';
-    notebooksState: string = 'loading';
+    currentState: string = '';
+
 
     userId: string = '';
-    username: string = 'Carregando...';
-    userRole: string = '----';
-  
-    notebookList: NotebookType[] = [];
-    totalPages: number = 1;
+    userName: string = '';
+    userRole: string = '';
+    userInstitution: InstitutionType | null = null;
 
-    bimesterFilter: string = '%';
+
+    //TEACHER ATTRIBUTES 
+    @ViewChild(TeacherPageComponent) teacherPageComponent?: TeacherPageComponent;
+
+
+    totalPages: number = 1;
     sortBy: string = 'status';
     direction: string = 'desc';
     pageNum: number = 1;
+    //TEACHER ATTRIBUTES 
 
-    deleteNotebookId?: string;
-    deleteNotebookVCode?: string;
+
+
 
     constructor(
-    private notebookService: NotebookService,
-    private userService: UserService,
-    private activatedRoute: ActivatedRoute,
-    ) { 
+        private userService: UserService
+    ) {
         super();
-        this.activatedRoute.queryParams.subscribe({
-            next: (res) => {
-                this.deleteNotebookId = res['deleteNotebookId'];
-                this.deleteNotebookVCode = res['deleteNotebookVCode'];
-                if (this.deleteNotebookId != null && this.deleteNotebookVCode != null) this.deleteNotebook();
-            }
-        });
     }
+
 
     ngOnInit(): void {
-        this.verifyUserStatus();
+        this.loadPageInfo();
     }
 
-    verifyUserStatus(): void {
-        const token: string | null = localStorage.getItem('token');
-        if (token == null) {
-            this.currentState = 'unlogged';
+
+
+
+    loadPageInfo(): void {
+        const lStorage = localStorage.getItem('userAuth');
+        if (lStorage == null) { 
+            this.currentState = 'unlogged'; 
+            return; 
+        }
+
+        const userAuth: AuthReturnType = JSON.parse(lStorage);
+        if (userAuth.userId == null || userAuth.token == null) {
+            this.currentState == 'unlogged';
+            localStorage.removeItem('userAuth');
             return;
         }
-        const userId: string | null = localStorage.getItem('userId');
-        if (userId != null) {
-            this.userService.getUserById(userId).subscribe({
-                next: (res) => {
-                    if (res.body != null) {
-                        this.currentState = 'loaded';
-                        this.userId = userId;
-                        this.username = res.body.name;
 
-                        if (res.body.verified) {
-                            this.defineUserRole(res.body.role);
-                            this.checkSelectedBimesterCache();
-                            this.getAllNotebooks();
-                        } else this.notebooksState = 'unverified';
-                    }
-                },
-                error: () => this.currentState = 'error'
-            });
-        } else {
-            this.currentState = 'error'; 
-        }
+        this.userId = userAuth.userId;
+        this.getUserInfo();
     }
 
-    checkSelectedBimesterCache(): void {
-        const selectedBimesterCache = localStorage.getItem('selected-bimester');
-        if (selectedBimesterCache != null) {
-            this.bimesterFilter = selectedBimesterCache;
-        }
-    }
 
-    deleteNotebook(): void {
-        this.notebookService.deleteNotebook(this.deleteNotebookId, this.deleteNotebookVCode).subscribe({
-            next: () => { 
-                this.refreshNotebooks(); 
-                this.setStatus('Caderneta Deletada Com Sucesso!', 'Caderneta deletada com sucesso', 'success');
-                this.switchStatusMode();
+    getUserInfo(): void {
+        this.userService.getUserById(this.userId).subscribe({
+            next: (res) => {
+                if (res.body == null) { this.currentState = 'error'; return; }
+
+                const user = res.body;
+                this.userName = user.name;
+                this.userRole = user.role;
+                this.userInstitution = user.institution;
+
+                this.currentState = 'loaded';
             },
-            error: () => {
-                this.setStatus('Erro Ao Deletar Cadereta!', environment.simpleErrorMessage, 'error');
-                this.switchStatusMode();
+            error: (err) => {
+                this.currentState = 'error',
+                console.error(err);
             }
         });
     }
 
-    refreshNotebooks(): void {
-        this.notebooksState = 'loading';
-        this.getAllNotebooks();
+
+
+
+    refreshPage(): void { location.reload(); }
+
+
+    getRoleName(): string {
+        switch (this.userRole) {
+            case 'ROLE_TCHR': 
+                return 'PROFESSOR(A)';
+            case 'ROLE_ADM':
+                return 'ADMIN';
+            case'ROLE_SUPER': 
+                return 'ADMIN/SUPER';
+            default: 
+                return '-----'
+        }
     }
+
+
+    refreshTeacherNotebooks(): void {
+        this.teacherPageComponent?.getNotebooks(this.sortBy, this.direction, this.pageNum - 1);
+    }
+
 
     receiveSortValues(values: Map<string, string>): void {
         const val0 = values.get('sortBy');
@@ -120,53 +127,14 @@ export class HomePageComponent extends DialogParent implements OnInit {
             this.sortBy = val0;
             this.direction = val1;
             this.pageNum = Number.parseInt(val2);
-            this.refreshNotebooks();
+
+            this.refreshTeacherNotebooks();
         }
     }
 
-    getAllNotebooks(): void {
-        this.notebookService.getAllNotebooks(
-            this.userId, this.bimesterFilter, this.sortBy, this.direction, this.pageNum - 1
-        ).subscribe({
-            next: (res) => {
-                if (res.status == 200) {
-                    if (res.body != null) {
-                        this.notebookList = res.body.content;
-                        this.totalPages = res.body.totalPages;
-                        this.notebooksState = 'loaded';
-                    }
-                } else this.notebooksState = 'empty';
-            },
-            error: () => {
-                this.notebooksState = 'error';
-            }
-        });
-    }
 
-    refreshPage(): void {
-        location.reload();
-    }
-
-    setCreateStatus(): void {
-        this.setStatus('Caderneta Criada Com Sucesso!', 'Caderneta criada com sucesso', 'success');
-    }
-
-    defineUserRole(role: string) {
-        switch (role) {
-        case 'ROLE_ADM': 
-            this.userRole = 'ADMIN';
-            break;
-        case 'ROLE_TCHR': 
-            this.userRole = 'PROFESSOR(A)';
-            break;  
-        }
-    }
-
-    changeBimesterFilter(bimester: string): void {
-        this.bimesterFilter = bimester;
-        this.refreshNotebooks();
-        
-        localStorage.setItem('selected-bimester', bimester);
+    triggerRefreshNotebooks(): void {
+        this.refreshTeacherNotebooks();
     }
 
 }

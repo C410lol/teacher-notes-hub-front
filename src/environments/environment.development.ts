@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
+import { AuthReturnType } from 'src/app/types/Others/AuthReturnType';
 
-const prefix: string = 'https://server2.teachernoteshub.online';
+const prefix: string = 'http://localhost:8080';
 
 // http://localhost:8080
 // https://server.teachernoteshub.online:8443
@@ -8,13 +9,15 @@ const prefix: string = 'https://server2.teachernoteshub.online';
 
 export const environment = {
     production: false,
-    getHeaders: (token: any): HttpHeaders => {
-        return new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': token
-        });
+    getToken: (): string => {
+        const lStorage = localStorage.getItem('userAuth');
+        if (lStorage == null) return '';
+        return JSON.parse(lStorage).token;
     },
     userUrl: `${prefix}/users`,
+    adminUrl: `${prefix}/admins`,
+    teacherUrl: `${prefix}/teachers`,
+    institutionUrl: `${prefix}/institutions`,
     notebooksUrl: `${prefix}/notebooks`,
     studentUrl: `${prefix}/students`,
     lessonsUrl: `${prefix}/lessons`,
@@ -25,3 +28,12 @@ export const environment = {
     simpleErrorMessage: 'Ops, algo deu errado, tente novamente mais tarde',
     fieldErrorMessage: 'Ops, algo deu errado, verifique os campos e tente novamente mais tarde'
 };
+
+export const requestsUtils = {
+    getHeaders: (): HttpHeaders => {
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': environment.getToken()
+        });
+    }
+}

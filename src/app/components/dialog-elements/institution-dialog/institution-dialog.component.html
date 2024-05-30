@@ -1,0 +1,71 @@
+<div class="institution-dialog-container dialog-container">
+    <div class="dialog-header-container">
+        <h1 class="dialog-title-txt">Institutição</h1>
+        <div (click)="cancelOnClick()" class="dialog-close-container">
+            <img src="../../../../assets/icons8-close-24 (1).png">
+        </div>
+    </div>
+
+
+
+
+    <div class="dialog-content-container">
+        <div class="select-option-container">
+            <div 
+            (click)="optionSelected = 'join'"
+            [ngClass]="optionSelected == 'join' ? 'selected-option' : ''"
+            class="gray-hover select-option">
+            Entrar</div>
+            
+            <div 
+            *ngIf="isAdmin"
+            (click)="optionSelected = 'createInstitution'"
+            [ngClass]="optionSelected == 'createInstitution' ? 'selected-option' : ''"
+            class="gray-hover select-option">
+            Criar</div>
+        </div>
+
+
+
+        <div>
+            <app-dropdown
+            *ngIf="optionSelected == 'join'"
+            (searchItems)="getAllInstitutionsByName($event)"
+            (selectedValue)="institutionSelectedId = $event"
+            [elements]="institutions"
+            [inputClass]="'dialog-input'" [inputPlaceholder]="'Selecione a Instituição que deseja entrar'"
+            [dropDownWidth]="'300px'">
+            </app-dropdown>
+
+
+            <input 
+            *ngIf="optionSelected == 'createInstitution'"
+            class="dialog-input" 
+            type="text" 
+            placeholder="Insira o nome da nova Instituição"
+            [(ngModel)]="institutionCreateName">
+        </div>
+    </div>
+
+
+    <hr class="dialog-division-line">
+
+
+    <div class="dialog-footer-container">
+        <div class="dialog-warning-container">
+        </div>
+
+
+        <div>
+            <app-confirm-btn
+            (clickEvent)="confirmOnClick()"
+            [isClicked]="isClicked" [text]="btnText">
+            </app-confirm-btn>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="mask-filter"></div>

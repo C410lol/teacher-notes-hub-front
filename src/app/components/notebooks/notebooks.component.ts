@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { NotebookType } from 'src/app/types/NotebookType';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
-import { environment } from 'src/environments/environment.development';
 
 @Component({
     selector: 'app-notebooks',
@@ -32,21 +31,6 @@ export class NotebooksComponent extends DialogParent {
 
 
 
-
-  resendVerificationEmail(): void {
-      if (this.userId != null) {
-          this.userService.resendVerificationEmailBtUserId(this.userId).subscribe({
-              next: () => {
-                  this.setStatus('Email Reenviado Com Sucesso!', 'Vá até seu email para confirmar sua conta', 'success');
-                  this.switchStatusMode();
-              },
-              error: () => {
-                  this.setStatus('Erro Ao Reenviar Email!', environment.simpleErrorMessage, 'error');
-                  this.switchStatusMode();
-              }
-          });
-      }
-  }
 
   onClickFilterElement(bimester: string): void {
     this.selectedBimester = bimester;

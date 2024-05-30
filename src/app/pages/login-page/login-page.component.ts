@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 import { Validations } from '../pages-shared-styles/Validations';
+import { AuthReturnType } from 'src/app/types/Others/AuthReturnType';
 
 @Component({
     selector: 'app-login-page',
@@ -15,7 +16,7 @@ import { Validations } from '../pages-shared-styles/Validations';
         '../pages-shared-styles/login-create-styles.css',
     ]
 })
-export class LoginPageComponent extends DialogParent {
+export class LoginPageComponent extends DialogParent implements OnInit {
 
     email: string = '';
     password: string = '';
@@ -26,6 +27,32 @@ export class LoginPageComponent extends DialogParent {
     private userService: UserService
     ) { 
         super('Login');
+    }
+
+
+    ngOnInit(): void {
+        this.checkUserAuth();
+    }
+
+
+
+
+    checkUserAuth(): void {
+        const lStorage = localStorage.getItem('userAuth');
+        if (lStorage == null) return;
+
+        const userAuth: AuthReturnType = JSON.parse(lStorage);
+        if (userAuth.userId == null || userAuth.token == null) return;
+
+        this.userService.checkUserAuth(userAuth).subscribe({
+            next: (res) => {
+                const body = res.body;
+                if (body == null) return;
+
+                if (!body) return;
+                this.router.navigate(['/home']);
+            }
+        });
     }
 
     loginOnClick(): void {
@@ -43,21 +70,21 @@ export class LoginPageComponent extends DialogParent {
         this.loginUser();
     }
 
+
     loginUser(): void {
         this.userService.loginUser({
             email: this.email.trim().replaceAll(' ', ''),
             password: this.password.trim().replaceAll(' ', '')
         }).subscribe({
             next: (res) => {
-                if (res.body != null) {
-                    localStorage.setItem('token', res.body.token);
-                    localStorage.setItem('userId', res.body.userId);
+                if (res.body == null) return;
+
+                localStorage.setItem('userAuth', JSON.stringify(res.body));
           
-                    this.router.navigate(['/cadernetas']);
+                this.router.navigate(['/home']);
   
-                    this.eventService.triggerRefreshServices();
-                    this.eventService.triggerRefreshHeader();
-                }
+                this.eventService.triggerRefreshServices();
+                this.eventService.triggerRefreshHeader();
             },
             error: (err) => {
                 this.resetBtnProperties('Login');

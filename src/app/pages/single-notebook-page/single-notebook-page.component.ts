@@ -10,7 +10,7 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
     templateUrl: './single-notebook-page.component.html',
     styleUrls: [
         './single-notebook-page.component.css',
-        '../pages-shared-styles/css-shared-styles.css',
+        '../pages-shared-styles/css-shared-styles.css'
     ]
 })
 export class SingleNotebookPageComponent extends DialogParent implements OnInit {
@@ -21,7 +21,6 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
     bimester: string = 'Carregando...';
     status?: string = 'Carregando...';
     date?: string = '';
-    studentsLength?: number = 0;
 
     constructor(
     private router: Router,
@@ -60,17 +59,16 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
         this.bimester = notebook.bimester;
         this.status = notebook.status;
         this.date = notebook.createDate;
-        this.studentsLength = notebook.students;
-    }
-
-    deleteNotebookMessageAlert(): void {
-        this.setStatus('Requisição Para Deletar Caderneta Enviada!', 'Vá até seu email para confirmar essa ação');
-        this.switchStatusMode();
     }
 
 
     navigateToUrl(endpoint: string): void {
         this.router.navigate([`${this.router.url}/${endpoint}`]);
+    }
+
+
+    goToHomePage(): void {
+        this.router.navigate(['/home']);
     }
 
 

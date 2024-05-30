@@ -1,8 +1,10 @@
+import { InstitutionType } from "./InstitutionType"
+
 export type UserType = {
     id: string,
     name: string,
     email: string,
     role: string,
-    verified: boolean,
-    notebooks: number
+    institution: InstitutionType,
+    notebooks?: number
 }

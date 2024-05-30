@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
+import { environment, requestsUtils } from 'src/environments/environment.development';
 import { CreationUserType } from '../types/Others/CreationUserType';
 import { UserType } from '../types/UserType';
 import { UserWithoutPasswordType } from '../types/Others/UserWithoutPasswordType';
@@ -16,16 +16,22 @@ export class UserService {
     private getHeaders: HttpHeaders = new HttpHeaders();
     private userUrl: string = '';
 
+
+
+
     constructor(
     private httpClient: HttpClient,
     eventService: EventService
     ) {
         eventService.refreshServices.subscribe({
-            next: () => this.getHeaders = environment.getHeaders(localStorage.getItem('token'))
+            next: () => this.getHeaders = requestsUtils.getHeaders()
         });
-        this.getHeaders = environment.getHeaders(localStorage.getItem('token'));
+        this.getHeaders = requestsUtils.getHeaders();
         this.userUrl = environment.userUrl;
     }
+
+
+
 
     createUser(user: CreationUserType): Observable<HttpResponse<any>> {
         return this.httpClient.post<any>(`${this.userUrl}/create`, user, {
@@ -34,61 +40,47 @@ export class UserService {
         });
     }
 
-    confirmUser(userId: string, vCode: string): Observable<void> {
-        return this.httpClient.put<void>(`${this.userUrl}/verify-account/${userId}?vCode=${vCode}`, {}, {
-            responseType: 'text' as 'json',
-        });
-    }
 
-    resendVerificationEmailBtUserId(userId: string): Observable<HttpResponse<void>> {
-        return this.httpClient.post<void>(`${this.userUrl}/resend-verification-email?teacherId=${userId}`, {}, {
-            headers: this.getHeaders,
-            responseType: 'text' as 'json',
-            observe: 'response'
-        });
-    }
 
-    sendChangePasswordRequestByEmail(userEmail: string): Observable<HttpResponse<any>> {
-        return this.httpClient.post<any>(`${this.userUrl}/request-password-change?email=${userEmail}`, {}, {
-            responseType: 'text' as 'json',
-            observe: 'response'
-        });
-    }
-
-    sendChangePasswordRequestById(userId: string): Observable<HttpResponse<any>> {
-        return this.httpClient.post<any>(`${this.userUrl}/request-password-change?id=${userId}`, {}, {
-            responseType: 'text' as 'json',
-            observe: 'response'
-        });
-    }
-
-    changePassword(userId: string, vCode: string, newPassword: string): Observable<HttpResponse<void>> {
-        return this.httpClient.put<void>(`${this.userUrl}/${userId}/change-password?vCode=${vCode}`, newPassword, { 
-            responseType: 'text' as 'json',
-            observe: 'response' 
-        });
-    }
-
-    isUserVerified(userId: string): Observable<HttpResponse<boolean>> {
-        return this.httpClient.get<boolean>(`${this.userUrl}/${userId}/verified`, { observe: 'response' });
-    }
 
     loginUser(user: CreationUserType): Observable<HttpResponse<AuthReturnType>> {
         return this.httpClient.post<AuthReturnType>(`${this.userUrl}/login`, user, { observe: 'response' });
     }
 
-    getUserById(userId: string): Observable<HttpResponse<UserType>> {
-        return this.httpClient.get<UserType>(`${this.userUrl}/${userId}`, { 
-            headers: this.getHeaders,
-            observe: 'response' 
-        },);
+    checkUserAuth(
+        userAuth: AuthReturnType
+    ): Observable<HttpResponse<boolean>> {
+        return this.httpClient.post<boolean>(
+            `${this.userUrl}/check-auth`,
+            userAuth,
+            {
+                observe: 'response'
+            }
+        );
     }
 
-    getAllTeachers(): Observable<UserType[]> {
-        return this.httpClient.get<UserType[]>(`${this.userUrl}/all/teachers`, {
-            headers: this.getHeaders
+    getUserById(userId: string): Observable<HttpResponse<UserType>> {
+        return this.httpClient.get<UserType>(
+        `${this.userUrl}/${userId}`, 
+        { 
+            headers: this.getHeaders,
+            observe: 'response' 
         });
     }
+
+    getUserByEmail(
+        email: string
+    ): Observable<HttpResponse<UserType>> {
+        return this.httpClient.get<UserType>(
+            `${this.userUrl}/get-by-email?email=${email}`,
+            {
+                observe: 'response'
+            }
+        );
+    }
+
+
+
 
     editUser(userId: string, user: UserWithoutPasswordType): Observable<void> {
         return this.httpClient.put<void>(`${this.userUrl}/${userId}`, user, {
@@ -97,8 +89,38 @@ export class UserService {
         });
     }
 
+    changePassword(userId: string, newPassword: string): Observable<HttpResponse<void>> {
+        return this.httpClient.put<void>(
+        `${this.userUrl}/${userId}/change-password`, 
+        newPassword, 
+        { 
+            responseType: 'text' as 'json',
+            observe: 'response' 
+        });
+    }
+
+    joinInstitution(
+        userId: string,
+        institutionId: string
+    ): Observable<HttpResponse<string>> {
+        return this.httpClient.put<string>(
+            `${this.userUrl}/${userId}/set-institution?institutionId=${institutionId}`,
+            null,
+            {
+                headers: this.getHeaders,
+                responseType: 'text' as 'json',
+                observe: 'response'
+            }
+        );
+    }
+
+
+
+
     deleteUser(userId?: string): Observable<void> {
-        return this.httpClient.post<void>(`${this.userUrl}/${userId}/delete-request`, {}, {
+        return this.httpClient.delete<void>(
+        `${this.userUrl}/${userId}/delete`, 
+        {
             headers: this.getHeaders,
             responseType: 'text' as 'json'
         });

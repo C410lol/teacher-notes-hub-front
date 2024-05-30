@@ -7,9 +7,9 @@
 <app-delete-dialog
 *ngIf="isMode01"
 [id]="notebookId"
-(cancelButtonClick)="switchMode01()" (confirmButtonClick)="deleteNotebookMessageAlert(); switchMode01()"
+(cancelButtonClick)="switchMode01()" (confirmButtonClick)="goToHomePage()"
 type="notebookDelete" title="Deletar Caderneta" 
-content="Deseja realmente deletar essa caderneta? Uma mensagem será enviada até seu email para confirmar esta ação.">
+content="Deseja realmente deletar essa caderneta? Todas as aulas/trabalhos serão perdidos!">
 </app-delete-dialog>
 
 <app-finalize-dialog

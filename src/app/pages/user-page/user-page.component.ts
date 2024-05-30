@@ -27,22 +27,23 @@ export class UserPageComponent extends DialogParent {
     }
 
     getUser(): void {
-        const userId: string | null = localStorage.getItem('userId');
-        if(userId !== null) {
-            this.userService.getUserById(userId).subscribe({
-                next: (res) => {
-                    if (res.body != null) {
-                        this.userId = res.body.id;
-                        this.userName = res.body.name;
-                        this.userEmail = res.body.email;
-                    }
-                },
-                error: () => {
-                    this.setStatus('Erro Ao Carregar Usuário!', environment.simpleErrorMessage, 'error');
-                    this.switchStatusMode();
+        const userAuth: string | null = localStorage.getItem('userAuth');
+        if (userAuth == null) return;
+
+        const userId: string = JSON.parse(userAuth).userId;
+        this.userService.getUserById(userId).subscribe({
+            next: (res) => {
+                if (res.body != null) {
+                    this.userId = res.body.id;
+                    this.userName = res.body.name;
+                    this.userEmail = res.body.email;
                 }
-            });
-        }
+            },
+            error: () => {
+                this.setStatus('Erro Ao Carregar Usuário!', environment.simpleErrorMessage, 'error');
+                this.switchStatusMode();
+            }
+        });
     }
 
     refreshPage(): void {

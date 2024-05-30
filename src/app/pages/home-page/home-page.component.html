@@ -5,25 +5,35 @@
     (destroyButtonClick)="setStatusModeFalse()">
 </app-status-dialog>
 
-<app-notebook-dialog 
-    *ngIf="isMode01" [teacherId]="userId" 
-    (cancelButtonClick)="switchMode01()"
-    (confirmButtonClick)="refreshNotebooks(); switchMode01(); setCreateStatus(); switchStatusMode();" 
-    type="create" title="Criar Caderneta">
-</app-notebook-dialog>
+
+<app-institution-dialog
+*ngIf="isMode01"
+[userId]="userId" [isAdmin]="userRole == 'ROLE_ADM'"
+(cancelEmitter)="switchMode01()" (confirmEmitter)="refreshPage()">
+</app-institution-dialog>
+
 
 <app-sort-dialog
-*ngIf="isMode02" [orderByElementsList]="[
+*ngIf="isMode02" 
+[orderByElementsList]="[
 {value: 'classe', name: 'Classe'},
 {value: 'subject', name: 'Matéria'},
 {value: 'bimester', name: 'Bimestre'},
 {value: 'status', name: 'Status'},
-{value: 'createDate', name: 'Data'}
-]" [totalPages]="totalPages"
+{value: 'createDate', name: 'Data'}]" 
+[totalPages]="totalPages"
 [orderBy]="sortBy" [direction]="direction" [pageNum]="pageNum"
 (cancelButtonClick)="switchMode02()"
 (confirmButtonClick)="receiveSortValues($event); switchMode02()">
 </app-sort-dialog>
+
+
+<app-notebook-dialog
+*ngIf="isMode03"
+[teacherId]="userId"
+[type]="'create'" [title]="'Criar Caderneta'"
+(cancelButtonClick)="switchMode03()" (confirmButtonClick)="triggerRefreshNotebooks(); switchMode03()">
+</app-notebook-dialog>
 
 
 
@@ -43,27 +53,60 @@
         <div *ngSwitchCase="'loaded'">
             <div class="title-container">
                 <div class="user-info-container">
-                    <h1 class="user-txt">Olá, {{username}}!</h1>
-                    <div class="role-container"><p class="role-txt">{{userRole}}</p></div>
+                    <h1 class="user-txt">Olá, {{userName}}!</h1>
+
+
+                    <div class="subinfo-container">
+                        <img src="../../../assets/driver-license.png">
+                        <div class="role-container"><p class="role-txt">{{getRoleName()}}</p></div>
+                    </div>
+
+
+                    <div class="subinfo-container">
+                        <img src="../../../assets/home.png">
+                        <div class="role-container">
+                            <p 
+                            *ngIf="userInstitution == null" 
+                            (click)="switchMode01()"
+                            class="role-txt enter-institution-txt">
+                            ENTRAR EM UMA INSTITUIÇÃO</p>
+
+
+                            <p *ngIf="userInstitution != null" class="role-txt">{{userInstitution.name}}</p>
+                        </div>
+                    </div>
                 </div>
         
         
-                <div *ngIf="notebooksState != 'unverified'" class="notebook-use-container">
+                <div *ngIf="userRole == 'ROLE_TCHR'" class="notebook-use-container">
                     <div (click)="switchMode02()" class="notebook-sort-container gray-hover">
                         <img class="sort-img gray-hover" src="../../../assets/document.png">
                     </div>
-                    <button (click)="switchMode01()" class="notebook-create-btn gray-hover">
+                    <button (click)="switchMode03()" class="notebook-create-btn gray-hover">
                         <p class="plus-txt">+</p>
                         <p class="new-notebook-txt">Nova Caderneta</p>
                     </button>
                 </div>
             </div>
-        
-            <app-notebooks
-            [userId]="userId" [notebooksState]="notebooksState"
-            [notebooksList]="notebookList" [selectedBimester]="bimesterFilter"
-            (filterByBimesterEvent)="changeBimesterFilter($event)">
-            </app-notebooks>
+
+
+
+
+            <div class="home-content-container">
+                <app-admin-page
+                *ngIf="userRole == 'ROLE_ADM' || userRole == 'ROLE_SUPER'"
+                [adminId]="userId" [adminRole]="userRole"
+                [hasInstitution]="userInstitution != null"
+                [institutionId]="userInstitution?.id" [institutionName]="userInstitution?.name"
+                (openInstitutionDialog)="switchMode01()">
+                </app-admin-page>
+
+
+                <app-teacher-page
+                *ngIf="userRole == 'ROLE_TCHR'"
+                [teacherId]="userId">
+                </app-teacher-page>
+            </div>
         </div>
     
     

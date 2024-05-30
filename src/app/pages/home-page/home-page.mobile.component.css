@@ -1,6 +1,6 @@
 @media screen and (width <= 1014px) {
     
-    .notebooks-container {
+    .home-content-container {
         width: 754px;
         gap: 0;
         row-gap: 20px;
@@ -15,7 +15,7 @@
 
 @media screen and (width <= 768px) {
 
-    .notebooks-container {
+    .home-content-container {
         width: 350px;
         gap: 20px;
         grid-template-columns: auto;
@@ -23,6 +23,10 @@
 
     .title-container {
         width: 350px;
+    }
+
+    .role-container {
+        max-width: 100px;
     }
 
 }
