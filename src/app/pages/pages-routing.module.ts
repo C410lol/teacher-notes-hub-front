@@ -15,12 +15,15 @@ import { StudentsPerformancePageComponent } from './students-performance-page/st
 import { TeacherNotebooksPageComponent } from './teacher-notebooks-page/teacher-notebooks-page.component';
 import { TeachersListPageComponent } from './teachers-list-page/teachers-list-page.component';
 import { StudentsPageComponent } from './students-page/students-page.component';
+import { FinishedNotebookPageComponent } from './finished-notebook-page/finished-notebook-page.component';
+import { FinalGradesPageComponent } from './final-grades-page/final-grades-page.component';
 
 
 const childRoutes: Routes = [
     {
         path: ':notebookId', children: [
             { path: '', component: SingleNotebookPageComponent },
+            { path: 'finished', component: FinishedNotebookPageComponent },
             {
                 path: 'aulas', children: [
                     { path: '', component: LessonsPageComponent },
@@ -37,7 +40,7 @@ const childRoutes: Routes = [
                 path: 'alunos-performace', children: [
                     { path: '', component: StudentsPerformancePageComponent }
                 ]
-            }
+            },
         ]
     }
 ]
@@ -61,12 +64,14 @@ const routes: Routes = [
             { path: 'teachers', children: [
                 { path: '', component: TeachersListPageComponent },
                 { path: ':teacherId', children: [
-                    //{ path: '' },
                     { path: 'cadernetas', children: [
                         { path: '', component: TeacherNotebooksPageComponent, children: childRoutes },
                     ]}
                 ]}
             ] },
+            { path: 'final-grades', children: [
+                { path: '', component: FinalGradesPageComponent }
+            ] }
         ]}
     ]},
     { path: '**', redirectTo: 'home' },

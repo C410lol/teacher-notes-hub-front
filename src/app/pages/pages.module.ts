@@ -22,6 +22,8 @@ import { StudentsPerformancePageComponent } from './students-performance-page/st
 import { TeacherPageComponent } from './teacher-page/teacher-page.component';
 import { TeachersListPageComponent } from './teachers-list-page/teachers-list-page.component';
 import { StudentsPageComponent } from './students-page/students-page.component';
+import { FinishedNotebookPageComponent } from './finished-notebook-page/finished-notebook-page.component';
+import { FinalGradesPageComponent } from './final-grades-page/final-grades-page.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +45,8 @@ import { StudentsPageComponent } from './students-page/students-page.component';
         TeacherPageComponent,
         TeachersListPageComponent,
         StudentsPageComponent,
+        FinishedNotebookPageComponent,
+        FinalGradesPageComponent,
     ],
     exports: [
         PagesComponent,

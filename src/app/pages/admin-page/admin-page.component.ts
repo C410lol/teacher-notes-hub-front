@@ -89,6 +89,8 @@ export class AdminPageComponent implements OnInit {
             case 'students': 
                 this.router.navigate([`${url}/students`]);
                 break;
+            case 'final-grades': 
+                this.router.navigate([`${url}/final-grades`])
         }
     }
 

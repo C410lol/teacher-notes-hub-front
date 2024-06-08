@@ -7,6 +7,7 @@ import { MissingTasksType } from '../types/Others/MissingTasksType';
 import { PageType } from '../types/Others/PageType';
 import { EventService } from './event.service';
 import { StudentPerformanceType } from '../types/Others/StudentPerformanceType';
+import { FinishedNotebookType } from '../types/FinishedNotebookType';
 
 @Injectable({
     providedIn: 'root'
@@ -59,6 +60,18 @@ export class NotebookService {
         })
     }
 
+    getFinishedNotebookByNotebookId(
+        notebookId: string
+    ): Observable<HttpResponse<FinishedNotebookType>> {
+        return this.httpClient.get<FinishedNotebookType>(
+            `${this.notebooksUrl}/${notebookId}/get-finished`,
+            {
+                headers: this.getHeaders,
+                observe: 'response'
+            }
+        );
+    }
+
 
 
 
@@ -68,12 +81,33 @@ export class NotebookService {
         });
     }
 
+    editFinishedStudentGrade(
+        finishedStudentId: string,
+        grade: number
+    ): Observable<HttpResponse<string>> {
+        return this.httpClient.put<string>(
+            `${this.notebooksUrl}/${finishedStudentId}/edit-grade`,
+            grade,
+            {
+                headers: this.getHeaders,
+                responseType: 'text' as 'json',
+                observe: 'response'
+            }
+        );
+    }
+
+
+
+
     verifyMissingTasks(notebookId?: string): Observable<HttpResponse<MissingTasksType>> {
         return this.httpClient.get<MissingTasksType>(`${this.notebooksUrl}/${notebookId}/missing-tasks`, {
             headers: this.getHeaders,
             observe: 'response'
         });
     }
+
+
+
 
     deleteNotebook(notebookId?: string): Observable<HttpResponse<string>> {
         return this.httpClient.delete<string>(`${this.notebooksUrl}/${notebookId}/delete`, 
@@ -83,6 +117,9 @@ export class NotebookService {
                 observe: 'response'
             });
     }
+
+
+
 
     finalizeNotebook(gradesWeight: any, notebookId?: string): Observable<Blob> {
         return this.httpClient.put<Blob>(`${this.notebooksUrl}/finalize/${notebookId}`, gradesWeight, {
