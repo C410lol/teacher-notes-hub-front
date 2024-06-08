@@ -60,18 +60,6 @@ export class NotebookService {
         })
     }
 
-    getFinishedNotebookByNotebookId(
-        notebookId: string
-    ): Observable<HttpResponse<FinishedNotebookType>> {
-        return this.httpClient.get<FinishedNotebookType>(
-            `${this.notebooksUrl}/${notebookId}/get-finished`,
-            {
-                headers: this.getHeaders,
-                observe: 'response'
-            }
-        );
-    }
-
 
 
 
@@ -79,21 +67,6 @@ export class NotebookService {
         return this.httpClient.put<void>(`${this.notebooksUrl}/edit/${notebookId}`, notebook, {
             headers: this.getHeaders
         });
-    }
-
-    editFinishedStudentGrade(
-        finishedStudentId: string,
-        grade: number
-    ): Observable<HttpResponse<string>> {
-        return this.httpClient.put<string>(
-            `${this.notebooksUrl}/${finishedStudentId}/edit-grade`,
-            grade,
-            {
-                headers: this.getHeaders,
-                responseType: 'text' as 'json',
-                observe: 'response'
-            }
-        );
     }
 
 

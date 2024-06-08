@@ -30,6 +30,18 @@ export class FinishedNotebooksService {
 
 
 
+  getFinishedNotebookByNotebookId(
+    notebookId: string
+  ): Observable<HttpResponse<FinishedNotebookType>> {
+    return this.httpClient.get<FinishedNotebookType>(
+        `${this.finishedNotebooksUrl}/get-by-notebook?notebookId=${notebookId}`,
+        {
+            headers: this.getHeaders,
+            observe: 'response'
+        }
+    );
+  }
+
   getFinishedNotebooksByInstitutionIdAndClasseAndBimester(
     institutionId: string,
     classe: string,
@@ -57,6 +69,24 @@ export class FinishedNotebooksService {
         responseType: 'blob' as 'json',
         observe: 'response'
       }
+    );
+  }
+
+
+
+
+  editFinishedStudentGrade(
+    finishedStudentId: string,
+    grade: number
+  ): Observable<HttpResponse<string>> {
+    return this.httpClient.put<string>(
+        `${this.finishedNotebooksUrl}/finished-students/${finishedStudentId}/edit-grade`,
+        grade,
+        {
+            headers: this.getHeaders,
+            responseType: 'text' as 'json',
+            observe: 'response'
+        }
     );
   }
 
