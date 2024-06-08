@@ -39,6 +39,8 @@ export class PagesComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isFirstTimeAcessed();
+
         this.router.events.subscribe(event => {
           if (event instanceof NavigationEnd) {
             window.scrollTo(0, 0);
@@ -46,6 +48,18 @@ export class PagesComponent implements OnInit {
         });
 
         this.loadUser();
+    }
+
+
+
+
+
+    isFirstTimeAcessed(): void {
+        const isFirstTimeAcessed = sessionStorage.getItem('isFirstTimeAcessed');
+        if (isFirstTimeAcessed == null) {
+            sessionStorage.setItem('isFirstTimeAcessed', 'false');
+            this.router.navigate(['/home']);
+        }
     }
 
 
