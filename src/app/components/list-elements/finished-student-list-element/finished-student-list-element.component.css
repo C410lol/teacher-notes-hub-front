@@ -1,0 +1,54 @@
+.finished-student-list-element-container {
+    width: 100%;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 50% 16% 15.5% auto;
+}
+
+.finished-student-list-element-container div {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    background-color: #e4e4e4c4;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+}
+
+.final-grade-container {
+    position: relative !important;
+    padding: 0 !important;
+    border: 1px solid #868686 !important;
+}
+
+.finished-student-list-element-container div p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical; 
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.final-grade-input {
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    border: 0;
+    border-radius: 5px;
+
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: medium;
+}
+
+.final-grade-img {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+
+
+
+.disabled-input {
+    background-color: #d4d4d4e8;
+}

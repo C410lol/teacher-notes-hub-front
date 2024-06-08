@@ -1,0 +1,90 @@
+<div class="final-grades-page-container page-container">
+    <div class="page-title-container">
+        <div>
+            <h1 class="page-top-txt">Diários do</h1>
+            <select [(ngModel)]="selectedClasse" (change)="getFinishedNotebooks()" class="classe-selector-container">
+                <option value="Ensino_Fundamental_6_A">Ensino Fundamental 6-A</option>
+                <option value="Ensino_Fundamental_6_B">Ensino Fundamental 6-B</option>
+                <option value="Ensino_Fundamental_7_A">Ensino Fundamental 7-A</option>
+                <option value="Ensino_Fundamental_7_B">Ensino Fundamental 7-B</option>
+                <option value="Ensino_Fundamental_8_A">Ensino Fundamental 8-A</option>
+                <option value="Ensino_Fundamental_9_A">Ensino Fundamental 9-A</option>
+                <option value="Ensino_Fundamental_9_B">Ensino Fundamental 9-B</option>
+                <option value="Ensino_Médio_1_A">Ensino Médio 1-A</option>
+                <option value="Ensino_Médio_2_A">Ensino Médio 2-A</option>
+                <option value="Ensino_Médio_3_A">Ensino Médio 3-A</option>
+            </select>
+        </div>
+
+
+        <div class="page-use-container">
+            <button (click)="downloadFinishedNotebooks()" class="page-create-btn page-gray-hover">
+                <p class="page-new-txt">Dowload Das Médias</p>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="bimester-filter-container mobile-component">
+        <li class="filter-container">
+            <ul 
+            (click)="onClickFilterElement('Primeiro')" 
+            [ngClass]="selectedBimester == 'Primeiro' ? 'selected-bimester' : ''"
+            class="filter-element">Primeiro Bimestre
+            </ul>
+
+            <ul 
+            (click)="onClickFilterElement('Segundo')" 
+            [ngClass]="selectedBimester == 'Segundo' ? 'selected-bimester' : ''"
+            class="filter-element">Segundo Bimestre
+            </ul>
+
+            <ul 
+            (click)="onClickFilterElement('Terceiro')"
+            [ngClass]="selectedBimester == 'Terceiro' ? 'selected-bimester' : ''"
+            class="filter-element">Terceiro Bimestre
+            </ul>
+
+            <ul 
+            (click)="onClickFilterElement('Quarto')" 
+            [ngClass]="selectedBimester == 'Quarto' ? 'selected-bimester' : ''"
+            class="filter-element">Quarto Bimestre
+            </ul>
+        </li>
+    </div>
+
+
+
+
+    <div [ngSwitch]="gradesState" class="notebooks-component-container">
+        <div *ngSwitchCase="'loading'" class="error-container">
+            <div>
+                <img src="../../../assets/redo_12108539.png">
+                <h1>Carregando médias...</h1>
+            </div>
+        </div>
+    
+
+        <div *ngSwitchCase="'loaded'" class="page-content-container">
+            <app-notebook-list-element2
+            *ngFor="let notebook of gradesList"
+            [classe]="notebook.notebook.classe.replaceAll('_', ' ')"
+            [subject]="notebook.notebook.subject.replaceAll('_', ' ')"
+            [bimester]="notebook.notebook.bimester"
+            [lessons]="notebook.totalLessons"
+            [works]="notebook.notebook.works"
+            [status]="notebook.notebook.status"
+            [date]="notebook.notebook.endDate">
+            </app-notebook-list-element2>
+        </div>
+    
+    
+        <div *ngSwitchCase="'empty'" class="error-container">
+            <div>
+                <img src="../../../assets/search_11756156.png">
+                <h1 class="error-title">Nenhuma média encontrada</h1>
+            </div>
+        </div>
+    </div>
+</div>

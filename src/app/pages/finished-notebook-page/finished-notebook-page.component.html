@@ -1,0 +1,62 @@
+<app-back-arrow></app-back-arrow>
+
+
+
+
+<div class="finished-notebook-container">
+    <h1 class="page-title-txt">Médias Finais</h1>
+
+
+
+
+    <div class="page-content-container">
+        <div class="notebook-info-container 01">
+            <div class="notebook-info">
+                <p class="subtitle-txt">Turma:</p>
+                <p class="info-txt">{{finishedNotebook?.notebook?.classe?.replaceAll('_', ' ')}}</p>
+            </div>
+            <div class="notebook-info">
+                <p class="subtitle-txt">Disciplina:</p>
+                <p class="info-txt">{{finishedNotebook?.notebook?.subject?.replaceAll('_', ' ')}}</p>
+            </div>
+            <div class="notebook-info">
+                <p class="subtitle-txt">Bimestre:</p>
+                <p class="info-txt">{{finishedNotebook?.notebook?.bimester}}</p>
+            </div>
+            <div class="notebook-info">
+                <p class="subtitle-txt">Aulas:</p>
+                <p class="info-txt">{{finishedNotebook?.totalLessons}}</p>
+            </div>
+            <div class="notebook-info">
+                <p class="subtitle-txt">Ferramentas de Avaliação:</p>
+                <p class="info-txt">{{finishedNotebook?.notebook?.works}}</p>
+            </div>
+        </div>
+
+
+
+
+        <div class="scroll-container">
+            <div class="final-grades-container">
+                <div class="students-header-container">
+                    <div class="students-header"><p>Aluno</p></div>
+                    <div class="students-header"><p>Média</p></div>
+                    <div class="students-header"><p>Faltas</p></div>
+                    <div class="students-header"><p>Presença</p></div>
+                </div>
+    
+    
+                <div class="students-list">
+                    <app-finished-student-list-element
+                    *ngFor="let finishedStudent of finishedNotebook?.finishedStudents"
+                    [finishedStudentId]="finishedStudent.id" 
+                    [studentName]="finishedStudent.student.name"
+                    [studentFinalGrade]="finishedStudent.finalGrade"
+                    [studentAbsences]="finishedStudent.absences"
+                    [studentPresencePercentage]="finishedStudent.presencePercentage">
+                    </app-finished-student-list-element>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
