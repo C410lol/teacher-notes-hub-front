@@ -152,7 +152,7 @@ export class CreatePageComponent extends DialogParent {
                     'success'
                 );
                 this.switchStatusMode();  
-                setTimeout(() => this.router.navigate(['/login']), 3000);
+                setTimeout(() => this.router.navigate(['/login']), 1000);
             },
             error: (err) => {
                 this.resetBtnProperties('Criar');

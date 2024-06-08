@@ -25,7 +25,7 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
   clickedStudentIsOrder: boolean = true;
 
 
-  studentsState: string = 'empty';
+  studentsState: string = 'loading';
   studentsList: StudentType[] | null = null;
   totalPages: number = 1;
 
@@ -61,6 +61,8 @@ export class StudentsPageComponent extends DialogParent implements OnInit {
 
 
   getStudents(): void {
+    this.studentsState = 'loading';
+
     this.studentService.getStudentsByInstitutionAndClasse(
       this.institutionId, 
       this.selectedClasse,
