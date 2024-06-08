@@ -20,12 +20,14 @@ export class NotebookListElement2Component {
   @Input() status?: string = '';
   @Input() date?: string = '';
 
+  @Input() clickable: boolean = true;
+
   constructor(
     private router: Router
   ) { }
 
   navigateToSingleNotebook(): void {
-      this.router.navigate([`cadernetas/${this.id}`]);
+    if (this.clickable) this.router.navigate([`cadernetas/${this.id}`]);
   }
 
 }

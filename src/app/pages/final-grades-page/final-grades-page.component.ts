@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FinishedNotebooksService } from 'src/app/services/finished-notebooks.service';
 import { FinishedNotebookType } from 'src/app/types/FinishedNotebookType';
 import { StudentType } from 'src/app/types/StudentType';
+import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 
 @Component({
   selector: 'app-final-grades-page',
@@ -13,7 +14,7 @@ import { StudentType } from 'src/app/types/StudentType';
     './final-grades-page.component.css'
   ]
 })
-export class FinalGradesPageComponent implements OnInit {
+export class FinalGradesPageComponent extends DialogParent implements OnInit {
 
   institutionId: string = '';
 
@@ -32,7 +33,9 @@ export class FinalGradesPageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private finishedNotebooksService: FinishedNotebooksService
-  ) { }
+  ) { 
+    super('Baixar Médias');
+  }
 
 
   ngOnInit(): void {
@@ -93,6 +96,8 @@ export class FinalGradesPageComponent implements OnInit {
         a.click();
 
         window.URL.revokeObjectURL(blobUrl);
+
+        this.resetBtnProperties('Baixar Médias');
       },
       error: (err) => {
         console.error(err);
@@ -102,6 +107,10 @@ export class FinalGradesPageComponent implements OnInit {
 
 
 
+
+  changeBtnState(): void {
+    this.confirmBtnClick('Baixando...');
+  }
 
   onClickFilterElement(bimester: string): void {
     this.selectedBimester = bimester;

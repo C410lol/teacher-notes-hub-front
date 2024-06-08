@@ -90,4 +90,8 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
         this.setStatus('Caderneta Editada Com Sucesso!', 'Caderneta editada com sucesso');
     }
 
+    reloadPage(): void {
+        location.reload();
+    }
+
 }

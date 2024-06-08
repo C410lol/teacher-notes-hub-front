@@ -17,10 +17,12 @@
         </div>
 
 
-        <div class="page-use-container">
-            <button (click)="downloadFinishedNotebooks()" class="page-create-btn page-gray-hover">
-                <p class="page-new-txt">Dowload Das Médias</p>
-            </button>
+        <div *ngIf="gradesState == 'loaded'" class="page-use-container">
+            <app-confirm-btn
+            (click)="changeBtnState()"
+            [text]="btnText" [isClicked]="isClicked"
+            (clickEvent)="downloadFinishedNotebooks()">
+            </app-confirm-btn>
         </div>
     </div>
 
@@ -75,7 +77,8 @@
             [lessons]="notebook.totalLessons"
             [works]="notebook.notebook.works"
             [status]="notebook.notebook.status"
-            [date]="notebook.notebook.endDate">
+            [date]="notebook.notebook.endDate"
+            [clickable]="false">
             </app-notebook-list-element2>
         </div>
     

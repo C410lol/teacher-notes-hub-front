@@ -16,7 +16,7 @@ content="Deseja realmente deletar essa caderneta? Todas as aulas/trabalhos serã
 *ngIf="isMode02"
 [notebookId]="notebookId"
 (cancelButtonClick)="switchMode02()" 
-(confirmButtonClick)="switchMode02(); setFinalizeStatus(); switchStatusMode()">
+(confirmButtonClick)="switchMode02(); setFinalizeStatus(); switchStatusMode(); reloadPage()">
 </app-finalize-dialog>
 
 <app-notebook-dialog 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NotebookService } from 'src/app/services/notebook.service';
+import { FinishedNotebooksService } from 'src/app/services/finished-notebooks.service';
 import { FinishedNotebookType } from 'src/app/types/FinishedNotebookType';
-import { FinishedStudentType } from 'src/app/types/FinishedStudentType';
 
 @Component({
   selector: 'app-finished-notebook-page',
@@ -23,7 +22,7 @@ export class FinishedNotebookPageComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private notebookService: NotebookService
+    private finishedNotebookService: FinishedNotebooksService
   ) {
 
   }
@@ -45,7 +44,7 @@ export class FinishedNotebookPageComponent implements OnInit {
 
 
   getFinishedNotebook(): void {
-    this.notebookService.getFinishedNotebookByNotebookId(this.notebookId).subscribe({
+    this.finishedNotebookService.getFinishedNotebookByNotebookId(this.notebookId).subscribe({
       next: (res) => {
         const body = res.body;
         if (body == null) return;
