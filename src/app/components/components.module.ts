@@ -79,6 +79,7 @@ import { FinishedStudentListElementComponent } from './list-elements/finished-st
         SortDialogComponent,
         UserListElementComponent,
         NotebooksComponent,
+        ConfirmBtnComponent,
         StudentPerformanceListElementComponent,
         DropdownComponent,
         InstitutionDialogComponent,
