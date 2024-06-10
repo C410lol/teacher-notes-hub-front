@@ -16,7 +16,7 @@ content="Deseja realmente deletar essa caderneta? Todas as aulas/trabalhos serã
 *ngIf="isMode02"
 [notebookId]="notebookId"
 (cancelButtonClick)="switchMode02()" 
-(confirmButtonClick)="switchMode02(); setFinalizeStatus(); switchStatusMode()">
+(confirmButtonClick)="switchMode02(); setFinalizeStatus(); switchStatusMode(); reloadPage()">
 </app-finalize-dialog>
 
 <app-notebook-dialog 
@@ -66,8 +66,8 @@ type="edit" title="Editar Caderneta">
         <h1 (click)="navigateToUrl('aulas')" class="interactive-txt">Ver Aulas</h1>
         <h1 (click)="navigateToUrl('trabalhos')" class="interactive-txt">Ver Ferramentas de Avaliação</h1>
         <h1 (click)="navigateToUrl('alunos-performace')" class="interactive-txt">Ver Desempenho dos Alunos</h1>
+        <h1 *ngIf="endDate != null" (click)="navigateToUrl('finished')" class="interactive-txt">Médias Finais</h1>
     </div>
-
 
 
 

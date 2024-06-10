@@ -1,0 +1,42 @@
+<app-status-dialog
+*ngIf="isStatusMode"
+[type]="statusType" [title]="statusTitle"
+[content]="statusContent"
+(destroyButtonClick)="isStatusMode = false">
+</app-status-dialog>
+
+
+
+
+<div class="finished-student-list-element-container">
+    <div><p>{{studentName}}</p></div>
+    <div 
+    (mouseenter)="isMouseOnElement = true"
+    (mouseleave)="mouseOutEvent()"
+    class="final-grade-container"
+    >
+        <input 
+        [ngClass]="isInputDisabled ? 'disabled-input' : ''"
+        class="final-grade-input"
+        [(ngModel)]="studentFinalGrade" 
+        [disabled]="isInputDisabled">
+
+        <img 
+        *ngIf="isMouseOnElement && isInputDisabled" 
+        (click)="isInputDisabled = false"
+        class="final-grade-img" 
+        src="../../../../assets/pen.png"
+        >
+        <img 
+        *ngIf="!isInputDisabled" 
+        (click)="editFinishedStudentFinalGrade()"
+        class="final-grade-img" 
+        src="../../../../assets/check-mark.png">
+    </div>
+    <div>
+        <p>{{studentAbsences}}</p>
+    </div>
+    <div>
+        <p>{{studentPresencePercentage}}</p>
+    </div>
+</div>

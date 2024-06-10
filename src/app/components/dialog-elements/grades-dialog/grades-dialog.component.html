@@ -71,7 +71,11 @@
 
 
         <div *ngIf="studentsStatus == 'loaded'" class="creation-btns-container">
-            <button (click)="confirmOnClick()" class="green-btn">Criar/Editar</button>
+            <app-confirm-btn
+            (clickEvent)="confirmOnClick()"
+            [isClicked]="isClicked"
+            [text]="btnText">
+            </app-confirm-btn>
         </div>
     </div>
 

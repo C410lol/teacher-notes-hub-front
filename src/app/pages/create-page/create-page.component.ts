@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { DialogParent } from 'src/app/types/interfaces/DialogParent';
 import { environment } from 'src/environments/environment.development';
 import { Validations } from '../pages-shared-styles/Validations';
@@ -152,7 +151,7 @@ export class CreatePageComponent extends DialogParent {
                     'success'
                 );
                 this.switchStatusMode();  
-                setTimeout(() => this.router.navigate(['/login']), 3000);
+                setTimeout(() => this.router.navigate(['/login']), 1000);
             },
             error: (err) => {
                 this.resetBtnProperties('Criar');

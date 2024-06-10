@@ -9,8 +9,8 @@ import { DialogParent } from 'src/app/types/interfaces/DialogParent';
     selector: 'app-single-notebook-page',
     templateUrl: './single-notebook-page.component.html',
     styleUrls: [
+        '../pages-shared-styles/css-shared-styles.css',
         './single-notebook-page.component.css',
-        '../pages-shared-styles/css-shared-styles.css'
     ]
 })
 export class SingleNotebookPageComponent extends DialogParent implements OnInit {
@@ -21,6 +21,7 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
     bimester: string = 'Carregando...';
     status?: string = 'Carregando...';
     date?: string = '';
+    endDate?: string | null = null;
 
     constructor(
     private router: Router,
@@ -59,6 +60,7 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
         this.bimester = notebook.bimester;
         this.status = notebook.status;
         this.date = notebook.createDate;
+        this.endDate = notebook.endDate;
     }
 
 
@@ -86,6 +88,10 @@ export class SingleNotebookPageComponent extends DialogParent implements OnInit 
 
     setEditStatus(): void {
         this.setStatus('Caderneta Editada Com Sucesso!', 'Caderneta editada com sucesso');
+    }
+
+    reloadPage(): void {
+        location.reload();
     }
 
 }

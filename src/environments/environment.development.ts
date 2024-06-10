@@ -1,5 +1,4 @@
 import { HttpHeaders } from '@angular/common/http';
-import { AuthReturnType } from 'src/app/types/Others/AuthReturnType';
 
 const prefix: string = 'http://localhost:8080';
 
@@ -19,6 +18,7 @@ export const environment = {
     teacherUrl: `${prefix}/teachers`,
     institutionUrl: `${prefix}/institutions`,
     notebooksUrl: `${prefix}/notebooks`,
+    finishedNotebooksUrl: `${prefix}/finished-notebooks`,
     studentUrl: `${prefix}/students`,
     lessonsUrl: `${prefix}/lessons`,
     attendanceUrl: `${prefix}/attendances`,
