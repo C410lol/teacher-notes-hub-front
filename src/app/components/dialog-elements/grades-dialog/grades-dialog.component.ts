@@ -40,7 +40,7 @@ export class GradesDialogComponent extends DialogParent implements OnInit {
     private studentService: StudentService,
     private gradeService: GradeService,
   ) { 
-      super();
+      super('Salvar');
   }
 
   ngOnInit(): void {
@@ -88,15 +88,21 @@ export class GradesDialogComponent extends DialogParent implements OnInit {
               this.loadGrades();
               this.setStatus('Nota Salva Com Sucesso!', 'Nota salva com sucesso', 'success');
               this.switchStatusMode();
+
+              this.resetBtnProperties('Salvar');
           },
           error: () => { 
               this.setStatus('Erro Ao Salvar Nota!', environment.simpleErrorMessage, 'error'); 
               this.switchStatusMode(); 
+
+              this.resetBtnProperties('Salvar');
           }
       });
   }
 
   confirmOnClick(): void {
+      this.confirmBtnClick('Salvando...');
+
       this.createGrade(this.studentSelect, Number.parseFloat(this.gradeSelect));
   }
 
