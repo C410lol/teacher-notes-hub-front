@@ -1,53 +1,53 @@
 # Teacher Notes Hub — Frontend
 
-Aplicação frontend do **Teacher Notes Hub**, um sistema de apoio à organização de registros escolares. A interface foi desenvolvida em Angular e consome a API do projeto para disponibilizar funcionalidades de gestão acadêmica a professores e usuários administrativos.
+The frontend application for **Teacher Notes Hub**, a system designed to help organize school records. The interface was built with Angular and consumes the project's API to provide academic management features for teachers and administrative users.
 
-O sistema reúne recursos para organizar cadernetas, alunos, aulas, frequência, notas, atividades e informações de desempenho. A interface também possui páginas específicas para consulta e administração de instituições, professores e usuários.
+The system brings together features for managing school notebooks, students, lessons, attendance, grades, assignments, and student performance information. The interface also includes dedicated pages for viewing and managing institutions, teachers, and users.
 
-## ✨ Funcionalidades da interface
+## ✨ Interface features
 
-- Autenticação e navegação entre as áreas do sistema.
-- Consulta e gerenciamento de cadernetas escolares.
-- Organização de alunos e informações de turmas.
-- Registro e consulta de aulas e frequência.
-- Gestão de notas e atividades.
-- Consulta de desempenho dos estudantes.
-- Páginas administrativas e componentes reutilizáveis para formulários, diálogos, listas e confirmações.
-- Telas e estilos específicos para diferentes tamanhos de tela.
+- Authentication and navigation across the system.
+- Viewing and managing school notebooks.
+- Organizing students and class information.
+- Recording and viewing lessons and attendance.
+- Managing grades and assignments.
+- Viewing student performance.
+- Administrative pages and reusable components for forms, dialogs, lists, and confirmations.
+- Dedicated layouts and styles for different screen sizes.
 
-> Este repositório contém somente a aplicação frontend. A lógica de negócio e a persistência de dados são fornecidas pela [API do Teacher Notes Hub](https://github.com/C410lol/teacher-notes-hub-api).
+> This repository contains only the frontend application. Business logic and data persistence are provided by the [Teacher Notes Hub API](https://github.com/C410lol/teacher-notes-hub-api).
 
-## 🧰 Tecnologias
+## 🧰 Technologies
 
 - **Angular 16**
 - **TypeScript**
 - **RxJS**
 - **Angular Router**
 - **Angular Forms**
-- **HTML e CSS**
+- **HTML and CSS**
 - **@ng-select/ng-select**
 
-## 🗂️ Organização do projeto
+## 🗂️ Project structure
 
-A aplicação segue a estrutura padrão de um projeto Angular, organizada principalmente em:
+The application follows the standard structure of an Angular project, organized mainly into:
 
-- `src/app/pages`: páginas e fluxos de navegação, como login, área inicial, cadernetas, alunos, professores, aulas e áreas administrativas.
-- `src/app/components`: componentes reutilizáveis, diálogos, elementos de lista e componentes de interface.
-- `src/app/services`: serviços responsáveis pela comunicação HTTP com a API.
-- `src/app/types`: tipos e interfaces usados para representar os dados recebidos e enviados pela aplicação.
-- `src/environments`: configurações de ambiente, incluindo os endereços utilizados para comunicação com a API.
+- `src/app/pages`: pages and navigation flows, such as login, home, notebooks, students, teachers, lessons, and administrative areas.
+- `src/app/components`: reusable components, dialogs, list elements, and interface components.
+- `src/app/services`: services responsible for HTTP communication with the API.
+- `src/app/types`: types and interfaces used to represent data received and sent by the application.
+- `src/environments`: environment settings, including the URLs used to communicate with the API.
 
-## ▶️ Como executar localmente
+## ▶️ How to run locally
 
-### Pré-requisitos
+### Prerequisites
 
-- Node.js e npm.
-- A [API do Teacher Notes Hub](https://github.com/C410lol/teacher-notes-hub-api) configurada e em execução.
-- Acesso a uma instância da API a partir do endereço definido nos arquivos de ambiente.
+- Node.js and npm.
+- The [Teacher Notes Hub API](https://github.com/C410lol/teacher-notes-hub-api) configured and running.
+- Access to an API instance at the address defined in the environment files.
 
-### Instalação
+### Installation
 
-Clone o repositório e entre na pasta do projeto:
+Clone the repository and navigate to the project directory:
 
 ```bash
 git clone https://github.com/C410lol/teacher-notes-hub-front.git
@@ -55,34 +55,34 @@ cd teacher-notes-hub-front
 npm install
 ```
 
-### Ambiente de desenvolvimento
+### Development environment
 
 ```bash
 npm start
 ```
 
-O servidor de desenvolvimento do Angular ficará disponível, normalmente, em `http://localhost:4200/`.
+The Angular development server will usually be available at `http://localhost:4200/`.
 
-Antes de utilizar a aplicação, confira os arquivos em `src/environments/` e ajuste as URLs para apontar para a instância correta da API.
+Before using the application, check the files in `src/environments/` and update the URLs to point to the correct API instance.
 
-### Build de produção
+### Production build
 
 ```bash
 npm run build
 ```
 
-Os arquivos compilados serão gerados no diretório de saída configurado pelo Angular CLI.
+The compiled files will be generated in the output directory configured by Angular CLI.
 
-### Testes
+### Tests
 
 ```bash
 npm test
 ```
 
-## 🔗 Projeto relacionado
+## 🔗 Related project
 
 - [Teacher Notes Hub — API](https://github.com/C410lol/teacher-notes-hub-api)
 
 ---
 
-Projeto desenvolvido como parte de uma iniciativa de desenvolvimento de software para organização de informações e rotinas escolares.
+Project developed as part of a software development initiative focused on organizing school information and routines.
